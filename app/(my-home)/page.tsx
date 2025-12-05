@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import { useRef, useState } from "react";
-import { useMainTab } from "./MainTabContext";  // 🔥 추가
+import { useMainTab } from "../MainTabContext";  // 🔥 추가
 
 export default function HomePage() {
   const { mainTab } = useMainTab();            // 🔥 탭 상태 읽기
