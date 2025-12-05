@@ -817,7 +817,7 @@ export default function CampaignDetailPage() {
                       lineHeight: 1.7,
                     }}
                   >
-                    <li>'가장/제품' 등 최상급 의미를 가진 표현 불가</li>
+                    <li>&apos;가장/제품&apos; 등 최상급 의미를 가진 표현 불가</li>
                     <li>여드름 피부 전용 (x), 여드름 피부가 사용 가능한 (o)</li>
                   </ol>
 
@@ -1192,6 +1192,7 @@ https://bepla.in/HTtM`;
 
           {/* 신청하기 버튼 */}
           <button
+            onClick={() => router.push("/campaign-apply/step1")}
             style={{
               width: "100%",
               padding: "12px 0",

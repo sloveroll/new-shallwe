@@ -30,7 +30,7 @@ export default function HomePage() {
     <main>
       {mainTab === "home" && (
       
-      <section style={{ padding: "0px 20px 80px" }}>
+      <section style={{ padding: "0px 20px" }}>
         {/* 상단 배너 카드 */}
         <div
           style={{
