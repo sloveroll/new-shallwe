@@ -119,7 +119,7 @@ export default function HomePage() {
             className="no-scrollbar"
           >
             {[1, 2, 3, 4].map((no) => (
-              <a key={no} className="best-card" href="#">
+              <a key={no} className="best-card" href="/campaign-detail">
                 {/* 상단: 이미지 + 숫자 */}
                 <div className="best-card-main">
                   <div className="best-card-rank">{no}</div>
