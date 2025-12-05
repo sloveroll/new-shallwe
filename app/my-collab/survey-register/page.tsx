@@ -231,7 +231,7 @@ const labelStyle = {
   marginBottom: 8,
 };
 
-const inputStyle = {
+const inputStyle: React.CSSProperties = {
   width: "100%",
   borderRadius: 8,
   border: "1px solid #eee",
