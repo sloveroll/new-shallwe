@@ -15,12 +15,8 @@ export default function Header() {
     const ON = 200;
     const OFF = 40;
 
-    const scroller = document.getElementById("scroll-container");
-
-    if (!scroller) return;
-
     const handleScroll = () => {
-      const y = window.scrollY; // ✅ window.scrollY 대신
+      const y = window.scrollY;
 
       setIsCompact((prev) => {
         if (!prev && y > ON) return true;
@@ -29,19 +25,20 @@ export default function Header() {
       });
     };
 
-    handleScroll();
-    scroller.addEventListener("scroll", handleScroll);
-    return () => scroller.removeEventListener("scroll", handleScroll);
+    handleScroll(); // 초기 상태 한 번 계산
+    window.addEventListener("scroll", handleScroll);
+
+    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
+
 
   if (pathname.startsWith("/search")) {
     return null;
   }
 
-  return (
+   return (
     <header
       className="
-        sticky top-0 z-10
         bg-white
         transition-all duration-200 ease-in-out
       "
@@ -61,14 +58,7 @@ export default function Header() {
         />
 
         {!isCompact && (
-          <p
-            className="
-              mt-2 mb-6
-              text-sm
-              text-[#555]
-              leading-snug
-            "
-          >
+          <p className="mt-2 mb-6 text-sm text-[#555] leading-snug">
             마이크로 인플루언서의{" "}
             <span className="font-bold">올인원 협업 플랫폼</span>
           </p>
