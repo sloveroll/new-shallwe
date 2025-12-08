@@ -3,7 +3,15 @@
 import { useState } from "react";
 import Image from "next/image";
 
-export default function NoticeAccordion({ item }: any) {
+type NoticeItem = {
+  id: number;
+  icon: string;
+  title: string;
+  message: string;
+  date: string;
+};
+
+  export default function NoticeAccordion({ item }: { item: NoticeItem }) {
   const [open, setOpen] = useState(false);
 
   return (
