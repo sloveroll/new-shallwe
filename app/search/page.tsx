@@ -10,50 +10,39 @@ export default function SearchPage() {
 
   return (
     <main>
-      <section style={{ padding: "12px 20px 80px" }}>
+      <section className="px-[20px] pt-[12px] pb-[80px]">
         {/* 상단 검색바 영역 */}
-        <div
-          style={{
-            display: "flex",
-            alignItems: "center",
-            marginBottom: "20px",
-          }}
-        >
+        <div className="flex items-center mb-[20px]">
           {/* 뒤로가기 */}
           <button
             onClick={() => router.back()}
-            style={{
-              border: "none",
-              background: "transparent",
-              cursor: "pointer",
-              marginRight: "8px",
-              fontSize: "18px",
-            }}
+            className="
+              border-0 bg-transparent cursor-pointer
+              mr-[8px]
+              text-[18px]
+            "
           >
             ←
           </button>
 
           {/* 검색 인풋 + 돋보기 */}
           <div
-            style={{
-              flex: 1,
-              display: "flex",
-              alignItems: "center",
-              borderRadius: "999px",
-              border: "1px solid #ccc",
-              padding: "6px 10px",
-              background: "#fff",
-            }}
+            className="
+              flex items-center flex-1
+              rounded-full
+              border border-[#ccc]
+              px-[10px] py-[6px]
+              bg-white
+            "
           >
             <input
               type="text"
               placeholder="캠페인 키워드 검색"
-              style={{
-                flex: 1,
-                border: "none",
-                outline: "none",
-                fontSize: "14px",
-              }}
+              className="
+                flex-1
+                border-0 outline-none
+                text-[14px]
+              "
             />
             <Image
               src="/images/search-icon.png"
@@ -66,47 +55,36 @@ export default function SearchPage() {
 
         {/* 최근 검색어 타이틀 */}
         <div
-          style={{
-            display: "flex",
-            justifyContent: "space-between",
-            alignItems: "center",
-            marginBottom: "12px",
-            fontSize: "14px",
-          }}
+          className="
+            flex items-center justify-between
+            mb-[12px]
+            text-[14px]
+          "
         >
-          <span style={{ fontWeight: 600 }}>최근 검색어</span>
+          <span className="font-semibold">최근 검색어</span>
           <button
-            style={{
-              border: "none",
-              background: "transparent",
-              fontSize: "12px",
-              color: "#888",
-              cursor: "pointer",
-            }}
+            className="
+              border-0 bg-transparent cursor-pointer
+              text-[12px] text-[#888]
+            "
           >
             전체 삭제
           </button>
         </div>
 
-        {/* 최근 검색어 칩들 */}
-        <div
-          style={{
-            display: "flex",
-            flexWrap: "wrap",
-            gap: "8px",
-          }}
-        >
+        {/* 최근 검색어 칩 */}
+        <div className="flex flex-wrap gap-[8px]">
           {recentKeywords.map((word, idx) => (
             <button
               key={`${word}-${idx}`}
-              style={{
-                padding: "6px 14px",
-                borderRadius: "999px",
-                border: "1px solid #ccc",
-                background: "#fff",
-                fontSize: "13px",
-                cursor: "pointer",
-              }}
+              className="
+                px-[14px] py-[6px]
+                rounded-full
+                border border-[#ccc]
+                bg-white
+                text-[13px]
+                cursor-pointer
+              "
             >
               {word}
             </button>

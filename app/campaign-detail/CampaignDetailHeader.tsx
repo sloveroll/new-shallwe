@@ -8,39 +8,29 @@ export default function CampaignDetailHeader({
   onBack: () => void;
 }) {
   return (
-    <section style={{ position: "relative" }}>
+    <section className="relative">
       {/* 뒤로가기 */}
       <button
         onClick={onBack}
-        style={{
-          position: "absolute",
-          top: 12,
-          left: 12,
-          background: "rgba(0,0,0,0.5)",
-          color: "#fff",
-          borderRadius: "50%",
-          width: 32,
-          height: 32,
-          border: "none",
-          fontSize: 18,
-        }}
+        className="
+          absolute top-3 left-3
+          bg-black/50 text-white
+          rounded-full
+          w-8 h-8
+          border-0 text-[18px]
+          flex items-center justify-center
+        "
       >
         ←
       </button>
 
       {/* 대표 이미지 */}
-      <div
-        style={{
-          width: "100%",
-          height: "320px",
-          position: "relative",
-        }}
-      >
+      <div className="w-full h-[320px] relative">
         <Image
           src="/images/sample.png"
           alt="캠페인 이미지"
           fill
-          style={{ objectFit: "contain" }}
+          className="object-contain"
         />
       </div>
     </section>

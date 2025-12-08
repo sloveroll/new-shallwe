@@ -1,11 +1,9 @@
 "use client";
 
 import Image from "next/image";
-import { usePathname } from "next/navigation";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { useMainTab } from "../MainTabContext";
-
 
 export default function Header() {
   const pathname = usePathname();
@@ -17,8 +15,13 @@ export default function Header() {
     const ON = 200;
     const OFF = 40;
 
+    const scroller = document.getElementById("scroll-container");
+
+    if (!scroller) return;
+
     const handleScroll = () => {
-      const y = window.scrollY;
+      const y = window.scrollY; // ✅ window.scrollY 대신
+
       setIsCompact((prev) => {
         if (!prev && y > ON) return true;
         if (prev && y < OFF) return false;
@@ -27,8 +30,8 @@ export default function Header() {
     };
 
     handleScroll();
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
+    scroller.addEventListener("scroll", handleScroll);
+    return () => scroller.removeEventListener("scroll", handleScroll);
   }, []);
 
   if (pathname.startsWith("/search")) {
@@ -37,135 +40,128 @@ export default function Header() {
 
   return (
     <header
-      style={{
-        position: "sticky",
-        top: 0,
-        zIndex: 10,
-        background: "#fff",
-        transition: "all 0.2s ease",
-      }}
+      className="
+        sticky top-0 z-10
+        bg-white
+        transition-all duration-200 ease-in-out
+      "
     >
       {/* 로고 + 문구 */}
-      <div style={{ padding: isCompact ? "8px 20px" : "16px 20px 0px" }}>
+      <div className={isCompact ? "px-5 py-2" : "px-5 pt-4 pb-0"}>
         <Image
           src={isCompact ? "/images/scroll-logo.png" : "/images/main-logo.svg"}
           width={isCompact ? 150 : 420}
           height={100}
           alt="Shallwe Logo"
-          style={{
-            width: isCompact ? "150px" : "100%",
-            height: "auto",
-            transition: "all 0.2s ease",
-          }}
+          className={`
+            h-auto
+            transition-all duration-200 ease-in-out
+            ${isCompact ? "w-[150px]" : "w-full"}
+          `}
         />
 
         {!isCompact && (
           <p
-            style={{
-              marginTop: "8px",
-              marginBottom: "24px",
-              fontSize: "14px",
-              color: "#555",
-              lineHeight: 1.4,
-            }}
+            className="
+              mt-2 mb-6
+              text-sm
+              text-[#555]
+              leading-snug
+            "
           >
             마이크로 인플루언서의{" "}
-            <span style={{ fontWeight: 700 }}>올인원 협업 플랫폼</span>
+            <span className="font-bold">올인원 협업 플랫폼</span>
           </p>
         )}
       </div>
 
       {/* 네비 */}
       <nav
-        style={{
-          display: "flex",
-          gap: "16px",
-          padding: "4px 20px 12px",
-          fontSize: "14px",
-        }}
+        className="
+          flex
+          gap-4
+          px-5 pt-1 pb-3
+          text-sm
+        "
       >
         <button
-          style={{
-            border: "none",
-            background: "transparent",
-            cursor: "pointer",
-            fontWeight: mainTab === "home" ? 700 : 400,
-            color: mainTab === "home" ? "#000" : "#888",
-            borderBottom:
-              mainTab === "home" ? "2px solid #000" : "2px solid transparent",
-            paddingBottom: "2px",
-          }}
+          type="button"
           onClick={() => setMainTab("home")}
+          className={`
+            border-0 bg-transparent cursor-pointer
+            pb-0.5
+            ${
+              mainTab === "home"
+                ? "font-bold text-black border-b-2 border-black"
+                : "font-normal text-[#888] border-b-2 border-transparent"
+            }
+          `}
         >
           Home
         </button>
 
         <button
-          style={{
-            border: "none",
-            background: "transparent",
-            cursor: "pointer",
-            fontWeight: mainTab === "youtube" ? 700 : 400,
-            color: mainTab === "youtube" ? "#000" : "#888",
-            borderBottom:
-              mainTab === "youtube"
-                ? "2px solid #000"
-                : "2px solid transparent",
-            paddingBottom: "2px",
-          }}
+          type="button"
           onClick={() => setMainTab("youtube")}
+          className={`
+            border-0 bg-transparent cursor-pointer
+            pb-0.5
+            ${
+              mainTab === "youtube"
+                ? "font-bold text-black border-b-2 border-black"
+                : "font-normal text-[#888] border-b-2 border-transparent"
+            }
+          `}
         >
           Youtube
         </button>
 
         <button
-          style={{
-            border: "none",
-            background: "transparent",
-            cursor: "pointer",
-            fontWeight: mainTab === "instagram" ? 700 : 400,
-            color: mainTab === "instagram" ? "#000" : "#888",
-            borderBottom:
-              mainTab === "instagram"
-                ? "2px solid #000"
-                : "2px solid transparent",
-            paddingBottom: "2px",
-          }}
+          type="button"
           onClick={() => setMainTab("instagram")}
+          className={`
+            border-0 bg-transparent cursor-pointer
+            pb-0.5
+            ${
+              mainTab === "instagram"
+                ? "font-bold text-black border-b-2 border-black"
+                : "font-normal text-[#888] border-b-2 border-transparent"
+            }
+          `}
         >
           Instagram
         </button>
 
         <button
-          style={{
-            border: "none",
-            background: "transparent",
-            cursor: "pointer",
-            fontWeight: mainTab === "blog" ? 700 : 400,
-            color: mainTab === "blog" ? "#000" : "#888",
-            borderBottom:
-              mainTab === "blog" ? "2px solid #000" : "2px solid transparent",
-            paddingBottom: "2px",
-          }}
+          type="button"
           onClick={() => setMainTab("blog")}
+          className={`
+            border-0 bg-transparent cursor-pointer
+            pb-0.5
+            ${
+              mainTab === "blog"
+                ? "font-bold text-black border-b-2 border-black"
+                : "font-normal text-[#888] border-b-2 border-transparent"
+            }
+          `}
         >
           Blog
         </button>
 
         <button
-          style={{
-            marginLeft: "auto",
-            border: "none",
-            background: "transparent",
-            cursor: "pointer",
-          }}
+          type="button"
           onClick={() => router.push("/search")}
+          className="
+            ml-auto
+            border-0 bg-transparent cursor-pointer
+          "
         >
           <Image
             src="/images/search-icon.png"
             width={16}
             height={16}
             alt="검색"
+            className="w-4 h-4"
           />
         </button>
       </nav>

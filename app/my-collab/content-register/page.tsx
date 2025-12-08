@@ -9,128 +9,86 @@ export default function ContentRegisterPage() {
   const [showModal, setShowModal] = useState(false);
 
   return (
-    <main
-      style={{
-        background: "#fff",
-      }}
-    >
-      <div
-        style={{
-          width: "100%",
-          maxWidth: 430,
-          margin: "0 auto",
-          padding: "16px 20px 0px",
-          boxSizing: "border-box",
-        }}
-      >
+    <main className="bg-white">
+      <div className="w-full max-w-[430px] mx-auto px-5 pt-4 box-border">
         {/* 상단: 뒤로가기 + 타이틀 */}
         <button
           onClick={() => router.back()}
-          style={{
-            border: "none",
-            background: "transparent",
-            cursor: "pointer",
-            fontSize: 22,
-            marginBottom: 6,
-          }}
+          type="button"
+          className="
+            border-0 bg-transparent cursor-pointer
+            text-[22px]
+            mb-1.5
+          "
         >
           ←
         </button>
 
-        <h1
-          style={{
-            textAlign: "center",
-            fontSize: 18,
-            fontWeight: 700,
-            marginBottom: 20,
-          }}
-        >
+        <h1 className="text-center text-[18px] font-bold mb-5">
           협업 콘텐츠 등록
         </h1>
 
         {/* 1. 경고 배너 */}
         <section
-          style={{
-            borderRadius: 999,
-            border: "1px solid #ff3b30",
-            padding: "10px 14px",
-            fontSize: 12,
-            color: "#000", // ⭐ 기본 텍스트는 검정
-            textAlign: "center",
-            marginBottom: 18,
-          }}
+          className="
+            mb-[10px]
+            w-[90%]
+            mx-auto
+            rounded-full
+            border border-[#ff3b30]
+            px-1.5 py-2.5
+            text-[12px]
+            text-black
+            text-center
+          "
         >
           콘텐츠 등록 기간이{" "}
-          <strong style={{ color: "#ff3b30" }}>2일 경과</strong>하여 캐시가{" "}
-          <strong style={{ color: "#ff3b30" }}>80%만 지급</strong>될 예정이에요.
+          <strong className="text-[#ff3b30]">2일 경과</strong>하여 캐시가{" "}
+          <strong className="text-[#ff3b30]">80%만 지급</strong>될 예정이에요.
         </section>
 
         {/* 2. 캠페인 요약 박스 */}
         <section
-          style={{
-            borderRadius: 14,
-            background: "#fafafa",
-            padding: "12px 12px",
-            marginBottom: 24,
-            fontSize: 12,
-            lineHeight: 1.6,
-          }}
+          className="
+            mb-6
+            rounded-[14px]
+            bg-[#fafafa]
+            px-3 py-3
+            text-[12px]
+            leading-relaxed
+          "
         >
           {/* 상단 태그들 */}
-          <div
-            style={{
-              display: "flex",
-              alignItems: "center",
-              marginBottom: 20,
-              gap: 6,
-            }}
-          >
+          <div className="flex items-center mb-5 gap-1.5">
             <span
-              style={{
-                fontSize: 11,
-                padding: "2px 6px",
-                borderRadius: 4,
-                border: "1px solid #000",
-              }}
+              className="
+                text-[11px]
+                px-1.5 py-[2px]
+                rounded
+                border border-black
+              "
             >
               쇼츠
             </span>
           </div>
 
-          <div
-            style={{
-              fontSize: 13,
-              marginBottom: 4,
-            }}
-          >
+          <div className="text-[13px] mb-1">
             <strong>[메디힐, 비플레인]</strong> 요즘 잘 쓰는 아이템 추천템 특집
             캠페인명 두줄 일 때
           </div>
 
-          <div
-            style={{
-              fontSize: 12,
-              marginBottom: 4,
-            }}
-          >
+          <div className="text-[12px] mb-1">
             <strong>제품 협찬</strong>
           </div>
 
-          <ul
-            style={{
-              fontSize: 12,
-              margin: 0,
-              paddingLeft: 16,
-              lineHeight: 1.7,
-            }}
-          >
+          <ul className="text-[12px] m-0 pl-4 leading-[1.7] list-disc">
             <li>
               <strong>콘텐츠 등록 기간: 11/16(일) ~ 11/27(목)</strong>
             </li>
             <li>
               <strong>
                 사전 검수 마감일: 11/27(목)까지{" "}
-                <a href="#" style={{ color: "#0070c9" }}>
+                <a href="#" className="text-[#0070c9]">
                   (→ 사전 검수)
                 </a>
               </strong>
@@ -141,99 +99,64 @@ export default function ContentRegisterPage() {
         </section>
 
         {/* 3. 섹션 타이틀 */}
-        <section style={{ marginBottom: 40 }}>
-          <h2
-            style={{
-              fontSize: 16,
-              fontWeight: 700,
-              marginBottom: 12,
-            }}
-          >
-            <strong style={{ color: "red" }}>①</strong> 콘텐츠 등록 전 한번 더
+        <section className="mb-10">
+          <h2 className="text-[16px] font-bold mb-3">
+            <strong className="text-red-500">①</strong> 콘텐츠 등록 전 한번 더
             확인해 주세요.
           </h2>
 
           {/* 유의사항 제목 */}
-          <div
-            style={{
-              fontSize: 13,
-              fontWeight: 600,
-              marginBottom: 6,
-            }}
-          >
-            유의사항
-          </div>
+          <div className="text-[13px] font-semibold mb-1.5">유의사항</div>
+
           {/* 유의사항 박스 */}
           <div
-            style={{
-              borderRadius: 12,
-              border: "1px solid #e5e5e5",
-              padding: 14,
-              marginBottom: 14,
-              background: "white",
-              fontSize: 12,
-            }}
+            className="
+              mb-3.5
+              rounded-[12px]
+              border border-[#e5e5e5]
+              p-3.5
+              bg-white
+              text-[12px]
+            "
           >
             {/* 1줄: 2차 활용 */}
-            <div
-              style={{
-                display: "flex",
-                alignItems: "center",
-                marginBottom: 8,
-                gap: 10,
-              }}
-            >
+            <div className="flex items-center mb-2 gap-2.5">
               <span
-                style={{
-                  background: "#e7fbdc",
-                  borderRadius: 999,
-                  padding: "4px 10px",
-                  fontSize: 11,
-                  fontWeight: 600,
-                  whiteSpace: "nowrap",
-                }}
+                className="
+                  bg-[#e7fbdc]
+                  rounded-full
+                  px-2.5 py-1
+                  text-[11px] font-semibold
+                  whitespace-nowrap
+                "
               >
                 ✅ 2차 활용
               </span>
-              <span style={{ lineHeight: 1.6 }}>
+              <span className="leading-relaxed">
                 협업 영상이 상업적으로 활용될 수 있습니다.
               </span>
             </div>
 
             {/* 2줄: 사전 검수 */}
-            <div
-              style={{
-                display: "flex",
-                alignItems: "center",
-                marginBottom: 10,
-                gap: 10,
-              }}
-            >
+            <div className="flex items-center mb-2.5 gap-2.5">
               <span
-                style={{
-                  background: "#e7fbdc",
-                  borderRadius: 999,
-                  padding: "4px 10px",
-                  fontSize: 11,
-                  fontWeight: 600,
-                  whiteSpace: "nowrap",
-                }}
+                className="
+                  bg-[#e7fbdc]
+                  rounded-full
+                  px-2.5 py-1
+                  text-[11px] font-semibold
+                  whitespace-nowrap
+                "
               >
                 ✅ 사전 검수
               </span>
-              <span style={{ lineHeight: 1.6 }}>
+              <span className="leading-relaxed">
                 콘텐츠 초안을 미리 제출하여 검수받아야 해요.
               </span>
             </div>
 
             {/* 아래 bullet 목록 */}
-            <ul
-              style={{
-                margin: 0,
-                paddingLeft: 16,
-                lineHeight: 1.7,
-              }}
-            >
+            <ul className="m-0 pl-4 leading-[1.7] list-disc">
               <li>유튜브 제품 태그 필수</li>
               <li>추가 제공품 노출 필수</li>
               <li>협업금에 2차 활용 비용 포함</li>
@@ -241,45 +164,24 @@ export default function ContentRegisterPage() {
           </div>
 
           {/* 노출 시간 */}
-          <div style={{ marginBottom: 14 }}>
+          <div className="mb-3.5">
+            <div className="text-[13px] font-semibold mb-1.5">노출 시간</div>
             <div
-              style={{
-                fontSize: 13,
-                fontWeight: 600,
-                marginBottom: 6,
-              }}
-            >
-              노출 시간
-            </div>
-            <div
-              style={{
-                borderRadius: 8,
-                border: "1px solid #eee",
-                padding: "10px 12px",
-                fontSize: 13,
-              }}
+              className="
+                rounded-[8px]
+                border border-[#eee]
+                px-3 py-2.5
+                text-[13px]
+              "
             >
               30초
             </div>
           </div>
 
           {/* 더보기란 내용 */}
-          <div style={{ marginBottom: 14 }}>
-            <div
-              style={{
-                display: "flex",
-                alignItems: "center",
-                marginBottom: 6,
-              }}
-            >
-              <div
-                style={{
-                  fontSize: 13,
-                  fontWeight: 600,
-                }}
-              >
-                더보기란 내용
-              </div>
+          <div className="mb-3.5">
+            <div className="flex items-center mb-1.5">
+              <div className="text-[13px] font-semibold">더보기란 내용</div>
               <button
                 type="button"
                 onClick={() => {
@@ -292,29 +194,29 @@ https://bepla.in/HTtM`;
                   navigator.clipboard?.writeText(text);
                   alert("복사되었습니다.");
                 }}
-                style={{
-                  marginLeft: "auto",
-                  fontSize: 11,
-                  padding: "4px 10px",
-                  borderRadius: 999,
-                  border: "1px solid #d4ff8f",
-                  background: "#AFFF33",
-                  cursor: "pointer",
-                }}
+                className="
+                  ml-auto
+                  text-[11px]
+                  px-2.5 py-1
+                  rounded-full
+                  border border-[#d4ff8f]
+                  bg-[#AFFF33]
+                  cursor-pointer
+                "
               >
                 복사
               </button>
             </div>
 
             <div
-              style={{
-                borderRadius: 8,
-                border: "1px solid #eee",
-                padding: "10px 12px",
-                fontSize: 12,
-                lineHeight: 1.7,
-                whiteSpace: "pre-line",
-              }}
+              className="
+                rounded-[8px]
+                border border-[#eee]
+                px-3 py-2.5
+                text-[12px]
+                leading-[1.7]
+                whitespace-pre-line
+              "
             >
               메디힐의 유료 광고를 포함하고 있으며, 스튜디오 쉘위를 통해 제공
               받았습니다.
@@ -332,73 +234,54 @@ https://bepla.in/HTtM`;
           </div>
 
           {/* 제목 키워드 */}
-          <div style={{ marginBottom: 14 }}>
-            <div
-              style={{
-                display: "flex",
-                alignItems: "center",
-                marginBottom: 6,
-              }}
-            >
-              <div
-                style={{
-                  fontSize: 13,
-                  fontWeight: 600,
-                }}
-              >
-                제목 키워드
-              </div>
+          <div className="mb-3.5">
+            <div className="flex items-center mb-1.5">
+              <div className="text-[13px] font-semibold">제목 키워드</div>
               <button
                 type="button"
                 onClick={() => {
                   navigator.clipboard?.writeText("메디힐");
                   alert("복사되었습니다.");
                 }}
-                style={{
-                  marginLeft: "auto",
-                  fontSize: 11,
-                  padding: "4px 10px",
-                  borderRadius: 999,
-                  border: "1px solid #d4ff8f",
-                  background: "#AFFF33",
-                  cursor: "pointer",
-                }}
+                className="
+                  ml-auto
+                  text-[11px]
+                  px-2.5 py-1
+                  rounded-full
+                  border border-[#d4ff8f]
+                  bg-[#AFFF33]
+                  cursor-pointer
+                "
               >
                 복사
               </button>
             </div>
 
             <div
-              style={{
-                borderRadius: 8,
-                border: "1px solid #eee",
-                padding: "10px 12px",
-                fontSize: 12,
-              }}
+              className="
+                rounded-[8px]
+                border border-[#eee]
+                px-3 py-2.5
+                text-[12px]
+              "
             >
               메디힐
             </div>
           </div>
 
           {/* 유료 프로모션 체크 */}
-          <div style={{ marginBottom: 4 }}>
-            <div
-              style={{
-                fontSize: 13,
-                fontWeight: 600,
-                marginBottom: 6,
-              }}
-            >
+          <div className="mb-1">
+            <div className="text-[13px] font-semibold mb-1.5">
               유료 프로모션 체크
             </div>
             <div
-              style={{
-                borderRadius: 8,
-                border: "1px solid #eee",
-                padding: "10px 12px",
-                fontSize: 12,
-                lineHeight: 1.6,
-              }}
+              className="
+                rounded-[8px]
+                border border-[#eee]
+                px-3 py-2.5
+                text-[12px]
+                leading-relaxed
+              "
             >
               Youtube 영상 옵션 &gt; 세부정보 &gt; &apos;유료 프로모션 라벨
               추가&apos; 설정해 주세요.
@@ -407,74 +290,50 @@ https://bepla.in/HTtM`;
         </section>
 
         {/* 4. 최종 콘텐츠 URL 등록 */}
-        <section style={{ marginBottom: 18 }}>
-          <h2
-            style={{
-              fontSize: 16,
-              fontWeight: 700,
-              marginBottom: 10,
-            }}
-          >
-            <strong style={{ color: "red" }}>②</strong> 최종 업로드된 콘텐츠를
+        <section className="mb-4.5">
+          <h2 className="text-[16px] font-bold mb-2.5">
+            <strong className="text-red-500">②</strong> 최종 업로드된 콘텐츠를
             등록해 주세요.
           </h2>
 
-          <div style={{ marginBottom: 6 }}>
+          <div className="mb-1.5">
             <input
               placeholder="협업 채널에 최종 업로드된 콘텐츠의 URL을 붙여 넣어주세요"
-              style={{
-                width: "100%",
-                borderRadius: 8,
-                border: "1px solid #eee",
-                padding: "10px 12px",
-                fontSize: 13,
-                boxSizing: "border-box",
-              }}
+              className="
+                w-full
+                rounded-[8px]
+                border border-[#eee]
+                px-3 py-2.5
+                text-[13px]
+                box-border
+                outline-none
+              "
             />
           </div>
 
-          <div
-            style={{
-              fontSize: 11,
-              color: "#ff3b30",
-              marginBottom: 20,
-            }}
-          >
+          <div className="text-[11px] text-[#ff3b30] mb-5">
             연동된 채널의 콘텐츠만 등록 가능해요.
           </div>
 
           {/* 체크박스 */}
           <label
-            style={{
-              display: "flex",
-              alignItems: "center",
-              gap: 5,
-              fontSize: 12,
-              marginBottom: 4,
-            }}
+            className="
+              flex items-center
+              gap-1.5
+              text-[12px]
+              mb-1
+            "
           >
-            <input
-              type="checkbox"
-              style={{
-                verticalAlign: "middle",
-              }}
-            />
+            <input type="checkbox" className="align-middle" />
             <span>
               <strong>콘텐츠 내 가이드 내용을 전부 반영하였습니다. </strong>
-              <a href="#" style={{ color: "#0070c9" }}>
+              <a href="#" className="text-[#0070c9]">
                 (→ 가이드 확인)
               </a>
             </span>
           </label>
 
-          <div
-            style={{
-              fontSize: 11,
-              color: "#ff3b30",
-              marginLeft: 25,
-              marginTop: 4,
-            }}
-          >
+          <div className="text-[11px] text-[#ff3b30] ml-[25px] mt-1">
             ※ 미준수된 항목이 있을 경우, 수정·재업로드 요청 및 실패 처리될 수
             있어요.
           </div>
@@ -485,22 +344,21 @@ https://bepla.in/HTtM`;
       <button
         type="button"
         onClick={() => setShowModal(true)}
-        style={{
-          width: "100%",
-          marginTop: 20,
-          padding: "12px 0",
-          borderRadius: 8,
-          border: "none",
-          background: "#AFFF33",
-          fontSize: 15,
-          fontWeight: 700,
-          cursor: "pointer",
-        }}
+        className="
+          w-full
+          mt-5
+          py-3
+          rounded-[8px]
+          border-0
+          bg-[#AFFF33]
+          text-[15px] font-bold
+          cursor-pointer
+        "
       >
         등록하기
       </button>
 
-      {/* RegisterConfirmModal모달 */}
+      {/* RegisterConfirmModal 모달 */}
       <RegisterConfirmModal
         open={showModal}
         onConfirm={() => {

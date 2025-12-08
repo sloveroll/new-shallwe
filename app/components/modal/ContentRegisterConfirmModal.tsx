@@ -13,43 +13,38 @@ export default function RegisterConfirmModal({ open, onConfirm, onCancel }: Prop
 
   return (
     <div
-      style={{
-        position: "fixed",
-        inset: 0,
-        background: "rgba(0,0,0,0.45)",
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
-        zIndex: 100,
-      }}
+      className="
+        fixed inset-0 z-[100]
+        flex items-center justify-center
+        bg-black/45
+      "
     >
       <div
-        style={{
-          width: "100%",
-          maxWidth: 360,
-          background: "#fff",
-          borderRadius: 16,
-          padding: "40px 30px 30px",
-          boxSizing: "border-box",
-          boxShadow: "0 8px 20px rgba(0,0,0,0.15)",
-          textAlign: "center",
-        }}
+        className="
+          w-full max-w-sm
+          bg-white
+          rounded-2xl
+          pt-10 pb-8 px-8
+          box-border
+          shadow-lg
+          text-center
+        "
       >
         <h3
-          style={{
-            fontSize: 16,
-            fontWeight: 700,
-            margin: "0 0 8px",
-          }}
+          className="
+            text-base font-bold
+            mb-2
+          "
         >
           협업 콘텐츠를 등록할까요?
         </h3>
+
         <p
-          style={{
-            fontSize: 13,
-            lineHeight: 1.6,
-            margin: "0 0 16px",
-          }}
+          className="
+            text-sm
+            leading-relaxed
+            mb-4
+          "
         >
           담당자 승인 전일 경우,
           <br />
@@ -57,41 +52,40 @@ export default function RegisterConfirmModal({ open, onConfirm, onCancel }: Prop
         </p>
 
         <div
-          style={{
-            display: "flex",
-            gap: 8,
-            marginTop: 4,
-          }}
+          className="
+            mt-1
+            flex
+            gap-2
+          "
         >
           <button
             type="button"
             onClick={onConfirm}
-            style={{
-              flex: 1,
-              padding: "10px 0",
-              borderRadius: 999,
-              border: "none",
-              background: "#AFFF33",
-              fontSize: 14,
-              fontWeight: 700,
-              cursor: "pointer",
-            }}
+            className="
+              flex-1
+              py-2.5
+              rounded-full
+              border-0
+              bg-[#AFFF33]
+              text-sm font-bold
+              cursor-pointer
+            "
           >
             등록하기
           </button>
+
           <button
             type="button"
             onClick={onCancel}
-            style={{
-              flex: 1,
-              padding: "10px 0",
-              borderRadius: 999,
-              border: "1px solid #ddd",
-              background: "#fff",
-              fontSize: 14,
-              fontWeight: 500,
-              cursor: "pointer",
-            }}
+            className="
+              flex-1
+              py-2.5
+              rounded-full
+              border border-[#dddddd]
+              bg-white
+              text-sm font-medium
+              cursor-pointer
+            "
           >
             취소
           </button>

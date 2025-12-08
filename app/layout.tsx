@@ -15,10 +15,20 @@ export default function RootLayout({
 }) {
   return (
     <html lang="ko">
-      <body className="app-bg">
+      <body className="m-0 min-h-screen flex justify-center bg-[#f3f5f6]">
         <MainTabProvider>
           {/* 모바일 화면 캔버스 */}
-          <div className="app-shell">{children}</div>
+          <div
+            className="
+              w-full max-w-[430px]
+              min-h-screen
+              bg-white
+              shadow-[0_0_20px_rgba(0,0,0,0.03)]
+              relative
+            "
+          >
+            {children}
+          </div>
         </MainTabProvider>
       </body>
     </html>

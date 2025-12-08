@@ -10,7 +10,7 @@ type Tab = "apply" | "progress" | "done";
 export default function MyCollabPage() {
   const [activeTab, setActiveTab] = useState<Tab>("apply");
 
-  // 탭별 더미 데이터 (나중에 API 연동하면 여기만 교체)
+  // 탭별 더미 데이터
   const applyList = [
     {
       id: 1,
@@ -93,40 +93,15 @@ export default function MyCollabPage() {
         <CollabItemProgress key={item.id} {...item} />
       ));
     }
-    // done
     return doneList.map((item) => <CollabItemDone key={item.id} {...item} />);
   };
 
   return (
-    <main
-      style={{
-        minHeight: "100vh",
-        background: "#fff",
-        paddingBottom: 70,
-      }}
-    >
-      <div
-        style={{
-          width: "100%",
-          maxWidth: 430,
-          margin: "0 auto",
-          padding: "12px 12px 20px",
-          boxSizing: "border-box",
-        }}
-      >
+    <main className="min-h-screen bg-white pb-[70px]">
+      <div className="w-full max-w-[430px] mx-auto px-3 pt-3 pb-5 box-border">
         {/* 상단 탭 */}
-        <section
-          style={{
-            borderBottom: "1px solid #eee",
-            marginBottom: 8,
-          }}
-        >
-          <div
-            style={{
-              display: "flex",
-              textAlign: "center",
-            }}
-          >
+        <section className="border-b border-[#eee] mb-2">
+          <div className="flex text-center">
             <TabButton
               label="신청"
               active={activeTab === "apply"}
@@ -149,26 +124,18 @@ export default function MyCollabPage() {
         <section>{renderList()}</section>
       </div>
 
-      {/* ✅ 하단 고정 네비 */}
+      {/* 하단 고정 네비 (원래 구조 그대로) */}
       <div
-        style={{
-          position: "fixed",
-          left: 0,
-          bottom: 0,
-          width: "100%",
-          background: "#fff",
-          borderTop: "1px solid #eee",
-          zIndex: 60,
-          display: "flex",
-          justifyContent: "center",
-        }}
+        className="
+          fixed left-0 bottom-0
+          w-full
+          bg-white
+          border-t border-[#eee]
+          z-[60]
+          flex justify-center
+        "
       >
-        <div
-          style={{
-            width: "100%",
-            maxWidth: 430,
-          }}
-        >
+        <div className="w-full max-w-[430px]">
           <BottomNav />
         </div>
       </div>
@@ -179,6 +146,7 @@ export default function MyCollabPage() {
 /* -----------------------------
    탭 버튼 컴포넌트
 -------------------------------- */
+
 type TabButtonProps = {
   label: string;
   active: boolean;
@@ -190,17 +158,19 @@ function TabButton({ label, active, onClick }: TabButtonProps) {
     <button
       type="button"
       onClick={onClick}
-      style={{
-        flex: 1,
-        padding: "12px 0",
-        border: "none",
-        background: "transparent",
-        fontSize: 15,
-        fontWeight: active ? 700 : 500,
-        color: active ? "#000" : "#999",
-        borderBottom: active ? "2px solid #000" : "2px solid transparent",
-        cursor: "pointer",
-      }}
+      className={`
+        flex-1
+        py-3
+        border-0
+        bg-transparent
+        text-[15px]
+        cursor-pointer
+        ${
+          active
+            ? "font-bold text-black border-b-2 border-black"
+            : "font-medium text-[#999] border-b-2 border-transparent"
+        }
+      `}
     >
       {label}
     </button>
@@ -210,6 +180,7 @@ function TabButton({ label, active, onClick }: TabButtonProps) {
 /* -----------------------------
    리스트 아이템 - 신청 탭
 -------------------------------- */
+
 type BaseItemProps = {
   thumbnail: string;
   title: string;
@@ -233,140 +204,96 @@ function CollabItemApply({
   const router = useRouter();
 
   return (
-    <article
-      style={{
-        display: "flex",
-        padding: "12px 0",
-        borderBottom: "1px solid #f3f3f3",
-      }}
-    >
+    <article className="flex py-3 border-b border-[#f3f3f3]">
       {/* 썸네일 */}
       <div
-        style={{
-          width: 90,
-          height: 90,
-          borderRadius: 8,
-          overflow: "hidden",
-          background: "#f5f5f5",
-          marginRight: 12,
-        }}
+        className="
+          w-[90px] h-[90px]
+          rounded-[8px]
+          overflow-hidden
+          bg-[#f5f5f5]
+          mr-3
+        "
       >
-        {/* 실제 이미지로 바꾸면 좋음 */}
         <img
           src={thumbnail}
           alt={title}
-          style={{ width: "100%", height: "100%", objectFit: "cover" }}
+          className="w-full h-full object-cover"
         />
       </div>
 
       {/* 오른쪽 내용 */}
-      <div
-        style={{
-          flex: 1,
-          display: "flex",
-          flexDirection: "column",
-          gap: 4,
-        }}
-      >
+      <div className="flex-1 flex flex-col gap-1">
         {/* 상단 플랫폼/타입 태그 */}
-        <div style={{ display: "flex", alignItems: "center", gap: 6 }}>
-          <span style={{ fontSize: 12 }}>
+        <div className="flex items-center gap-1.5">
+          <span className="text-[12px]">
             {platform === "youtube" ? "▶️" : "📷"}
           </span>
           <span
-            style={{
-              borderRadius: 4,
-              border: "1px solid #000",
-              padding: "2px 6px",
-              fontSize: 11,
-            }}
+            className="
+              rounded
+              border border-black
+              px-[6px] py-[2px]
+              text-[11px]
+            "
           >
             {typeLabel}
           </span>
         </div>
 
         {/* 제목 */}
-        <div
-          style={{
-            fontSize: 14,
-            fontWeight: 600,
-            lineHeight: 1.4,
-          }}
-        >
-          {title}
-        </div>
+        <div className="text-[14px] font-semibold leading-snug">{title}</div>
 
         {/* 선정자 발표일 */}
-        <div
-          style={{
-            fontSize: 11,
-            color: "#666",
-          }}
-        >
-          {announceText}
-        </div>
+        <div className="text-[11px] text-[#666]">{announceText}</div>
 
         {/* 버튼 영역 */}
-        <div
-          style={{
-            display: "flex",
-            gap: 8,
-            marginTop: 6,
-          }}
-        >
-          {/* <button
-            style={{
-              padding: "6px 12px",
-              borderRadius: 6,
-              border: "none",
-              background: "#AFFF33",
-              fontSize: 12,
-              fontWeight: 600,
-              cursor: "pointer",
-            }}
-          >
-            {statusLabel}
-          </button> */}
+        <div className="flex gap-2 mt-1.5">
+          {/* 신청 취소 */}
           <button
-            style={{
-              padding: "6px 12px",
-              borderRadius: 6,
-              border: "1px solid #ccc",
-              background: "#fff",
-              fontSize: 12,
-              cursor: "pointer",
-            }}
+            type="button"
+            className="
+              px-3 py-1.5
+              rounded-[6px]
+              border border-[#ccc]
+              bg-white
+              text-[12px]
+              cursor-pointer
+            "
           >
             신청 취소
           </button>
+
           {/* 콘텐츠 등록 */}
           <button
+            type="button"
             onClick={() => router.push("/my-collab/content-register")}
-            style={{
-              padding: "6px 12px",
-              borderRadius: 6,
-              border: "none",
-              background: "#AFFF33",
-              fontSize: 12,
-              fontWeight: 600,
-              cursor: "pointer",
-              whiteSpace: "nowrap",
-            }}
+            className="
+              px-3 py-1.5
+              rounded-[6px]
+              border-0
+              bg-[#AFFF33]
+              text-[12px] font-semibold
+              cursor-pointer
+              whitespace-nowrap
+            "
           >
             콘텐츠 등록
           </button>
+
+          {/* 설문 등록 */}
           <button
+            type="button"
             onClick={() => router.push("/my-collab/survey-register")}
-            style={{
-              padding: "6px 12px",
-              borderRadius: 6,
-              border: "none",
-              background: "#AFFF33",
-              fontSize: 12,
-              fontWeight: 600,
-              cursor: "pointer",
-              whiteSpace: "nowrap",
-            }}
+            className="
+              px-3 py-1.5
+              rounded-[6px]
+              border-0
+              bg-[#AFFF33]
+              text-[12px] font-semibold
+              cursor-pointer
+              whitespace-nowrap
+            "
           >
             설문 등록
           </button>
@@ -379,18 +306,20 @@ function CollabItemApply({
 /* -----------------------------
    리스트 아이템 - 진행 중 탭
 -------------------------------- */
+
 type ProgressItemProps = ApplyItemProps;
 
 function CollabItemProgress(props: ProgressItemProps) {
-  // 일단 신청과 거의 비슷하게
+  // 신청 탭과 동일 UI
   return <CollabItemApply {...props} />;
 }
 
 /* -----------------------------
    리스트 아이템 - 완료 탭
 -------------------------------- */
+
 type DoneItemProps = BaseItemProps & {
-  statusLabel: string; // "미선정" 같은 표시
+  statusLabel: string; // "미선정" 등
 };
 
 function CollabItemDone({
@@ -401,91 +330,57 @@ function CollabItemDone({
   statusLabel,
 }: DoneItemProps) {
   return (
-    <article
-      style={{
-        display: "flex",
-        padding: "12px 0",
-        borderBottom: "1px solid #f3f3f3",
-      }}
-    >
+    <article className="flex py-3 border-b border-[#f3f3f3]">
       {/* 썸네일 + 오버레이 */}
       <div
-        style={{
-          width: 90,
-          height: 90,
-          borderRadius: 8,
-          overflow: "hidden",
-          background: "#ddd",
-          marginRight: 12,
-          position: "relative",
-        }}
+        className="
+          w-[90px] h-[90px]
+          rounded-[8px]
+          overflow-hidden
+          bg-[#ddd]
+          mr-3
+          relative
+        "
       >
         <img
           src={thumbnail}
           alt={title}
-          style={{
-            width: "100%",
-            height: "100%",
-            objectFit: "cover",
-            filter: "grayscale(0.2)",
-            opacity: 0.9,
-          }}
+          className="w-full h-full object-cover grayscale-[0.2] opacity-90"
         />
-        {/* 상태 오버레이 (예: 미선정) */}
         <div
-          style={{
-            position: "absolute",
-            inset: 0,
-            background: "rgba(0,0,0,0.4)",
-            color: "#fff",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            fontSize: 13,
-            fontWeight: 700,
-          }}
+          className="
+            absolute inset-0
+            bg-black/40
+            text-white
+            flex items-center justify-center
+            text-[13px] font-bold
+          "
         >
           {statusLabel}
         </div>
       </div>
 
       {/* 오른쪽 내용 */}
-      <div
-        style={{
-          flex: 1,
-          display: "flex",
-          flexDirection: "column",
-          gap: 6,
-          justifyContent: "center",
-        }}
-      >
+      <div className="flex-1 flex flex-col gap-1.5 justify-center">
         {/* 플랫폼 / 타입 */}
-        <div style={{ display: "flex", alignItems: "center", gap: 6 }}>
-          <span style={{ fontSize: 12 }}>
+        <div className="flex items-center gap-1.5">
+          <span className="text-[12px]">
             {platform === "youtube" ? "▶️" : "📷"}
           </span>
           <span
-            style={{
-              borderRadius: 4,
-              border: "1px solid #000",
-              padding: "2px 6px",
-              fontSize: 11,
-            }}
+            className="
+              rounded
+              border border-black
+              px-[6px] py-[2px]
+              text-[11px]
+            "
           >
             {typeLabel}
           </span>
         </div>
 
         {/* 제목 */}
-        <div
-          style={{
-            fontSize: 14,
-            fontWeight: 600,
-            lineHeight: 1.4,
-          }}
-        >
-          {title}
-        </div>
+        <div className="text-[14px] font-semibold leading-snug">{title}</div>
       </div>
     </article>
   );

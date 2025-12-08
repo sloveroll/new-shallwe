@@ -8,51 +8,19 @@ export default function MyHomeLayout({
   children: React.ReactNode;
 }) {
   return (
-    <div
-      style={{
-        display: "flex",
-        flexDirection: "column",
-        height: "100vh",
-        overflow: "hidden",
-      }}
-    >
+    <div className="flex min-h-screen flex-col">
       {/* 상단 고정 헤더 */}
-      <div
-        style={{
-          position: "sticky",
-          top: 0,
-          zIndex: 50,
-          background: "#fff",
-          borderBottom: "1px solid #eee",
-        }}
-      >
+      <div className="sticky top-0 z-50 border-b border-[#eee] bg-white">
         <Header />
       </div>
 
-      {/* 스크롤 되는 콘텐츠 영역 (홈, 검색 등) */}
-      <div
-        style={{
-          flex: 1,
-          overflowY: "auto",
-          WebkitOverflowScrolling: "touch",
-          paddingBottom: "70px", // 하단 네비 높이만큼 확보
-        }}
-      >
+      {/* 가운데 콘텐츠 – 그냥 자연스럽게 페이지 스크롤 */}
+      <div className="pb-[70px]">
         {children}
       </div>
 
       {/* 하단 고정 네비 */}
-      <div
-        style={{
-          position: "fixed",
-          bottom: 0,
-          left: 0,
-          width: "100%",
-          zIndex: 60,
-          background: "#fff",
-          borderTop: "1px solid #eee",
-        }}
-      >
+      <div className="fixed bottom-0 left-0 w-full border-t border-[#eee] bg-white z-[60]">
         <BottomNav />
       </div>
     </div>
