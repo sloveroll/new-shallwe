@@ -20,7 +20,7 @@ export default function BottomNav() {
       className="
         fixed left-1/2 bottom-0
         -translate-x-1/2
-        w-full max-w-[430px]
+        w-full max-w-[530px] 
         border-t border-[#eee]
         bg-white
         py-2 pb-2.5

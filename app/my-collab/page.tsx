@@ -98,7 +98,7 @@ export default function MyCollabPage() {
 
   return (
     <main className="min-h-screen bg-white pb-[70px]">
-      <div className="w-full max-w-[430px] mx-auto px-3 pt-3 pb-5 box-border">
+      <div className="w-full max-w-[530px] mx-auto px-3 pt-3 pb-5 box-border">
         {/* 상단 탭 */}
         <section className="border-b border-[#eee] mb-2">
           <div className="flex text-center">
@@ -135,7 +135,7 @@ export default function MyCollabPage() {
           flex justify-center
         "
       >
-        <div className="w-full max-w-[430px]">
+        <div className="w-full max-w-[530px]">
           <BottomNav />
         </div>
       </div>

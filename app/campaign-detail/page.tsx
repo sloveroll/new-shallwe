@@ -30,7 +30,7 @@ export default function CampaignDetailPage() {
   return (
     <main className="min-h-screen bg-white pb-[90px]">
       {/* 안쪽 모바일 캔버스 */}
-      <div className="w-full max-w-[430px] mx-auto bg-white min-h-screen pb-[30px] box-border">
+      <div className="w-full max-w-[530px] mx-auto bg-white min-h-screen pb-[30px] box-border">
         {/* 상단: 뒤로가기 + 대표 이미지 */}
         <section className="relative bg-[#f5f5f5]">
           {/* 뒤로가기 */}
@@ -642,7 +642,7 @@ https://bepla.in/HTtM`;
               <Image
                 src="/images/long.jpg"
                 alt="배너"
-                width={430}
+                width={530}
                 height={1200}
                 className="w-full h-auto block"
               />

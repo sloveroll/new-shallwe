@@ -37,7 +37,7 @@ export default function CampaignApplyPage() {
     <main className="min-h-screen bg-white">
       <div
         className="
-          w-full max-w-[430px] mx-auto
+          w-full max-w-[530px] mx-auto
           min-h-screen
           px-5 pt-3 pb-[50px]
           box-border
@@ -443,7 +443,7 @@ export default function CampaignApplyPage() {
           type="button"
           onClick={() => router.push("/campaign-apply/step2")}
           className="
-            w-full max-w-[430px]
+            w-full max-w-[530px]
             py-[14px]
             rounded-[8px]
             border-0

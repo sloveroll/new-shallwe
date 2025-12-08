@@ -10,7 +10,7 @@ export default function ContentRegisterPage() {
 
   return (
     <main className="bg-white">
-      <div className="w-full max-w-[430px] mx-auto px-5 pt-4 box-border">
+      <div className="w-full max-w-[530px] mx-auto px-5 pt-4 box-border">
         {/* 상단: 뒤로가기 + 타이틀 */}
         <button
           onClick={() => router.back()}

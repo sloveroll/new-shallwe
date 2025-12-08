@@ -12,7 +12,7 @@ export default function SurveyRegisterPage() {
     <main className="bg-white min-h-screen">
       <div
         className="
-          w-full max-w-[430px]
+          w-full max-w-[530px]
           mx-auto
           px-5 pt-4 pb-5
           box-border
@@ -31,9 +31,7 @@ export default function SurveyRegisterPage() {
           ←
         </button>
 
-        <h1 className="text-center text-[18px] font-bold mb-5">
-          설문 등록
-        </h1>
+        <h1 className="text-center text-[18px] font-bold mb-5">설문 등록</h1>
 
         {/* 1) 경고 배너 */}
         <section
@@ -48,9 +46,9 @@ export default function SurveyRegisterPage() {
             text-center
           "
         >
-          설문 등록 기간이{" "}
-          <strong className="text-[#ff3b30]">2일 경과</strong>하여 캐시가{" "}
-          <strong className="text-[#ff3b30]">80%만 지급</strong>될 예정이에요.
+          설문 등록 기간이 <strong className="text-[#ff3b30]">2일 경과</strong>
+          하여 캐시가 <strong className="text-[#ff3b30]">80%만 지급</strong>될
+          예정이에요.
         </section>
 
         {/* 2) 캠페인 요약 */}
@@ -198,12 +196,13 @@ export default function SurveyRegisterPage() {
             <span>아니요</span>
           </label>
         </section>
+      </div>
 
-        {/* 하단 등록하기 버튼 */}
-        <button
-          type="button"
-          onClick={() => setShowModal(true)}
-          className="
+      {/* 하단 등록하기 버튼 */}
+      <button
+        type="button"
+        onClick={() => setShowModal(true)}
+        className="
             w-full
             mt-[30px]
             py-[14px]
@@ -213,10 +212,9 @@ export default function SurveyRegisterPage() {
             text-[15px] font-bold
             cursor-pointer
           "
-        >
-          등록하기
-        </button>
-      </div>
+      >
+        등록하기
+      </button>
 
       {/* 등록 모달 */}
       <SurveyRegisterConfirmModal

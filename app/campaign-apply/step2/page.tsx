@@ -10,7 +10,7 @@ export default function CampaignApplyConfirmPage() {
 
   return (
     <main className="min-h-screen bg-white pb-[50px]">
-      <div className="w-full max-w-[430px] mx-auto px-5 py-4 box-border">
+      <div className="w-full max-w-[530px] mx-auto px-5 py-4 box-border">
         {/* 뒤로가기 */}
         <button
           onClick={() => router.back()}
@@ -145,7 +145,7 @@ export default function CampaignApplyConfirmPage() {
         {/* 모바일 컨테이너 (폭 제한) */}
         <div
           className="
-            w-full max-w-[430px]
+            w-full max-w-[530px]
             px-5
             box-border
           "
