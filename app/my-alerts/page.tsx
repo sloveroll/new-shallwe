@@ -20,7 +20,7 @@ type AlertItem = {
 const MY_ALERTS: AlertItem[] = [
   {
     id: 1,
-    icon: "/images/ic_notice.png", // 캠페인 신청
+    icon: "/images/my-collab/ic-notice.png", // 캠페인 신청
     title: "캠페인 신청",
     message:
       "[러, 아벤느] 캠페인 신청이 완료되었어요. 선정자에 한해 개별 안내드릴게요.",
@@ -29,7 +29,7 @@ const MY_ALERTS: AlertItem[] = [
   },
   {
     id: 2,
-    icon: "/images/ic_invite.png", // 캠페인 진행 제안
+    icon: "/images/my-collab/ic-invite.png", // 캠페인 진행 제안
     title: "캠페인 진행 제안",
     message:
       "[러, 아벤느] 캠페인 진행 제안을 받았어요. 내용을 확인하고 캠페인에 신청하세요.",
@@ -37,7 +37,7 @@ const MY_ALERTS: AlertItem[] = [
   },
   {
     id: 3,
-    icon: "/images/ic_feedback_contents.png", // 협업 콘텐츠 피드백
+    icon: "/images/my-collab/ic-feedback.png", // 협업 콘텐츠 피드백
     title: "협업 콘텐츠 피드백",
     message:
       "[러, 아벤느] 캠페인 피드백이 도착했어요. 오늘까지 반드시 콘텐츠 내 반영해 주세요.",
@@ -45,7 +45,7 @@ const MY_ALERTS: AlertItem[] = [
   },
   {
     id: 4,
-    icon: "/images/ic_cash_payment.png", // 캐시 지급
+    icon: "/images/my-collab/ic-cash-payment.png", // 캐시 지급
     title: "캐시 지급",
     message: "[러, 아벤느] 캠페인 협업이 완료되어, 캐시가 지급되었어요.",
     date: "2025.11.25",
@@ -56,7 +56,7 @@ const MY_ALERTS: AlertItem[] = [
 const NOTICE_LIST: AlertItem[] = [
   {
     id: 101,
-    icon: "/images/ic_bell.png",
+    icon: "/images/my-collab/ic-bell.png",
     title: "서비스 공지",
     message:
       "안정적인 서비스 제공을 위해 12월 1일(월) 02:00~04:00 시스템 점검이 진행됩니다.",
@@ -127,10 +127,10 @@ export default function MyAlertsPage() {
           {MY_ALERTS.map((item) => (
             <article
               key={item.id}
-              className="flex items-start py-4 border-b border-[#f0f0f0] text-[13px]"
+              className="flex items-center py-4 border-b border-[#f0f0f0] text-[13px]"
             >
               {/* 아이콘 */}
-              <div className="relative mr-3 mt-[2px]">
+              <div className="relative mr-3 flex items-center">
                 <Image
                   src={item.icon}
                   alt={item.title}

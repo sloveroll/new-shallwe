@@ -24,7 +24,7 @@ type NoticeItem = {
           <div className="mt-[9px] mr-2 w-[6px] h-[6px] rounded-full bg-[#a5ff3f]" />
 
           <Image
-            src="/images/ic_notice.png"
+            src="/images/my-collab/ic-notice.png"
             alt="notice"
             width={20}
             height={20}
