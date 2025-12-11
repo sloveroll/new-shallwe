@@ -4,12 +4,33 @@
 import { useRouter } from "next/navigation";
 import Image from "next/image";
 import { useState } from "react";
+import Link from "next/link";
 import BottomNav from "../components/BottomNav";
 import ChannelLinkedCard from "../components/my-page/ChannelLinkedCard";
+import UnlinkConfirmModal from "../components/modal/UnlinkConfirmModal";
+import LogoutConfirmModal from "../components/modal/LogoutConfirmModal";
 
 export default function MyPage() {
   const router = useRouter();
   const [marketingAgree, setMarketingAgree] = useState(false);
+  const [isLogoutModalOpen, setIsLogoutModalOpen] = useState(false);
+
+  // 모달 상태 (어떤 플랫폼을 해제할지)
+  const [unlinkTarget, setUnlinkTarget] = useState<string | null>(null);
+
+  const handleUnlink = (platform: string) => {
+    setUnlinkTarget(platform);
+  };
+
+  const closeUnlinkModal = () => {
+    setUnlinkTarget(null);
+  };
+
+  const confirmUnlink = () => {
+    // TODO: 실제 연동 해제 API 호출 로직
+    console.log(`${unlinkTarget} 해제됨`);
+    closeUnlinkModal();
+  };
 
   return (
     <main className="bg-[#f5f5f5] pb-[50px]">
@@ -63,7 +84,6 @@ export default function MyPage() {
 
       <div className="px-5">
         <br></br>
-        {/* 3. 채널별 연동 필요 카드 */}
         {/* 3. 연동된 채널 카드들 */}
         <ChannelLinkedCard
           platform="Youtube"
@@ -72,6 +92,7 @@ export default function MyPage() {
             { label: "롱폼", desc: "레퍼런스 등록 후 협업이 가능해요." },
             { label: "쇼츠", desc: "협업에 참여하실 수 있어요." },
           ]}
+          onRemove={() => handleUnlink("Youtube")}
         />
 
         <ChannelLinkedCard
@@ -81,6 +102,7 @@ export default function MyPage() {
             { label: "릴스", desc: "연동된 채널 내 릴스 콘텐츠가 없어요." },
             { label: "피드", desc: "협업에 참여하실 수 있어요." },
           ]}
+          onRemove={() => handleUnlink("Instagram")}
         />
 
         <ChannelLinkedCard
@@ -89,6 +111,7 @@ export default function MyPage() {
           items={[
             { label: "블로그", desc: "블로그 협업에 참여하실 수 있어요." },
           ]}
+          onRemove={() => handleUnlink("Blog")}
         />
 
         <div className="-mx-5 h-2 bg-white mt-5" />
@@ -184,9 +207,7 @@ export default function MyPage() {
           <button
             type="button"
             className="flex w-full items-center justify-between px-4 py-3 text-left"
-            onClick={() => {
-              // TODO: 실제 로그아웃 로직
-            }}
+            onClick={() => setIsLogoutModalOpen(true)}
           >
             <span className="text-[13px] font-semibold text-[#ff4b4b]">
               로그아웃
@@ -250,6 +271,26 @@ export default function MyPage() {
           <BottomNav />
         </div>
       </div>
+
+      {/* 연동 해제 확인 모달 */}
+      <UnlinkConfirmModal
+        open={!!unlinkTarget}
+        platform={unlinkTarget || ""}
+        onClose={closeUnlinkModal}
+        onConfirm={confirmUnlink}
+      />
+
+      {/* 로그아웃 확인 모달 */}
+      <LogoutConfirmModal
+        open={isLogoutModalOpen}
+        onClose={() => setIsLogoutModalOpen(false)}
+        onConfirm={() => {
+          // TODO: 실제 로그아웃 처리
+          alert("로그아웃 되었습니다.");
+          setIsLogoutModalOpen(false);
+          router.push("/login");
+        }}
+      />
     </main>
   );
 }

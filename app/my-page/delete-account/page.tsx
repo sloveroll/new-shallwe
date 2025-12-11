@@ -1,9 +1,13 @@
 "use client";
 
+import { useState } from "react";
 import { useRouter } from "next/navigation";
+import DeleteAccountConfirmModal from "@/app/components/modal/DeleteAccountConfirmModal";
 
 export default function WithdrawPage() {
   const router = useRouter();
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
 
   return (
     <main className="bg-white min-h-screen flex flex-col">
@@ -87,14 +91,21 @@ export default function WithdrawPage() {
       <button
         type="button"
         className="w-full py-4 text-[16px] font-bold bg-[#AFFF33]"
-        onClick={() => {
-          // TODO: 실제 탈퇴 API 호출 후 메인으로 이동 등
-          // router.push("/");
-          alert("탈퇴하기 클릭");
-        }}
+        onClick={() => setIsModalOpen(true)}
       >
         탈퇴하기
       </button>
+
+      {/* 탈퇴 확인 모달 */}
+      <DeleteAccountConfirmModal
+        open={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+        onConfirm={() => {
+          // TODO: 실제 탈퇴 API 호출
+          alert("탈퇴가 완료되었습니다.");
+          router.push("/");
+        }}
+      />
     </main>
   );
 }
