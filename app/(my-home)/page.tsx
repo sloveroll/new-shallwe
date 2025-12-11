@@ -345,7 +345,7 @@ export default function HomePage() {
         </section>
       )}
 
-      {/* 🔥 2. Youtube 탭 */}
+      {/* 2. Youtube 탭 */}
       {mainTab === "youtube" && (
         <section className="px-5 pb-20">
           {/* 상단 필터 (소츠 + 칩들) */}
@@ -417,7 +417,7 @@ export default function HomePage() {
         </section>
       )}
 
-      {/* 🔥 3. Instagram / Blog 탭 자리 */}
+      {/* 3. Instagram / Blog 탭 자리 */}
       {mainTab === "instagram" && (
         <section className="px-5 py-4">Instagram 탭 내용 넣을 자리</section>
       )}
