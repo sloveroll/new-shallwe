@@ -57,7 +57,7 @@ export default function ChannelLinkedCard({
       {/* --- Row 2: 플랫폼 공통 로고 + 채널명 --- */}
       <div className="mb-3 flex items-center gap-2">
         <Image
-          src="/images/common/ic-namelogo.png"
+          src="/images/common/ic-lookinglogo.png"
           alt="logo"
           width={15}
           height={15}

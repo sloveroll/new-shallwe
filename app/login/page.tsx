@@ -53,7 +53,7 @@ export default function LoginPage() {
         <div>
           <label className="mb-1 flex items-center text-[12px] font-semibold text-[#333]">
             <Image
-              src="/images/common/ic-namelogo.png"
+              src="/images/common/ic-lookinglogo.png"
               alt="아이디 아이콘"
               width={16}
               height={16}
@@ -88,7 +88,7 @@ export default function LoginPage() {
         <div>
           <label className="mb-1 flex items-center text-[12px] font-semibold text-[#333]">
             <Image
-              src="/images/common/ic-namelogo.png"
+              src="/images/common/ic-lookinglogo.png"
               alt="비밀번호 아이콘"
               width={16}
               height={16}

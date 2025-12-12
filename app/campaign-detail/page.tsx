@@ -65,26 +65,48 @@ export default function CampaignDetailPage() {
         <section className="px-5 pt-4 pb-4">
           {/* 태그/지원자수/D-day */}
           <div className="flex items-center gap-2 mb-3">
+            {/* 쇼츠 뱃지 */}
             <span
               className="
-                text-[11px]
-                px-2 py-[2px]
-                rounded
-                bg-black text-white
+                flex items-center gap-[2px]
+                text-[11px] font-bold
+                px-[6px] py-[2px]
+                rounded-[4px]
+                border-[0.5px] border-black
+                bg-white text-black
               "
             >
+              <Image
+                src="/images/common/ic-shorts.png"
+                alt="쇼츠"
+                width={14}
+                height={14}
+                className="w-[14px] h-[14px]"
+              />
               쇼츠
             </span>
 
-            <span className="text-[12px] text-[#333]">1,230/20</span>
+            {/* 지원자 수 */}
+            <div className="flex items-center gap-[2px] text-[12px] text-[#333]">
+              <svg
+                width="12"
+                height="12"
+                viewBox="0 0 24 24"
+                fill="#888"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z" />
+              </svg>
+              <strong>1,230</strong>/20
+            </div>
 
             <span
               className="
                 ml-auto
-                text-[11px]
-                px-2 py-[2px]
-                rounded
-                bg-[#ff6675] text-white
+                text-[11px] font-bold
+                px-[8px] py-[2px]
+                rounded-[4px]
+                bg-[#e4a8a8] text-black
               "
             >
               D-12
@@ -92,21 +114,22 @@ export default function CampaignDetailPage() {
           </div>
 
           {/* 상품명/제품 */}
-          <div className="text-[16px] font-semibold mb-1">메디힐</div>
+          <div className="text-[14px] font-bold mb-1">메디힐</div>
 
-          <div className="text-[15px] leading-[1.5] mb-3">
-            마데카소사이드 수분 선세럼 촉촉 리페어 50g
+          <div className="text-[16px] leading-[1.4] mb-4 text-[#111]">
+            마데카소사이드 수분 선세럼 흔적 리페어 50g
           </div>
 
-          {/* 지급 캐시, 기간 등 리스트 */}
-          <div className="text-[13px] text-[#333] mb-2">
-            지급 캐시: <strong>100,000</strong>
+          {/* 지급 캐시 */}
+          <div className="text-[13px] text-[#333] mb-3 flex items-center">
+            <span className="font-bold mr-1">⚡ 지금 캐시:</span>
+            <strong className="text-[16px]">100,000</strong>
           </div>
 
-          <ul className="text-[12px] leading-[1.7] text-[#555] pl-4 m-0 list-disc">
-            <li>콘텐츠 등록 기간: 11/6(금) ~ 11/27(목)</li>
+          <ul className="text-[12px] leading-[1.8] text-[#666] pl-4 m-0 list-disc">
+            <li>콘텐츠 등록 기간: 11/16(일) - 11/27(목)</li>
             <li>제품 발송·가이드 전달: 11/27(목)까지</li>
-            <li>사전 검사 마감일: 11/27(목)까지</li>
+            <li>사전 검수 마감일: 11/27(목)까지</li>
             <li>캐시 지급일: 11/27(목)까지</li>
             <li>콘텐츠 유지 기간: 60일</li>
           </ul>
@@ -154,9 +177,18 @@ export default function CampaignDetailPage() {
           {activeTab === "info" ? (
             <>
               {/* 희망 크리에이터 */}
-              <div className="border border-[#ddd] rounded-[10px] p-[14px] mb-3">
-                <div className="text-[14px] font-semibold mb-1.5">
-                  희망 크리에이터
+              <div className="border border-[#e8e9eb] rounded-[3px] p-[14px] mb-3">
+                <div className="flex items-center gap-[5px] mb-1.5">
+                  <Image
+                    src="/images/common/ic-winklogo.png"
+                    alt="희망 크리에이터"
+                    width={15}
+                    height={15}
+                    className="w-[15px] h-[15px]"
+                  />
+                  <div className="text-[14px] font-bold">
+                    희망 크리에이터
+                  </div>
                 </div>
                 <p className="text-[12px] text-[#666] mb-2">
                   브랜드는 이런 크리에이터님을 선호해요!
@@ -164,34 +196,81 @@ export default function CampaignDetailPage() {
 
                 <ul className="text-[12px] leading-[1.8] m-0 pl-4 text-[#444] list-disc">
                   <li>피부 타입: 복합성, 민감성</li>
-                  <li>피부 고민: 여드름, 홍조, 기미</li>
-                  <li>타겟 연령대: 18–24, 여성</li>
+                  <li>피부 고민: 여드름, 주름, 기미</li>
+                  <li>시청자 타겟 연령대&성별: 18-24, 여성</li>
                 </ul>
               </div>
 
               {/* 유의사항 */}
-              <div className="border border-[#ddd] rounded-[10px] p-[14px] mb-4">
-                <div className="text-[14px] font-semibold mb-1.5">
-                  유의사항
+              <div className="border border-[#e8e9eb] rounded-[3px] p-[14px] mb-4">
+                <div className="flex items-center gap-[5px] mb-1.5">
+                  <Image
+                    src="/images/common/ic-lookinglogo.png"
+                    alt="유의사항"
+                    width={15}
+                    height={15}
+                    className="w-[15px] h-[15px]"
+                  />
+                  <div className="text-[14px] font-bold">
+                    유의사항
+                  </div>
                 </div>
+                
+                {/* 플래그 영역 */}
+                <div className="mb-2 space-y-1.5">
+                  <div className="flex items-center">
+                    <span
+                      className="
+                        px-2 py-1
+                        rounded-[2px]
+                        bg-[#edffd0]
+                        border-[0.3px] border-[#afafaf]
+                        text-[11px] font-medium
+                        mr-2
+                      "
+                    >
+                      ✅ 2차 활용
+                    </span>
+                    <span className="text-[12px] text-[#5d5d5d]">
+                      협업 영상이 상업적으로 활용될 수 있습니다.
+                    </span>
+                  </div>
+                  
+                  <div className="flex items-center">
+                    <span
+                      className="
+                        px-2 py-1
+                        rounded-[2px]
+                        bg-[#edffd0]
+                        border-[0.3px] border-[#afafaf]
+                        text-[11px] font-medium
+                        mr-2
+                      "
+                    >
+                      ✅ 클린본 제출
+                    </span>
+                    <span className="text-[12px] text-[#5d5d5d]">
+                      BGM, 효과음 등을 제거한 영상 제출이 필수입니다.
+                    </span>
+                  </div>
+                </div>
+
                 <ul className="text-[12px] leading-[1.7] m-0 pl-4 text-[#444] list-disc">
-                  <li>2차 활용 : 협업 영상이 상업적으로 활용될 수 있어요.</li>
-                  <li>
-                    음원 관련 안내 : BGM, 효과음 등은 저작권 허용 범위를
-                    확인해주세요.
-                  </li>
-                  <li>유튜브 제품 링크 필수 포함</li>
-                  <li>협업 영상 2차 활용 비용 포함</li>
+                  <li>유튜브 제품 태그 필수</li>
+                  <li>추가 제공품 노출 필수</li>
+                  <li>협업금에 2차 활용 비용 포함</li>
                 </ul>
               </div>
 
               {/* 협업 제품 / 단순 선물 카드 2개 */}
               <div className="flex gap-3 mb-6">
-                <div className="flex-1 border border-[#eee] rounded-[10px] p-[10px]">
-                  <div className="text-[11px] font-semibold text-[#ff6675] mb-1.5">
-                    협업 제품
+                <div className="flex-1 border border-[#edefef] rounded-[5px] p-[10px] relative">
+                  {/* 제품 플래그 */}
+                  <div className="absolute top-[5px] left-[4px] bg-[#ffdada] border-[0.3px] border-[#e5e5e5] h-[9px] px-1.5 flex items-center">
+                    <span className="text-[6px] font-medium text-black">협업 제품</span>
                   </div>
-                  <div className="w-full h-[120px] relative mb-2">
+                  
+                  <div className="w-full h-[112px] relative mb-2 mt-3">
                     <Image
                       src="/images/sample.png"
                       alt="협업 제품"
@@ -199,17 +278,22 @@ export default function CampaignDetailPage() {
                       style={{ objectFit: "contain" }}
                     />
                   </div>
-                  <div className="text-[12px] font-semibold mb-1">
-                    메디힐 마데카소사이드 수분 선세럼 촉촉 리페어 50g
+                  <div className="text-[12px] font-bold mb-1">
+                    메디힐 MEDIHEAL
                   </div>
-                  <div className="text-[12px] text-[#666]">59,000원</div>
+                  <div className="text-[12px] font-medium mb-1">
+                    마데카소사이드 수분 선세럼 흔적 리페어 50g
+                  </div>
+                  <div className="text-[12px] font-bold text-black">59,000원</div>
                 </div>
 
-                <div className="flex-1 border border-[#eee] rounded-[10px] p-[10px]">
-                  <div className="text-[11px] font-semibold text-[#666] mb-1.5">
-                    단순 선물
+                <div className="flex-1 border border-[#edefef] rounded-[5px] p-[10px] relative">
+                  {/* 제품 플래그 */}
+                  <div className="absolute top-[5px] left-[4px] bg-[#d9d9d9] border-[0.3px] border-[#e5e5e5] h-[9px] px-1.5 flex items-center">
+                    <span className="text-[6px] font-medium text-black">단순 선물</span>
                   </div>
-                  <div className="w-full h-[120px] relative mb-2">
+                  
+                  <div className="w-full h-[112px] relative mb-2 mt-3">
                     <Image
                       src="/images/sample.png"
                       alt="단순 선물"
@@ -217,10 +301,13 @@ export default function CampaignDetailPage() {
                       style={{ objectFit: "contain" }}
                     />
                   </div>
-                  <div className="text-[12px] font-semibold mb-1">
-                    메디힐 마데카소사이드 수분 선세럼 촉촉 리페어 50g
+                  <div className="text-[12px] font-bold mb-1">
+                    메디힐 MEDIHEAL
                   </div>
-                  <div className="text-[12px] text-[#666]">59,000원</div>
+                  <div className="text-[12px] font-medium mb-1">
+                    마데카소사이드 수분 선세럼 흔적 리페어 50g
+                  </div>
+                  <div className="text-[12px] font-bold text-black">59,000원</div>
                 </div>
               </div>
             </>
@@ -681,7 +768,7 @@ https://bepla.in/HTtM`;
       {/* 고정 신청하기 버튼 */}
       <div
         className="
-          fixed left-0 bottom-0 w-full
+          fixed left-1/2 bottom-0 w-full max-w-[530px] -translate-x-1/2
           px-3 py-[10px]
           bg-black/25
           backdrop-blur

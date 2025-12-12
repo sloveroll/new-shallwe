@@ -58,7 +58,7 @@ export default function MyPageContent({ userName }: MyPageContentProps) {
           <div className="mb-3 flex items-start justify-between">
             <div className="flex items-center gap-2">
               <Image
-                src="/images/my-page/ic-userlogo.png"
+                src="/images/common/ic-winklogo.png"
                 alt="creator"
                 width={18}
                 height={18}

@@ -1,4 +1,6 @@
 import mysql from 'mysql2/promise';
+import { drizzle } from 'drizzle-orm/mysql2';
+import * as schema from '@/lib/schema';
 
 export const pool = mysql.createPool({
     host: process.env.DB_HOST,
@@ -12,3 +14,5 @@ export const pool = mysql.createPool({
     idleTimeout: 60000, // idle connections timeout, in milliseconds, the default value 60000
     queueLimit: 0,
 });
+
+export const db = drizzle(pool, { mode: 'default', schema });

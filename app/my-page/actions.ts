@@ -1,12 +1,18 @@
 'use server'
 
-import { pool } from '@/lib/db';
+import { db } from '@/lib/db';
+import { admin } from '@/lib/schema';
+import { sql } from 'drizzle-orm';
 
 export async function getAdminName() {
     try {
-        const [rows] = await pool.query('SELECT name FROM admin LIMIT 1');
-        // @ts-ignore
-        const name = rows[0]?.name || '크리에이터';
+        // Drizzle: SELECT name FROM admin LIMIT 1
+        const result = await db
+            .select({ name: admin.name })
+            .from(admin)
+            .limit(1);
+
+        const name = result[0]?.name || '크리에이터';
         return { success: true, name: name };
     } catch (error: any) {
         console.error('DB Error:', error);
