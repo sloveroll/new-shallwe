@@ -64,16 +64,16 @@ export default function CampaignDetailPage() {
         {/* 캠페인 기본 정보 */}
         <section className="px-5 pt-4 pb-4">
           {/* 태그/지원자수/D-day */}
+          {/* 태그/지원자수/D-day */}
           <div className="flex items-center gap-2 mb-3">
-            {/* 쇼츠 뱃지 */}
+            {/* 쇼츠 뱃지 (블랙/화이트 반전 스타일이 자주 쓰이나, 기존 유지하되 내용 확인) */}
             <span
               className="
                 flex items-center gap-[2px]
                 text-[11px] font-bold
                 px-[6px] py-[2px]
                 rounded-[4px]
-                border-[0.5px] border-black
-                bg-white text-black
+                bg-[#333] text-white
               "
             >
               <Image
@@ -81,58 +81,79 @@ export default function CampaignDetailPage() {
                 alt="쇼츠"
                 width={14}
                 height={14}
-                className="w-[14px] h-[14px]"
+                className="w-[14px] h-[14px] invert" 
               />
               쇼츠
             </span>
 
-            {/* 지원자 수 */}
-            <div className="flex items-center gap-[2px] text-[12px] text-[#333]">
-              <svg
-                width="12"
-                height="12"
-                viewBox="0 0 24 24"
-                fill="#888"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z" />
-              </svg>
-              <strong>1,230</strong>/20
-            </div>
-
+            {/* 모집 인원 (10명 | 1명) */}
             <span
               className="
-                ml-auto
-                text-[11px] font-bold
-                px-[8px] py-[2px]
+                text-[12px] font-medium
+                px-[6px] py-[2px]
+                border border-[#333]
                 rounded-[4px]
-                bg-[#e4a8a8] text-black
+                bg-white text-[#333]
               "
             >
-              D-12
+              10명 | <strong>1명</strong>
+            </span>
+
+            {/* 마감임박 뱃지 */}
+            <span
+              className="
+                text-[11px] font-bold
+                px-[6px] py-[2px]
+                rounded-[4px]
+                bg-[#AFFF33] text-black
+              "
+            >
+              마감임박!
             </span>
           </div>
 
           {/* 상품명/제품 */}
-          <div className="text-[14px] font-bold mb-1">메디힐</div>
+          <div className="text-[18px] font-bold mb-1 text-black">아르마니 뷰티</div>
 
-          <div className="text-[16px] leading-[1.4] mb-4 text-[#111]">
-            마데카소사이드 수분 선세럼 흔적 리페어 50g
+          <div className="text-[16px] leading-[1.4] mb-6 text-[#111]">
+            NEW 파워 패브릭 PRO 파운데이션
           </div>
 
-          {/* 지급 캐시 */}
-          <div className="text-[13px] text-[#333] mb-3 flex items-center">
-            <span className="font-bold mr-1">⚡ 지금 캐시:</span>
-            <strong className="text-[16px]">100,000</strong>
-          </div>
+          {/* 정보 리스트 (Grid Layout) */}
+          <div className="flex flex-col gap-2 text-[13px] text-[#333]">
+            {/* 지급 캐시 */}
+            <div className="flex items-start">
+              <span className="font-bold w-[100px] shrink-0">지급 캐시</span>
+              <span className="font-medium">
+                <span className="text-[#AFFF33] font-bold underline cursor-pointer mr-1">로그인</span> 
+                후 확인 가능
+              </span>
+            </div>
 
-          <ul className="text-[12px] leading-[1.8] text-[#666] pl-4 m-0 list-disc">
-            <li>콘텐츠 등록 기간: 11/16(일) - 11/27(목)</li>
-            <li>제품 발송·가이드 전달: 11/27(목)까지</li>
-            <li>사전 검수 마감일: 11/27(목)까지</li>
-            <li>캐시 지급일: 11/27(목)까지</li>
-            <li>콘텐츠 유지 기간: 60일</li>
-          </ul>
+            {/* 콘텐츠 등록기간 */}
+            <div className="flex items-start">
+              <span className="font-bold w-[100px] shrink-0">콘텐츠 등록기간</span>
+              <span className="font-medium">11/16(일) - 11/27(목)</span>
+            </div>
+
+            {/* 사전 검수 마감일 */}
+            <div className="flex items-start">
+              <span className="font-bold w-[100px] shrink-0">사전 검수 마감일</span>
+              <span className="font-medium">11/27(목)까지</span>
+            </div>
+
+            {/* 캐시 지급일 */}
+            <div className="flex items-start">
+              <span className="font-bold w-[100px] shrink-0">캐시 지급일</span>
+              <span className="font-medium">11/27(목)까지</span>
+            </div>
+
+            {/* 콘텐츠 유지 기간 */}
+            <div className="flex items-start">
+              <span className="font-bold w-[100px] shrink-0">콘텐츠 유지 기간</span>
+              <span className="font-medium">60일</span>
+            </div>
+          </div>
         </section>
 
         {/* 탭 영역 */}
@@ -779,7 +800,7 @@ https://bepla.in/HTtM`;
       >
         <div className="w-full max-w-[480px] bg-transparent rounded-[10px] px-3 pb-3 box-border">
           <div className="text-[12px] text-[#555] text-center mb-1.5">
-            모집 마감: 10/30(목) | 당첨자 발표: 10/31(금)까지
+            모집 마감: 11/13(목) | 당첨자 발표: 11/14(금)까지
           </div>
 
           <button
