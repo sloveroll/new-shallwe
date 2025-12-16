@@ -204,8 +204,8 @@ export default function CampaignDetailContent({
       </section>
 
       {/* 탭 영역 */}
-      <section className="px-5">
-        <div className="flex border-b border-[#eee] mb-4">
+      <section className="bg-[#f5f5f5] pt-3 pb-5">
+        <div className="flex border-b border-[#eee] mb-0 bg-white pt-5">
           <button
             onClick={() => setActiveTab("info")}
             className={`
@@ -216,8 +216,8 @@ export default function CampaignDetailContent({
               border-b-0 border-r border-[#eee]
               ${
                 activeTab === "info"
-                  ? "font-bold text-[#111] border-t-2 border-t-[#AFFF33]"
-                  : "font-medium text-[#888] border-t-2 border-t-transparent"
+                  ? "font-bold text-[#111] border-b-2 border-b-[#AFFF33]"
+                  : "font-medium text-[#888] border-b-2 border-b-transparent"
               }
             `}
           >
@@ -232,8 +232,8 @@ export default function CampaignDetailContent({
               cursor-pointer
               ${
                 activeTab === "guide"
-                  ? "font-bold text-[#111] border-t-2 border-t-[#AFFF33]"
-                  : "font-medium text-[#888] border-t-2 border-t-transparent"
+                  ? "font-bold text-[#111] border-b-2 border-b-[#AFFF33]"
+                  : "font-medium text-[#888] border-b-2 border-b-transparent"
               }
             `}
           >
@@ -241,145 +241,146 @@ export default function CampaignDetailContent({
           </button>
         </div>
 
-        {/* 탭 내용 */}
-        {activeTab === "info" ? (
-          <>
-            {/* 희망 크리에이터 */}
-            <div className="border border-[#e8e9eb] rounded-[3px] p-[14px] mb-3">
-              <div className="flex items-center gap-[5px] mb-1.5">
-                <Image
-                  src="/images/common/ic-winklogo.png"
-                  alt="희망 크리에이터"
-                  width={15}
-                  height={15}
-                  className="w-[15px] h-[15px]"
-                />
-                <div className="text-[14px] font-bold">희망 크리에이터</div>
-              </div>
-              <p className="text-[12px] text-[#666] mb-2">
-                브랜드는 이런 크리에이터님을 선호해요!
-              </p>
-
-              <ul className="text-[12px] leading-[1.8] m-0 pl-4 text-[#444] list-disc">
-                <li>피부 타입: 복합성, 민감성</li>
-                <li>피부 고민: 여드름, 주름, 기미</li>
-                <li>시청자 타겟 연령대&성별: 18-24, 여성</li>
-              </ul>
-            </div>
-
-            {/* 유의사항 */}
-            <div className="border border-[#e8e9eb] rounded-[3px] p-[14px] mb-4">
-              <div className="flex items-center gap-[5px] mb-1.5">
-                <Image
-                  src="/images/common/ic-lookinglogo.png"
-                  alt="유의사항"
-                  width={15}
-                  height={15}
-                  className="w-[15px] h-[15px]"
-                />
-                <div className="text-[14px] font-bold">유의사항</div>
-              </div>
-
-              {/* 플래그 영역 */}
-              <div className="mb-2 space-y-1.5">
-                <div className="flex items-center">
-                  <span
-                    className="
-                      px-2 py-1
-                      rounded-[2px]
-                      bg-[#edffd0]
-                      border-[0.3px] border-[#afafaf]
-                      text-[11px] font-medium
-                      mr-2
-                    "
-                  >
-                    ✅ 2차 활용
-                  </span>
-                  <span className="text-[12px] text-[#5d5d5d]">
-                    협업 영상이 상업적으로 활용될 수 있습니다.
-                  </span>
-                </div>
-
-                <div className="flex items-center">
-                  <span
-                    className="
-                      px-2 py-1
-                      rounded-[2px]
-                      bg-[#edffd0]
-                      border-[0.3px] border-[#afafaf]
-                      text-[11px] font-medium
-                      mr-2
-                    "
-                  >
-                    ✅ 클린본 제출
-                  </span>
-                  <span className="text-[12px] text-[#5d5d5d]">
-                    BGM, 효과음 등을 제거한 영상 제출이 필수입니다.
-                  </span>
-                </div>
-              </div>
-
-              <ul className="text-[12px] leading-[1.7] m-0 pl-4 text-[#444] list-disc">
-                <li>유튜브 제품 태그 필수</li>
-                <li>추가 제공품 노출 필수</li>
-                <li>협업금에 2차 활용 비용 포함</li>
-              </ul>
-            </div>
-
-            {/* 협업 제품 / 단순 선물 카드 2개 */}
-            <div className="flex gap-3 mb-6">
-              <div className="flex-1 border border-[#edefef] rounded-[5px] p-[10px] relative">
-                {/* 제품 플래그 */}
-                <div className="absolute top-[5px] left-[4px] bg-[#ffdada] border-[0.3px] border-[#e5e5e5] h-[9px] px-1.5 flex items-center">
-                  <span className="text-[6px] font-medium text-black">
-                    협업 제품
-                  </span>
-                </div>
-
-                <div className="w-full h-[112px] relative mb-2 mt-3">
+        {/* 탭 내용 - 회색 배경 */}
+        <div className="bg-[#f5f5f5] pb-4">
+          {activeTab === "info" ? (
+            <>
+              {/* 희망 크리에이터 카드 */}
+              <div className="bg-white rounded-[8px] p-[14px] mb-3 mt-3 mx-5 shadow-sm">
+                <div className="flex items-center gap-[5px] mb-1.5">
                   <Image
-                    src="/images/sample.png"
-                    alt="협업 제품"
-                    fill
-                    style={{ objectFit: "contain" }}
+                    src="/images/common/ic-winklogo.png"
+                    alt="희망 크리에이터"
+                    width={15}
+                    height={15}
+                    className="w-[15px] h-[15px]"
                   />
+                  <div className="text-[14px] font-bold">희망 크리에이터</div>
                 </div>
-                <div className="text-[12px] font-bold mb-1">메디힐 MEDIHEAL</div>
-                <div className="text-[12px] font-medium mb-1">
-                  마데카소사이드 수분 선세럼 흔적 리페어 50g
+                <p className="text-[12px] text-[#666] mb-2">
+                  브랜드는 이런 크리에이터님을 선호해요!
+                </p>
+                
+                {/* 수평선 */}
+                <div className="border-b border-[#eee] mb-3"></div>
+
+                {/* 키-값 쌍 형태로 표시 */}
+                <div className="flex flex-col gap-2 text-[12px]">
+                  <div className="flex justify-between items-center">
+                    <span className="text-[#444]">피부타입</span>
+                    <span className="text-[#444] font-bold">복합성, 민감성</span>
+                  </div>
+                  <div className="flex justify-between items-center">
+                    <span className="text-[#444]">피부고민</span>
+                    <span className="text-[#444] font-bold">여드름, 주름, 기미</span>
+                  </div>
+                  <div className="flex justify-between items-center">
+                    <span className="text-[#444]">시청자 타겟 연령대&성별</span>
+                    <span className="text-[#444] font-bold">18-24세 여성</span>
+                  </div>
                 </div>
-                <div className="text-[12px] font-bold text-black">59,000원</div>
               </div>
 
-              <div className="flex-1 border border-[#edefef] rounded-[5px] p-[10px] relative">
-                {/* 제품 플래그 */}
-                <div className="absolute top-[5px] left-[4px] bg-[#d9d9d9] border-[0.3px] border-[#e5e5e5] h-[9px] px-1.5 flex items-center">
-                  <span className="text-[6px] font-medium text-black">
-                    단순 선물
-                  </span>
-                </div>
-
-                <div className="w-full h-[112px] relative mb-2 mt-3">
+              {/* 유의사항 카드 */}
+              <div className="bg-white rounded-[8px] p-[14px] mb-3 mx-5 shadow-sm">
+                <div className="flex items-center gap-[5px] mb-1.5">
                   <Image
-                    src="/images/sample.png"
-                    alt="단순 선물"
-                    fill
-                    style={{ objectFit: "contain" }}
+                    src="/images/common/ic-lookinglogo.png"
+                    alt="유의사항"
+                    width={15}
+                    height={15}
+                    className="w-[15px] h-[15px]"
                   />
+                  <div className="text-[14px] font-bold">유의 사항</div>
                 </div>
-                <div className="text-[12px] font-bold mb-1">메디힐 MEDIHEAL</div>
-                <div className="text-[12px] font-medium mb-1">
-                  마데카소사이드 수분 선세럼 흔적 리페어 50g
+
+                {/* 수평선 */}
+                <div className="border-b border-[#eee] mb-3"></div>
+
+                {/* 체크마크 항목들 - 연두색 박스 없이 */}
+                <div className="mb-3 space-y-2">
+                  <div className="flex items-start gap-2">
+                    <span className="text-[#AFFF33] font-bold text-[14px] mt-0.5">✔</span>
+                    <div>
+                      <span className="text-[12px] font-bold text-[#444]">2차 활용</span>
+                      <span className="text-[12px] text-[#5d5d5d] ml-1">
+                        *협업 영상이 상업적으로 활용될 수 있습니다.
+                      </span>
+                    </div>
+                  </div>
+
+                  <div className="flex items-start gap-2">
+                    <span className="text-[#AFFF33] font-bold text-[14px] mt-0.5">✔</span>
+                    <div>
+                      <span className="text-[12px] font-bold text-[#444]">클린본 제출</span>
+                      <span className="text-[12px] text-[#5d5d5d] ml-1">
+                        *BGM, 효과음 등을 제거한 영상 제출이 필수입니다.
+                      </span>
+                    </div>
+                  </div>
                 </div>
-                <div className="text-[12px] font-bold text-black">59,000원</div>
+
+                <div className="flex flex-col gap-1.5 text-[12px] text-[#444]">
+                  <div>유튜브 제품 태그 필수</div>
+                  <div>추가 제공품 노출 필수</div>
+                  <div>협업금에 2차 활용 비용 포함</div>
+                </div>
               </div>
-            </div>
-          </>
-        ) : (
+
+              {/* 협업 제품 / 단순 선물 카드 2개 */}
+              <div className="flex gap-3 mb-6 mx-5">
+                <div className="flex-1 bg-white rounded-[8px] p-[10px] relative shadow-sm">
+                  {/* 제품 플래그 - 다크 그레이 배경, 흰색 텍스트 */}
+                  <div className="absolute top-[5px] left-[4px] bg-[#333] h-[18px] px-2 flex items-center rounded-[2px] z-10">
+                    <span className="text-[10px] font-medium text-white">
+                      협업제품
+                    </span>
+                  </div>
+
+                  <div className="w-full h-[112px] relative mb-2 mt-3 bg-[#f5f5f5] rounded-[4px]">
+                    <Image
+                      src="/images/sample.png"
+                      alt="협업 제품"
+                      fill
+                      style={{ objectFit: "contain" }}
+                    />
+                  </div>
+                  <div className="text-[12px] font-bold mb-1 text-black">아르마니 뷰티</div>
+                  <div className="text-[12px] font-medium mb-1 text-[#444]">
+                    NEW 파워 패브릭 PRO 파운데이션
+                  </div>
+                  <div className="text-[14px] font-bold text-black">80,000원</div>
+                </div>
+
+                <div className="flex-1 bg-white rounded-[8px] p-[10px] relative shadow-sm">
+                  {/* 제품 플래그 - 다크 그레이 배경, 흰색 텍스트 */}
+                  <div className="absolute top-[5px] left-[4px] bg-[#333] h-[18px] px-2 flex items-center rounded-[2px] z-10">
+                    <span className="text-[10px] font-medium text-white">
+                      단순선물
+                    </span>
+                  </div>
+
+                  <div className="w-full h-[112px] relative mb-2 mt-3 bg-[#f5f5f5] rounded-[4px]">
+                    <Image
+                      src="/images/sample.png"
+                      alt="단순 선물"
+                      fill
+                      style={{ objectFit: "contain" }}
+                    />
+                  </div>
+                  <div className="text-[12px] font-bold mb-1 text-black">아르마니 뷰티</div>
+                  <div className="text-[12px] font-medium mb-1 text-[#444]">
+                    립 마에스트로 사틴
+                  </div>
+                  <div className="text-[14px] font-bold text-black">40,000원</div>
+                </div>
+              </div>
+            </>
+          ) : (
           // 콘텐츠 가이드 탭 내용
           <>
             {/* 상단 안내 문구 + 인쇄 버튼 */}
-            <div className="relative mb-[15px] px-[2px]">
+            <div className="relative mb-[15px] px-[2px] mt-4">
               <span className="text-[11px] text-[#ff3b30] text-center w-full block">
                 ※ 참고자료 외 모든 항목이 콘텐츠 내 전부 반영되어야 합니다.
               </span>
@@ -778,12 +779,13 @@ https://bepla.in/HTtM`;
               </div>
             </div>
           </>
-        )}
+          )}
+        </div>
       </section>
 
       {/* 하단 큰 배너 (이미지 접힘/펼침) */}
       {activeTab === "info" && (
-        <section className="mb-4 px-5">
+        <section className="mb-4">
           <div
             ref={bannerRef}
             style={{ height: bannerHeight }}
@@ -816,7 +818,7 @@ https://bepla.in/HTtM`;
                 className="
                   w-full
                   py-[10px]
-                  rounded-[6px]
+                  rounded-full
                   border border-white/90
                   bg-black/35
                   text-white
@@ -836,40 +838,36 @@ https://bepla.in/HTtM`;
       <div
         className="
           fixed left-1/2 bottom-0 w-full max-w-[530px] -translate-x-1/2
-          px-3 py-[10px]
-          bg-black/25
-          backdrop-blur
-          box-border
-          flex justify-center
           z-20
         "
       >
-        <div className="w-full max-w-[480px] bg-transparent rounded-[10px] px-3 pb-3 box-border">
-          {(campaignData.deadline || campaignData.announcementDate) && (
-            <div className="text-[12px] text-[#555] text-center mb-1.5">
-              {campaignData.deadline && `모집 마감: ${campaignData.deadline}`}
+        {/* 모집 마감 텍스트 영역 - 검정 배경, 연두색 텍스트 */}
+        {(campaignData.deadline || campaignData.announcementDate) && (
+          <div className="w-full bg-black py-3 px-4 text-center">
+            <div className="text-[12px] text-[#AFFF33]">
+              {campaignData.deadline && `모집기간 : ${campaignData.deadline}`}
               {campaignData.deadline && campaignData.announcementDate && " | "}
               {campaignData.announcementDate &&
-                `당첨자 발표: ${campaignData.announcementDate}까지`}
+                `당첨자 발표 : ${campaignData.announcementDate}까지`}
             </div>
-          )}
+          </div>
+        )}
 
-          <button
-            onClick={() => router.push("/campaign-apply/step1")}
-            className="
-              w-full
-              py-3
-              rounded-[8px]
-              border-0
-              bg-[#AFFF33]
-              text-black
-              text-[15px] font-semibold
-              cursor-pointer
-            "
-          >
-            신청하기
-          </button>
-        </div>
+        {/* 신청하기 버튼 - 연두색 배경, 가로 꽉 차게, 아래 패딩 없음 */}
+        <button
+          onClick={() => router.push("/campaign-apply/step1")}
+          className="
+            w-full
+            py-4
+            border-0
+            bg-[#AFFF33]
+            text-black
+            text-[15px] font-semibold
+            cursor-pointer
+          "
+        >
+          신청하기
+        </button>
       </div>
     </>
   );
