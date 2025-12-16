@@ -76,29 +76,13 @@ export default function Header() {
       >
         <button
           type="button"
-          onClick={() => setMainTab("home")}
-          className={`
-            border-0 bg-transparent cursor-pointer
-            pb-0.5
-            ${
-              mainTab === "home"
-                ? "font-bold text-black border-b-2 border-black"
-                : "font-normal text-[#888] border-b-2 border-transparent"
-            }
-          `}
-        >
-          Home
-        </button>
-
-        <button
-          type="button"
           onClick={() => setMainTab("youtube")}
           className={`
             border-0 bg-transparent cursor-pointer
             pb-0.5
             ${
               mainTab === "youtube"
-                ? "font-bold text-black border-b-2 border-black"
+                ? "font-bold text-black border-b-2 border-[#AFFF33]"
                 : "font-normal text-[#888] border-b-2 border-transparent"
             }
           `}
@@ -114,7 +98,7 @@ export default function Header() {
             pb-0.5
             ${
               mainTab === "instagram"
-                ? "font-bold text-black border-b-2 border-black"
+                ? "font-bold text-black border-b-2 border-[#AFFF33]"
                 : "font-normal text-[#888] border-b-2 border-transparent"
             }
           `}
@@ -130,7 +114,7 @@ export default function Header() {
             pb-0.5
             ${
               mainTab === "blog"
-                ? "font-bold text-black border-b-2 border-black"
+                ? "font-bold text-black border-b-2 border-[#AFFF33]"
                 : "font-normal text-[#888] border-b-2 border-transparent"
             }
           `}

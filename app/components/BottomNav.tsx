@@ -3,17 +3,37 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import Image from "next/image";
+import { useEffect } from "react";
+import { useMainTab } from "../MainTabContext";
 
 const tabs = [
-  { href: "/", label: "홈", icon: "/images/bottom-my-home.png" },
-  { href: "/my-cash", label: "내 캐시", icon: "/images/bottom-my-cash.png" },
-  { href: "/my-collab", label: "내 협업", icon: "/images/bottom-my-collab.png" },
-  { href: "/my-alerts", label: "알림", icon: "/images/bottom-my-alerts.png" },
-  { href: "/my-page", label: "내 정보", icon: "/images/bottom-my-page.png" },
+  { href: "/", label: "홈", icon: "/images/bottom-my-home.png", isHome: true },
+  { href: "/my-cash", label: "내 캐시", icon: "/images/bottom-my-cash.png", isHome: false },
+  { href: "/my-collab", label: "내 협업", icon: "/images/bottom-my-collab.png", isHome: false },
+  { href: "/my-alerts", label: "알림", icon: "/images/bottom-my-alerts.png", isHome: false },
+  { href: "/my-page", label: "내 정보", icon: "/images/bottom-my-page.png", isHome: false },
 ];
 
 export default function BottomNav() {
   const pathname = usePathname();
+  const { mainTab, setMainTab } = useMainTab();
+
+  // 홈 페이지로 이동하면 mainTab을 "home"으로 리셋
+  useEffect(() => {
+    if (pathname === "/") {
+      setMainTab("home");
+    }
+  }, [pathname, setMainTab]);
+
+  const handleHomeClick = (e: React.MouseEvent) => {
+    // 홈 버튼 클릭 시 항상 mainTab을 "home"으로 설정
+    setMainTab("home");
+    
+    // 이미 홈 페이지에 있으면 기본 링크 동작 방지
+    if (pathname === "/") {
+      e.preventDefault();
+    }
+  };
 
   return (
     <nav
@@ -33,12 +53,15 @@ export default function BottomNav() {
         "
       >
         {tabs.map((tab) => {
-          const active = pathname === tab.href;
+          const active = tab.isHome 
+            ? pathname === tab.href && mainTab === "home"
+            : pathname === tab.href;
 
           return (
             <Link
               key={tab.href}
               href={tab.href}
+              onClick={tab.isHome ? handleHomeClick : undefined}
               className={`
                 no-underline
                 ${active ? "text-black" : "text-[#999]"}
