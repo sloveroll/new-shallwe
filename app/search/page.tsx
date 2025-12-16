@@ -136,66 +136,71 @@ export default function SearchPage() {
           </div>
         </div>
 
-        {/* 최근 검색어 타이틀 */}
-        {recentKeywords.length > 0 && (
-          <>
-            <div
+        {/* 최근 검색어 타이틀 - 항상 표시 */}
+        <div
+          className="
+            flex items-center justify-between
+            mb-[12px]
+            text-[14px]
+          "
+        >
+          <span className="font-semibold">최근 검색어</span>
+          {recentKeywords.length > 0 && (
+            <button
+              onClick={handleClearAll}
               className="
-                flex items-center justify-between
-                mb-[12px]
-                text-[14px]
+                border-0 bg-transparent cursor-pointer
+                text-[12px] text-[#888]
               "
             >
-              <span className="font-semibold">최근 검색어</span>
-              <button
-                onClick={handleClearAll}
+              전체 삭제
+            </button>
+          )}
+        </div>
+
+        {/* 검색 기록이 있을 때: 칩 형태로 표시 */}
+        {recentKeywords.length > 0 ? (
+          <div className="flex flex-wrap gap-[8px]">
+            {recentKeywords.map((word, idx) => (
+              <div
+                key={`${word}-${idx}`}
+                onClick={() => handleKeywordClick(word)}
                 className="
-                  border-0 bg-transparent cursor-pointer
-                  text-[12px] text-[#888]
+                  relative
+                  px-[14px] py-[6px]
+                  pr-[28px]
+                  rounded-full
+                  border border-[#ccc]
+                  bg-white
+                  text-[13px]
+                  cursor-pointer
+                  hover:bg-[#f5f5f5]
                 "
               >
-                전체 삭제
-              </button>
-            </div>
-
-            {/* 최근 검색어 칩 */}
-            <div className="flex flex-wrap gap-[8px]">
-              {recentKeywords.map((word, idx) => (
-                <div
-                  key={`${word}-${idx}`}
-                  onClick={() => handleKeywordClick(word)}
+                {word}
+                <button
+                  type="button"
+                  onClick={(e) => handleDeleteKeyword(word, e)}
                   className="
-                    relative
-                    px-[14px] py-[6px]
-                    pr-[28px]
-                    rounded-full
-                    border border-[#ccc]
-                    bg-white
-                    text-[13px]
+                    absolute right-[8px] top-1/2 -translate-y-1/2
+                    w-[16px] h-[16px]
+                    flex items-center justify-center
+                    border-0 bg-transparent
+                    text-[#999] text-[12px]
                     cursor-pointer
-                    hover:bg-[#f5f5f5]
+                    hover:text-[#333]
                   "
                 >
-                  {word}
-                  <button
-                    type="button"
-                    onClick={(e) => handleDeleteKeyword(word, e)}
-                    className="
-                      absolute right-[8px] top-1/2 -translate-y-1/2
-                      w-[16px] h-[16px]
-                      flex items-center justify-center
-                      border-0 bg-transparent
-                      text-[#999] text-[12px]
-                      cursor-pointer
-                      hover:text-[#333]
-                    "
-                  >
-                    ×
-                  </button>
-                </div>
-              ))}
-            </div>
-          </>
+                  ×
+                </button>
+              </div>
+            ))}
+          </div>
+        ) : (
+          /* 검색 기록이 없을 때: 메시지 표시 */
+          <div className="text-[14px] text-[#888]">
+            검색 내역이 없습니다.
+          </div>
         )}
       </section>
     </main>

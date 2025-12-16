@@ -2,8 +2,20 @@
 
 import Image from "next/image";
 import { useRef, useState, useEffect } from "react";
+import { useRouter } from "next/navigation";
 import { useMainTab } from "../MainTabContext";
 import LoadingSpinner from "../components/common/LoadingSpinner";
+
+// 카테고리 목록 (컴포넌트 외부로 이동하여 hydration 오류 방지)
+const CATEGORIES = [
+  { key: "skincare", label: "skincare" },
+  { key: "makeup", label: "makeup" },
+  { key: "body", label: "body" },
+  { key: "hair", label: "hair" },
+  { key: "health", label: "health" },
+  { key: "food", label: "food" },
+  { key: "etc", label: "etc" },
+];
 
 // YouTube 캠페인 아이템 타입
 type CampaignItem = {
@@ -18,6 +30,7 @@ type CampaignItem = {
 
 export default function HomePageContent() {
   const { mainTab } = useMainTab();
+  const router = useRouter();
   const [bestIndex, setBestIndex] = useState(0);
   const bestListRef = useRef<HTMLDivElement | null>(null);
   
@@ -27,6 +40,12 @@ export default function HomePageContent() {
   const [hasMore, setHasMore] = useState(true);
   const [page, setPage] = useState(0);
   const observerTarget = useRef<HTMLDivElement | null>(null);
+  
+  // YouTube 탭 필터 상태
+  const [youtubeFormat, setYoutubeFormat] = useState<"쇼츠" | "롱폼">("쇼츠");
+  const [isFormatDropdownOpen, setIsFormatDropdownOpen] = useState(false);
+  const formatDropdownRef = useRef<HTMLDivElement | null>(null);
+  const [selectedCategory, setSelectedCategory] = useState<string>("all");
 
   const handleBestScroll = () => {
     const el = bestListRef.current;
@@ -90,8 +109,29 @@ export default function HomePageContent() {
       setPage(0);
       setHasMore(true);
       setIsLoading(false);
+      setIsFormatDropdownOpen(false);
     }
   }, [mainTab]);
+
+  // 외부 클릭 시 드롭다운 닫기
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (
+        formatDropdownRef.current &&
+        !formatDropdownRef.current.contains(event.target as Node)
+      ) {
+        setIsFormatDropdownOpen(false);
+      }
+    };
+
+    if (isFormatDropdownOpen) {
+      document.addEventListener("mousedown", handleClickOutside);
+    }
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [isFormatDropdownOpen]);
 
   // 초기 데이터 로딩 (4개)
   useEffect(() => {
@@ -142,24 +182,32 @@ export default function HomePageContent() {
             />
           </div>
 
-          {/* 카테고리 버튼 영역 (태그들) */}
-          <div className="flex flex-wrap mb-6 gap-2">
-            {["basic", "color", "body", "hair", "fashion", "food", "etc"].map(
-              (label) => (
+          {/* 카테고리 버튼 영역 (태그들) - 위 3개, 아래 4개 */}
+          <div className="mb-6">
+            {/* 첫 번째 행: 3개 */}
+            <div className="flex flex-wrap gap-2 mb-2">
+              {CATEGORIES.slice(0, 3).map(({ key, label }) => (
                 <button
-                  key={label}
-                  className="
-                    rounded-full
-                    border border-black
-                    px-3 py-[6px]
-                    text-[12px]
-                    bg-white
-                  "
+                  key={key}
+                  onClick={() => router.push(`/category/${key}`)}
+                  className="rounded-full border border-black px-3 py-[6px] text-[12px] bg-white cursor-pointer hover:bg-gray-50"
                 >
                   {label}
                 </button>
-              )
-            )}
+              ))}
+            </div>
+            {/* 두 번째 행: 4개 */}
+            <div className="flex flex-wrap gap-2">
+              {CATEGORIES.slice(3, 7).map(({ key, label }) => (
+                <button
+                  key={key}
+                  onClick={() => router.push(`/category/${key}`)}
+                  className="rounded-full border border-black px-3 py-[6px] text-[12px] bg-white cursor-pointer hover:bg-gray-50"
+                >
+                  {label}
+                </button>
+              ))}
+            </div>
           </div>
 
           {/* Best Campaign 영역 */}
@@ -234,12 +282,9 @@ export default function HomePageContent() {
 
           {/* New 캠페인 리스트 섹션 */}
           <section className="py-5 rounded-[16px]">
-            {/* 상단 제목 + 전체보기 */}
+            {/* 상단 제목 */}
             <div className="flex items-center justify-between">
               <h2 className="text-[18px] font-semibold">New Campaign</h2>
-              <button className="bg-transparent border-0 text-[14px] text-[#444]">
-                전체보기 &gt;
-              </button>
             </div>
 
             {/* 카드 리스트 (3열 그리드) */}
@@ -446,34 +491,79 @@ export default function HomePageContent() {
       {/* 2. Youtube 탭 */}
       {mainTab === "youtube" && (
         <section className="px-5 pb-20">
-          {/* 상단 필터 (소츠 + 칩들) */}
+          {/* 상단 필터 (쇼츠 + 칩들) */}
           <div className="flex flex-wrap items-center gap-2 my-3">
-            <button
-              className="
-                px-[10px] py-1
-                rounded-full
-                border border-black
-                bg-black text-white
-                text-[12px]
-              "
-            >
-              소츠 ▼
-            </button>
-
-            {["all", "skincare", "makeup", "etc"].map((label) => (
+            {/* 쇼츠/롱폼 드롭다운 */}
+            <div className="relative" ref={formatDropdownRef}>
               <button
-                key={label}
+                onClick={() => setIsFormatDropdownOpen(!isFormatDropdownOpen)}
                 className="
                   px-[10px] py-1
-                  rounded-full
-                  border border-black
-                  bg-white
+                  bg-white text-black
                   text-[12px]
+                  flex items-center gap-1
                 "
               >
-                {label}
+                {youtubeFormat} <span className="text-[10px]">▼</span>
               </button>
-            ))}
+              
+              {/* 드롭다운 메뉴 */}
+              {isFormatDropdownOpen && (
+                <div className="absolute top-full left-0 mt-1 bg-white border border-black rounded-lg shadow-lg z-50 min-w-[80px]">
+                  <button
+                    onClick={() => {
+                      setYoutubeFormat("쇼츠");
+                      setIsFormatDropdownOpen(false);
+                    }}
+                    className={`
+                      w-full px-[10px] py-2 text-[12px] text-left
+                      first:rounded-t-lg last:rounded-b-lg
+                      hover:bg-gray-100
+                      ${youtubeFormat === "쇼츠" ? "bg-gray-50 font-bold" : ""}
+                    `}
+                  >
+                    쇼츠
+                  </button>
+                  <button
+                    onClick={() => {
+                      setYoutubeFormat("롱폼");
+                      setIsFormatDropdownOpen(false);
+                    }}
+                    className={`
+                      w-full px-[10px] py-2 text-[12px] text-left
+                      first:rounded-t-lg last:rounded-b-lg
+                      hover:bg-gray-100
+                      ${youtubeFormat === "롱폼" ? "bg-gray-50 font-bold" : ""}
+                    `}
+                  >
+                    롱폼
+                  </button>
+                </div>
+              )}
+            </div>
+
+            {["all", "skincare", "makeup", "etc"].map((label) => {
+              const isSelected = selectedCategory === label;
+              return (
+                <button
+                  key={label}
+                  onClick={() => setSelectedCategory(label)}
+                  className={`
+                    px-[10px] py-1
+                    rounded-full
+                    border border-black
+                    text-[12px]
+                    transition-colors
+                    ${isSelected 
+                      ? "bg-[#a5ff3f] border-[#a5ff3f]" 
+                      : "bg-white text-black"
+                    }
+                  `}
+                >
+                  {label}
+                </button>
+              );
+            })}
           </div>
 
           {/* 카드 리스트 2열 */}
