@@ -193,7 +193,7 @@ export default function CampaignDetailContent({
       </section>
 
       {/* 탭 영역 */}
-      <section className="bg-[#f5f5f5] pt-3 pb-5">
+      <section className="bg-[#f5f5f5] pt-3">
         <div className="flex border-b border-[#eee] mb-0 bg-white pt-5">
           <button
             onClick={() => setActiveTab("info")}
@@ -230,8 +230,12 @@ export default function CampaignDetailContent({
           </button>
         </div>
 
-        {/* 탭 내용 - 회색 배경 */}
-        <div className="bg-[#f5f5f5] pb-4">
+        {/* 탭 내용 - 탭별 배경색 분기 처리 */}
+        <div
+          className={`pb-4 ${
+            activeTab === "info" ? "bg-[#f5f5f5]" : "bg-white pt-5"
+          }`}
+        >
           {activeTab === "info" ? (
             <>
               {/* 희망 크리에이터 카드 */}
@@ -244,9 +248,9 @@ export default function CampaignDetailContent({
                     height={15}
                     className="w-[15px] h-[15px]"
                   />
-                  <div className="text-[14px] font-bold">희망 크리에이터</div>
+                  <div className="text-[16px] font-bold">희망 크리에이터</div>
                 </div>
-                <p className="text-[12px] text-[#666] mb-2">
+                <p className="text-[13px] text-[#666] mb-2">
                   브랜드는 이런 크리에이터님을 선호해요!
                 </p>
                 
@@ -254,7 +258,7 @@ export default function CampaignDetailContent({
                 <div className="border-b border-[#eee] mb-3"></div>
 
                 {/* 키-값 쌍 형태로 표시 */}
-                <div className="flex flex-col gap-2 text-[12px]">
+                <div className="flex flex-col gap-2 text-[13px]">
                   <div className="flex justify-between items-center">
                     <span className="text-[#444]">피부타입</span>
                     <span className="text-[#444] font-bold">복합성, 민감성</span>
@@ -280,7 +284,7 @@ export default function CampaignDetailContent({
                     height={15}
                     className="w-[15px] h-[15px]"
                   />
-                  <div className="text-[14px] font-bold">유의 사항</div>
+                  <div className="text-[16px] font-bold">유의 사항</div>
                 </div>
 
                 {/* 수평선 */}
@@ -289,27 +293,27 @@ export default function CampaignDetailContent({
                 {/* 체크마크 항목들 - 연두색 박스 없이 */}
                 <div className="mb-3 space-y-2">
                   <div className="flex items-start gap-2">
-                    <span className="text-[#AFFF33] font-bold text-[14px] mt-0.5">✅</span>
+                    <span className="text-[#AFFF33] font-bold text-[13px] mt-1">✅</span>
                     <div>
-                      <span className="text-[12px] font-bold text-[#444]">2차 활용</span>
-                      <span className="text-[12px] text-[#5d5d5d] ml-1">
+                      <span className="text-[13px] font-bold text-[#444]">2차 활용</span>
+                      <span className="text-[13px] text-[#5d5d5d] ml-1">
                         *협업 영상이 상업적으로 활용될 수 있습니다.
                       </span>
                     </div>
                   </div>
 
                   <div className="flex items-start gap-2">
-                    <span className="text-[#AFFF33] font-bold text-[14px] mt-0.5">✅</span>
+                    <span className="text-[#AFFF33] font-bold text-[13px] mt-1">✅</span>
                     <div>
-                      <span className="text-[12px] font-bold text-[#444]">클린본 제출</span>
-                      <span className="text-[12px] text-[#5d5d5d] ml-1">
+                      <span className="text-[13px] font-bold text-[#444]">클린본 제출</span>
+                      <span className="text-[13px] text-[#5d5d5d] ml-1">
                         *BGM, 효과음 등을 제거한 영상 제출이 필수입니다.
                       </span>
                     </div>
                   </div>
                 </div>
 
-                <div className="flex flex-col gap-1.5 text-[12px] text-[#444]">
+                <div className="flex flex-col gap-1.5 text-[13px] text-[#444]">
                   <div>유튜브 제품 태그 필수</div>
                   <div>추가 제공품 노출 필수</div>
                   <div>협업금에 2차 활용 비용 포함</div>
@@ -368,402 +372,538 @@ export default function CampaignDetailContent({
           ) : (
           // 콘텐츠 가이드 탭 내용
           <>
-            {/* 상단 안내 문구 + 인쇄 버튼 */}
-            <div className="relative mb-[15px] px-[2px] mt-4">
-              <span className="text-[11px] text-[#ff3b30] text-center w-full block">
-                ※ 참고자료 외 모든 항목이 콘텐츠 내 전부 반영되어야 합니다.
-              </span>
+            {/* 상단 안내 배너 (Lime Green) */}
+            <div
+              className="
+                relative
+                mx-5 mb-6
+                bg-[#AFFF33]
+                rounded-[12px]
+                px-4 py-3
+                flex items-center justify-center
+              "
+            >
+              {/* 왼쪽: 로고 (절대 위치) */}
+              <Image
+                src="/images/campaign-detail/ic-print-logo.png"
+                alt="Print Logo"
+                width={36}
+                height={36}
+                className="absolute left-4 object-contain"
+              />
 
+              {/* 중앙: 텍스트 */}
+              <div className="text-[12px] font-bold text-black leading-tight text-center">
+                참고자료 외 모든 항목이
+                <br />
+                콘텐츠 내 전부 반영되어야 합니다.
+              </div>
+
+              {/* 오른쪽: 인쇄 버튼 (절대 위치) */}
               <button
                 onClick={() => window.print()}
                 className="
-                  absolute right-[2px] top-1/2 -translate-y-1/2
-                  text-[11px]
-                  px-[10px] py-[2px]
-                  rounded-full
-                  border border-[#e0e0e0]
-                  bg-white
+                  absolute right-4
+                  flex items-center gap-1
+                  bg-black text-white
+                  text-[11px] font-bold
+                  px-3 py-1.5
+                  rounded-[4px]
                   cursor-pointer
-                  text-[#555]
                 "
               >
                 인쇄
+                <svg
+                  width="12"
+                  height="12"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                >
+                  <polyline points="6 9 6 2 18 2 18 9"></polyline>
+                  <path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path>
+                  <rect x="6" y="14" width="12" height="8"></rect>
+                </svg>
               </button>
             </div>
 
-            {/* 유의사항 박스 */}
-            <div
-              className="
-                border border-[#e5e5e5]
-                rounded-[12px]
-                p-4
-                mb-4
-                bg-white
-                shadow-[0_1px_2px_rgba(0,0,0,0.03)]
-                text-[12px] text-[#444]
-              "
-            >
-              <div className="text-[14px] font-bold mb-2.5">유의사항</div>
+            {/* 유의사항 박스 (회색 배경) */}
+            <div className="mx-5 mb-8 bg-[#f5f5f5] rounded-[16px] p-5">
+              {/* 타이틀 */}
+              <div className="flex items-center gap-1.5 mb-3">
+                <Image
+                  src="/images/common/ic-lookinglogo.png"
+                  alt="icon"
+                  width={15}
+                  height={15}
+                />
+                <h3 className="text-[16px] font-bold text-black m-0">
+                  유의 사항
+                </h3>
+              </div>
 
-              <div className="mb-[10px]">
-                {/* 2차 활용 */}
-                <div className="flex items-center mb-[6px]">
-                  <span
-                    className="
-                      px-2 py-1
-                      rounded-full
-                      bg-[#e7fbdc]
-                      text-[11px]
-                      mr-2
-                    "
-                  >
-                    ✅ 2차 활용
-                  </span>
-                  <span className="text-[12px]">
-                    협업 영상이 상업적으로 활용될 수 있습니다.
-                  </span>
+              {/* 체크리스트 */}
+              <div className="space-y-2 mb-4">
+                <div className="flex items-start gap-1.5">
+                  <span className="text-[#AFFF33] font-bold text-[12px]">✅</span>
+                  <div className="text-[13px] leading-snug">
+                    <span className="font-bold text-black">2차 활용</span>
+                    <span className="text-[#666] ml-1">
+                      *협업 영상이 상업적으로 활용될 수 있습니다.
+                    </span>
+                  </div>
                 </div>
-
-                {/* 클린본 제출 */}
-                <div className="flex items-center">
-                  <span
-                    className="
-                      px-2 py-1
-                      rounded-full
-                      bg-[#e7fbdc]
-                      text-[11px]
-                      mr-2
-                    "
-                  >
-                    ✅ 클린본 제출
-                  </span>
-                  <span className="text-[12px]">
-                    BGM, 효과음 등을 제거한 영상 제출이 필요합니다.
-                  </span>
+                <div className="flex items-start gap-1.5">
+                  <span className="text-[#AFFF33] font-bold text-[12px]">✅</span>
+                  <div className="text-[13px] leading-snug">
+                    <span className="font-bold text-black">클린본 제출</span>
+                    <span className="text-[#666] ml-1">
+                      *BGM, 효과음 등을 제거한 영상 제출이 필수입니다.
+                    </span>
+                  </div>
                 </div>
               </div>
 
-              <ul className="text-[12px] leading-[1.7] pl-4 m-0 list-disc">
-                <li>유튜브 제품 태그 필수</li>
-                <li>추가 제공품 노출 필수</li>
-                <li>협업금에 2차 활용 비용 포함</li>
-              </ul>
+              {/* 일반 텍스트 목록 */}
+              <div className="text-[13px] text-[#444] space-y-1 pl-1">
+                <p>유튜브 제품 태그 필수</p>
+                <p>추가 제공품 노출 필수</p>
+                <p>협업금에 2차 활용 비용 포함</p>
+              </div>
             </div>
 
-            {/* 아래 텍스트 영역 */}
-            <div className="text-[12px] leading-[1.8] text-[#444] mb-6">
-              {/* [광고 표기] */}
-              <div className="pt-1 pb-2.5">
-                <div className="pt-1 pb-2.5">
-                  <div className="flex items-center mb-1">
-                    <div className="font-bold">[광고 표기]</div>
-
-                    <button
-                      onClick={() => {
-                        navigator.clipboard.writeText(
-                          `영상 시작·중간·끝 광고 문구 반복 표기\n"메디힐의 유료광고를 포함하고 있습니다."`
-                        );
-                        alert("복사되었습니다!");
-                      }}
-                      className="
-                        ml-auto
-                        text-[11px]
-                        px-[10px] py-[4px]
-                        rounded-full
-                        border border-[#d4ff8f]
-                        bg-[#AFFF33]
-                        cursor-pointer
-                        text-black
-                      "
-                    >
-                      복사
-                    </button>
+            {/* 섹션 컨테이너 */}
+            <div className="mx-5 space-y-8 pb-10">
+              {/* 1. 광고 표기 */}
+              <div>
+                <div className="flex items-center justify-between mb-3">
+                  <div className="flex items-center gap-1.5">
+                    <Image
+                      src="/images/common/ic-lookinglogo.png"
+                      alt="icon"
+                      width={15}
+                      height={15}
+                    />
+                    <h3 className="text-[16px] font-bold text-black m-0">
+                      광고 표기
+                    </h3>
                   </div>
-
-                  <p className="m-0">
-                    영상 시작·중간·끝 광고 문구 반복 표기
-                    <br />
-                    메디힐의 유료광고를 포함하고 있습니다.
-                  </p>
-                </div>
-              </div>
-
-              {/* [촬영/편집 가이드] */}
-              <div className="pt-[10px] border-t border-[#eee]">
-                <div className="font-bold mb-1">[촬영/편집 가이드]</div>
-
-                <ul className="m-0 pl-4 list-disc">
-                  <li>(롱폼) 영상 총 구간의 50% 이내 제품 소개 시작</li>
-                  <li>(숏츠) 영상 시작 30초 이내 제품 소개 시작</li>
-                  <li>
-                    (숏츠) 영상 내 탑송, K-POP 등 상업적 사용 불가한 BGM 삽입
-                    금지
-                  </li>
-                  <li>
-                    본인 등장 및 직접 촬영/제작 필수 (타인의 리뷰 영상 짜깁기,
-                    AI 활용 금지)
-                  </li>
-                  <li>협업 제품과 동일 카테고리 제품 노출 및 비교 불가</li>
-                  <li>
-                    협업 제품 노출 구간에 제품과 무관한 개인적 이야기 언급
-                    불가
-                  </li>
-                  <li>가이드 내 전달되지 않은 별도 수익화 링크/태그 불가</li>
-                </ul>
-              </div>
-
-              {/* [노출시간] */}
-              <div className="mt-4 pt-[10px] border-t border-[#eee]">
-                <div className="font-bold mb-1">[노출시간]</div>
-                <div className="text-[13px] font-semibold">30초</div>
-              </div>
-
-              {/* 메디힐 블록 */}
-              <div className="mt-4 pt-[10px] border-t border-[#eee]">
-                <div className="text-[14px] font-bold text-[#0070c9] mb-2">
-                  메디힐
-                </div>
-
-                {/* [협업 제품] */}
-                <div className="flex items-center mb-1">
-                  <div className="font-bold">[협업 제품]</div>
-
                   <button
                     onClick={() => {
-                      const text = `메디힐 MEDIHEAL
-마데카소사이드 수분 선세럼 촉촉 리페어 50g
-59,000원`;
-                      navigator.clipboard?.writeText(text);
+                      navigator.clipboard.writeText(
+                        `영상 시작·중간·끝 광고 문구 반복 표기\n${campaignData.brand}의 유료광고를 포함하고 있습니다.`
+                      );
+                      alert("복사되었습니다!");
                     }}
-                    className="
-                      ml-auto
-                      text-[11px]
-                      px-[10px] py-[4px]
-                      rounded-full
-                      border border-[#d4ff8f]
-                      bg-[#AFFF33]
-                      cursor-pointer
-                      text-black
-                    "
+                    className="bg-black text-[#AFFF33] text-[12px] font-bold px-3 py-1 rounded-[4px]"
                   >
                     복사
                   </button>
                 </div>
-
-                <p className="m-0 mb-2 text-[12px] leading-[1.7]">
-                  메디힐 MEDIHEAL
-                  <br />
-                  마데카소사이드 수분 선세럼 촉촉 리페어 50g
-                  <br />
-                  59,000원
-                </p>
-
-                {/* [언급 사항] */}
-                <div className="flex items-center mt-2 mb-1 border-t border-[#eee]">
-                  <div className="font-bold mt-2">[언급 사항]</div>
+                <div className="text-[13px] text-[#333] leading-relaxed pl-1">
+                  <p className="mb-1">
+                    영상 시작/중간/끝 광고 명시 문구 반복 표기
+                  </p>
+                  <p className="font-bold">
+                    {campaignData.brand}의 유료광고를 포함하고 있습니다.
+                  </p>
                 </div>
+              </div>
 
-                <p className="m-0 mb-2 text-[12px] leading-[1.7]">
-                  물처럼 가볍고 산뜻촉촉한 가벼운 클렌징오일!
-                  <br />
-                  333 세안법으로 자극, 눈사람 없이 순하게 눈에 보이는 피지,
-                  블랙헤드 딥클렌징 가능!
-                </p>
-
-                {/* [연출 사항] */}
-                <div className="flex items-center mt-2 mb-1 border-t border-[#eee]">
-                  <div className="font-bold mt-2">[연출 사항]</div>
+              {/* 2. 촬영/편집 가이드 */}
+              <div>
+                <div className="flex items-center gap-1.5 mb-3">
+                  <Image
+                    src="/images/common/ic-lookinglogo.png"
+                    alt="icon"
+                    width={15}
+                    height={15}
+                  />
+                  <h3 className="text-[16px] font-bold text-black m-0">
+                    촬영/편집 가이드
+                  </h3>
                 </div>
-
-                <ol className="m-0 mb-2 pl-[18px] text-[12px] leading-[1.7] list-decimal">
-                  <li>하이라이터 사용 후 자연스러운 광채 연출</li>
-                  <li>하이라이터 B&amp;A컷</li>
-                  <li>얼굴에 하이라이터 바르는 장면 연출</li>
-                </ol>
-
-                {/* [금지 사항] */}
-                <div className="flex items-center mt-2 mb-1 border-t border-[#eee]">
-                  <div className="font-bold mt-2">[금지 사항]</div>
-                </div>
-
-                <ol className="m-0 pl-[18px] text-[12px] leading-[1.7] list-decimal">
+                <ul className="text-[13px] text-[#333] space-y-1.5 pl-1 m-0">
+                  <li>-(롱폼) 영상 총 구간의 50% 이내 제품 소재 시작</li>
+                  <li>-(쇼츠) 영상 시작 30초 이내 제품 소개 시작</li>
                   <li>
-                    &apos;가장/제품&apos; 등 최상급 의미를 가진 표현 불가
+                    -(쇼츠) 영상 내 팝송, K-pop 등<br />
+                    &nbsp;&nbsp;상업적 사용 불가한 BGM 삽입 금지
                   </li>
                   <li>
-                    여드름 피부 전용 (x), 여드름 피부가 사용 가능한 (o)
+                    -본인 등장 및 직접 촬영/제작 필수
+                    <br />
+                    &nbsp;&nbsp;(타인의 리뷰 영상 짜깁기, Ai 활용 금지)
                   </li>
-                </ol>
+                  <li>-협업 제품과 동일 카테고리 제품 노출 및 비교 불가</li>
+                  <li>
+                    -협업 제품 노출 구간에 제품과 무관한
+                    <br />
+                    &nbsp;&nbsp;개인적인 이야기 언급 불가
+                  </li>
+                  <li>-가이드 내 전달되지 않은 별도 수익화 링크/태그 불가</li>
+                </ul>
+              </div>
 
-                {/* 참고 자료 (접힘/펼침) */}
-                <div className="mt-5 pt-[10px] border-t-[3px] border-[#eee]">
-                  <div
-                    className="flex items-center justify-between cursor-pointer"
-                    onClick={() => setIsRefOpen((prev) => !prev)}
-                  >
-                    <div className="text-[14px] font-bold">참고 자료</div>
+              {/* 3. 노출 시간 */}
+              <div>
+                <div className="flex items-center gap-1.5 mb-3">
+                  <Image
+                    src="/images/common/ic-lookinglogo.png"
+                    alt="icon"
+                    width={15}
+                    height={15}
+                  />
+                  <h3 className="text-[16px] font-bold text-black m-0">
+                    노출 시간
+                  </h3>
+                </div>
+                <div className="text-[13px] text-[#333] pl-1">30초</div>
+              </div>
+            </div>
 
-                    <div
-                      className={`
-                        text-[20px] pr-1
-                        transition-transform duration-200
-                        ${isRefOpen ? "rotate-180" : ""}
-                      `}
-                    >
-                      ▾
-                    </div>
-                  </div>
+            {/* 섹션 2: 브랜드 정보 */}
+            <div>
+              {/* 구분선 (회색 바) */}
+              <div className="h-3 bg-[#f5f5f5] mb-6"></div>
 
-                  {isRefOpen && (
-                    <div className="mt-3 text-[13px] leading-[1.6]">
-                      {/* 단순 선물 */}
-                      <div className="mb-3">
-                        <div className="font-bold mb-1">[단순 선물]</div>
-                        <div>메디힐 MEDIHEAL</div>
-                        <div>마데카소사이드 수분 선세럼 촉촉 리페어 50g</div>
-                        <div>59,000원</div>
-                      </div>
-
-                      {/* 참고사항 */}
-                      <div className="mb-3">
-                        <div className="font-bold mb-1">[참고사항]</div>
-
-                        <ol className="m-0 pl-[18px] list-decimal">
-                          <li>제품 특징점 소개</li>
-                          <li>
-                            음영 하이라이터 : 코덕 & 인플루언서 사이에서 인기
-                            하이라이터
-                          </li>
-                          <li>
-                            텍스처 : 가루날림이 적고, 들뜸· 텁텁함 없이 밀착된
-                            베이크드 텍스처
-                          </li>
-                          <li>
-                            요철 부각 없는 하이라이터 : 미세 파우더가 모공과
-                            요철 사이를 커버하여 매끈한 결광 표현
-                          </li>
-                          <li>
-                            멀티 유즈 : 치크로도 활용 가능 (베이비 베리 빔
-                            컬러)
-                          </li>
-                          <li>
-                            얼굴형 커버 : 볼륨 라인 보정 가능, 입체적인
-                            이목구비 연출
-                          </li>
-                          <li>
-                            아이돌 하이라이터 : 데일리 사용부터 아이돌처럼
-                            화려한 맥시 볼륨광 연출 가능
-                          </li>
-                        </ol>
-                      </div>
-
-                      {/* 레퍼런스 영상 */}
-                      <div className="mb-3">
-                        <div className="font-bold mb-1">[레퍼런스 영상]</div>
-
-                        <div className="break-words">
-                          <a
-                            href="https://www.youtube.com/shorts/u2SvQgPmbw0"
-                            target="_blank"
-                          >
-                            https://www.youtube.com/shorts/u2SvQgPmbw0
-                          </a>
-                          <br />
-                          <a
-                            href="https://www.instagram.com/reel/DPlDaTPepnI/"
-                            target="_blank"
-                          >
-                            https://www.instagram.com/reel/DPlDaTPepnI/
-                          </a>
-                        </div>
-                      </div>
-                    </div>
-                  )}
+              <div className="mx-5 pb-6">
+                <div className="text-[18px] font-bold text-black border-b border-black mb-6 inline-block">
+                  {campaignData.brand}
                 </div>
 
-                {/* [더보기란 내용] */}
-                <div className="mt-4 pt-[10px] border-t-[3px] border-[#eee]">
-                  <div className="flex items-center mb-1">
-                    <div className="font-bold">[더보기란 내용]</div>
-
+                {/* [협업 제품] */}
+                <div className="mb-8">
+                  <div className="flex items-center justify-between mb-3">
+                    <div className="flex items-center gap-1.5">
+                      <Image
+                        src="/images/common/ic-lookinglogo-2.png"
+                        alt="icon"
+                        width={15}
+                        height={15}
+                      />
+                      <h3 className="text-[16px] font-bold text-black m-0">
+                        협업 제품
+                      </h3>
+                    </div>
                     <button
                       onClick={() => {
-                        const text = `메디힐의 유료 광고를 포함하고 있으며, 스튜디오 쉘위를 통해 제공 받았습니다.
-
-메디힐 마데카소사이드 수분 선세럼 촉촉 리페어 50g 더블기획
-MEDIHEAL Madecassoside Moisture Sun Serum,Blemish Repair Special Set
-#선크림 #선세럼 #선크림추천
-https://bepla.in/HTtM`;
+                        const text = `${campaignData.brand}\nNEW 파워 패브릭 PRO 파운데이션\n80,000원`;
                         navigator.clipboard?.writeText(text);
+                        alert("복사되었습니다!");
                       }}
-                      className="
-                        ml-auto
-                        text-[11px]
-                        px-[10px] py-[4px]
-                        rounded-full
-                        border border-[#d4ff8f]
-                        bg-[#AFFF33]
-                        cursor-pointer
-                        text-black
-                      "
+                      className="bg-black text-[#AFFF33] text-[12px] font-bold px-3 py-1 rounded-[4px]"
                     >
                       복사
                     </button>
                   </div>
+                  <div className="text-[14px] text-[#333] leading-[1.6] pl-1">
+                    <p>{campaignData.brand}</p>
+                    <p>NEW 파워 패브릭 PRO 파운데이션</p>
+                    <p className="font-bold">80,000원</p>
+                  </div>
+                </div>
 
-                  <p className="m-0 text-[12px] leading-[1.7] whitespace-pre-line">
-                    메디힐의 유료 광고를 포함하고 있으며, 스튜디오 쉘위를 통해
-                    제공 받았습니다.
-                    {"\n"}
-                    {"\n"}
-                    메디힐 마데카소사이드 수분 선세럼 촉촉 리페어 50g 더블기획
-                    {"\n"}
-                    MEDIHEAL Madecassoside Moisture Sun Serum,Blemish Repair
-                    Special Set
-                    {"\n"}
-                    #선크림 #선세럼 #선크림추천
-                    {"\n"}
-                    https://bepla.in/HTtM
-                  </p>
+                {/* [언급 사항] */}
+                <div className="mb-8">
+                  <div className="flex items-center gap-1.5 mb-3">
+                    <Image
+                      src="/images/common/ic-lookinglogo-2.png"
+                      alt="icon"
+                      width={15}
+                      height={15}
+                    />
+                    <h3 className="text-[16px] font-bold text-black m-0">
+                      언급 사항
+                    </h3>
+                  </div>
+                  <div className="text-[14px] text-[#333] leading-[1.6] pl-1">
+                    <p>물처럼 가볍고 산뜻촉촉한 가벼운 클렌징오일!</p>
+                    <p>
+                      333 세안법으로 자극, 눈시림 없이 순하게 눈에 보이는 피지,
+                      블랙헤드 딥클렌징 가능!
+                    </p>
+                  </div>
+                </div>
+
+                {/* [연출 사항] */}
+                <div className="mb-8">
+                  <div className="flex items-center gap-1.5 mb-3">
+                    <Image
+                      src="/images/common/ic-lookinglogo-2.png"
+                      alt="icon"
+                      width={15}
+                      height={15}
+                    />
+                    <h3 className="text-[16px] font-bold text-black m-0">
+                      연출 사항
+                    </h3>
+                  </div>
+                  <ol className="text-[14px] text-[#333] leading-[1.6] pl-1 list-none m-0 space-y-1">
+                    <li>1.하이라이터 사용 후 자연스러운 광채 연출</li>
+                    <li>2.하이라이터 B&A컷</li>
+                    <li>3.얼굴에 하이라이터 바르는 장면 연출</li>
+                  </ol>
+                </div>
+
+                {/* [금지 사항] */}
+                <div className="mb-4">
+                  <div className="flex items-center gap-1.5 mb-3">
+                    <Image
+                      src="/images/common/ic-lookinglogo-2.png"
+                      alt="icon"
+                      width={15}
+                      height={15}
+                    />
+                    <h3 className="text-[16px] font-bold text-black m-0">
+                      금지 사항
+                    </h3>
+                  </div>
+                  <ol className="text-[14px] text-[#333] leading-[1.6] pl-1 list-none m-0 space-y-1">
+                    <li>
+                      1. &apos;가장&apos; &apos;제일&apos; 등 최상급 의미를 가진
+                      표현 불가
+                    </li>
+                    <li>
+                      2. 여드름 피부 전용(X), 여드름 피부가 사용 가능한(O)
+                    </li>
+                  </ol>
+                </div>
+              </div>
+            </div>
+
+            {/* 섹션 3: 참고 자료 */}
+            <div>
+              {/* 구분선 (회색 바) */}
+              <div className="h-3 bg-[#f5f5f5] mb-6"></div>
+
+              <div className={`mx-5 ${isRefOpen ? "pb-10" : "pb-0"}`}>
+                <div
+                  className="flex items-center justify-between cursor-pointer mb-6"
+                  onClick={() => setIsRefOpen((prev) => !prev)}
+                >
+                  <div className="text-[18px] font-bold text-black border-b border-black inline-block">
+                    참고 자료
+                  </div>
+                  <div
+                    className={`
+                      text-[24px]
+                      transition-transform duration-200
+                      ${isRefOpen ? "rotate-180" : ""}
+                    `}
+                  >
+                    <svg
+                      width="24"
+                      height="24"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        d="M6 9L12 15L18 9"
+                        stroke="black"
+                        strokeWidth="2"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                      />
+                    </svg>
+                  </div>
+                </div>
+
+                {isRefOpen && (
+                  <div className="space-y-8">
+                    {/* [단순 선물] */}
+                    <div>
+                      <div className="flex items-center gap-1.5 mb-3">
+                        <Image
+                          src="/images/common/ic-lookinglogo-3.png"
+                          alt="icon"
+                          width={15}
+                          height={15}
+                        />
+                        <h3 className="text-[16px] font-bold text-black m-0">
+                          단순 선물
+                        </h3>
+                      </div>
+                      <div className="text-[14px] text-[#333] leading-[1.6] pl-1">
+                        <p>{campaignData.brand}</p>
+                        <p>립 마에스트로 사틴</p>
+                        <p className="font-bold">40,000원</p>
+                      </div>
+                    </div>
+
+                    {/* [참고 사항] */}
+                    <div>
+                      <div className="flex items-center gap-1.5 mb-3">
+                        <Image
+                          src="/images/common/ic-lookinglogo-3.png"
+                          alt="icon"
+                          width={15}
+                          height={15}
+                        />
+                        <h3 className="text-[16px] font-bold text-black m-0">
+                          참고 사항
+                        </h3>
+                      </div>
+                      <ol className="text-[14px] text-[#333] leading-[1.6] pl-1 list-none m-0 space-y-1">
+                        <li>1.제품 특장점 소개</li>
+                        <li>
+                          1)올영 하이라이터 : 코덕&인플루언서 사이에서 인기
+                          하이라이터
+                        </li>
+                        <li>
+                          2)텍스처 : 가루날림이 적고, 들뜸 텁텀함 없이 밀착 됨
+                          베이크드 텍스처
+                        </li>
+                        <li>
+                          3)모공 요철 부각 없는 하이라이터 : 미세 파우더가
+                          모공과 요철 사이를 커버하여 매끈한 결광 표현
+                        </li>
+                        <li>
+                          4)멀티 유즈 : 치크로도 활용 가능(베이비 베리 빔 컬러)
+                        </li>
+                        <li>
+                          5)얼굴형 커버 : 볼륨머로 활용 가능, 입체적인 이목구비
+                          연출
+                        </li>
+                        <li>
+                          6)아이돌 하이라이터 : 데일리 사용부터 아이돌처럼
+                          화려한 맥시 볼륨광 연출 가능, 인생 셀카 연출
+                        </li>
+                      </ol>
+                    </div>
+
+                    {/* [레퍼런스 영상] */}
+                    <div>
+                      <div className="flex items-center gap-1.5 mb-3">
+                        <Image
+                          src="/images/common/ic-lookinglogo-3.png"
+                          alt="icon"
+                          width={15}
+                          height={15}
+                        />
+                        <h3 className="text-[16px] font-bold text-black m-0">
+                          레퍼런스 영상
+                        </h3>
+                      </div>
+                      <div className="text-[14px] text-[#333] leading-[1.6] break-all underline pl-1">
+                        <a
+                          href="http://www.youtube.com/shorts/u2SvQgPmbw0"
+                          target="_blank"
+                          rel="noreferrer"
+                          className="block mb-1"
+                        >
+                          http://www.youtube.com/shorts/u2SvQgPmbw0
+                        </a>
+                        <a
+                          href="http://www.instagram.com/reel/DPlDaTPepnI/"
+                          target="_blank"
+                          rel="noreferrer"
+                          className="block"
+                        >
+                          http://www.instagram.com/reel/DPlDaTPepnI/
+                        </a>
+                      </div>
+                    </div>
+                  </div>
+                )}
+              </div>
+            </div>
+
+            {/* 섹션 4: 더보기란 / 키워드 / 유료 프로모션 (마지막 섹션) */}
+            <div>
+              {/* 구분선 (회색 바) */}
+              <div className="h-3 bg-[#f5f5f5] mb-6"></div>
+
+              <div className="mx-5">
+                {/* [더보기란 내용] */}
+                <div className="mb-8">
+                  <div className="flex items-center justify-between mb-3">
+                    <div className="flex items-center gap-1.5">
+                      <Image
+                        src="/images/common/ic-lookinglogo-4.png"
+                        alt="icon"
+                        width={15}
+                        height={15}
+                      />
+                      <h3 className="text-[16px] font-bold text-black m-0">
+                        더보기란 내용
+                      </h3>
+                    </div>
+                    <button
+                      onClick={() => {
+                        const text = `아르마니 뷰티의 유료 광고를 포함하고 있으며, 스튜디오 쉘위를 통해 제공 받았습니다.\n\n아르마니 뷰티 NEW 파워 패브릭 PRO 파운데이션\nArmani Beauty NEW Power Fabric Pro Foundation\n#선크림 #선세럼 #선크림추천\nhttps://bepla.in/HTTnM`;
+                        navigator.clipboard?.writeText(text);
+                        alert("복사되었습니다!");
+                      }}
+                      className="bg-black text-[#AFFF33] text-[12px] font-bold px-3 py-1 rounded-[4px]"
+                    >
+                      복사
+                    </button>
+                  </div>
+                  <div className="text-[14px] text-[#333] leading-[1.6] pl-1 break-words">
+                    <p className="mb-4">
+                      아르마니 뷰티의 유료 광고를 포함하고 있으며,
+                      <br />
+                      스튜디오 쉘위를 통해 제공 받았습니다.
+                    </p>
+                    <p>아르마니 뷰티 NEW 파워 패브릭 PRO 파운데이션</p>
+                    <p>Armani Beauty NEW Power Fabric Pro Foundation</p>
+                    <p>#선크림 #선세럼 #선크림추천</p>
+                    <p>https://bepla.in/HTTnM</p>
+                  </div>
                 </div>
 
                 {/* [제목 키워드] */}
-                <div className="mt-4 pt-[10px] border-t border-[#eee]">
-                  <div className="flex items-center mb-1">
-                    <div className="font-bold">[제목 키워드]</div>
-
+                <div className="mb-8">
+                  <div className="flex items-center justify-between mb-3">
+                    <div className="flex items-center gap-1.5">
+                      <Image
+                        src="/images/common/ic-lookinglogo-4.png"
+                        alt="icon"
+                        width={15}
+                        height={15}
+                      />
+                      <h3 className="text-[16px] font-bold text-black m-0">
+                        제목 키워드
+                      </h3>
+                    </div>
                     <button
                       onClick={() => {
-                        navigator.clipboard.writeText("메디힐");
+                        const text = `아르마니 뷰티`;
+                        navigator.clipboard?.writeText(text);
+                        alert("복사되었습니다!");
                       }}
-                      className="
-                        ml-auto
-                        text-[11px]
-                        px-[10px] py-[4px]
-                        rounded-full
-                        border border-[#d4ff8f]
-                        bg-[#AFFF33]
-                        cursor-pointer
-                        text-black
-                      "
+                      className="bg-black text-[#AFFF33] text-[12px] font-bold px-3 py-1 rounded-[4px]"
                     >
                       복사
                     </button>
                   </div>
-
-                  <p className="m-0 text-[12px] leading-[1.7]">메디힐</p>
+                  <div className="text-[14px] text-[#333] leading-[1.6] pl-1">
+                    아르마니 뷰티
+                  </div>
                 </div>
 
                 {/* [유료 프로모션 체크] */}
-                <div className="mt-4 pt-[10px] border-t border-[#eee]">
-                  <div className="flex items-center mb-1">
-                    <div className="font-bold">[유료 프로모션 체크]</div>
+                <div className="mb-4">
+                  <div className="flex items-center gap-1.5 mb-3">
+                    <Image
+                      src="/images/common/ic-lookinglogo-4.png"
+                      alt="icon"
+                      width={15}
+                      height={15}
+                    />
+                    <h3 className="text-[16px] font-bold text-black m-0">
+                      유료 프로모션 체크
+                    </h3>
                   </div>
-
-                  <p className="m-0 text-[12px] leading-[1.7]">
-                    Youtube 영상 옵션 &gt; 세부정보 &gt; &lsquo;유료 프로모션
-                    라벨 추가&rsquo; 설정해 주세요.
-                  </p>
+                  <div className="text-[14px] text-[#333] leading-[1.6] pl-1">
+                    Youtube 영상 옵션 &gt; 세부정보 &gt; &apos;유료 프로모션 라벨
+                    추가&apos; 설정해주세요.
+                  </div>
                 </div>
               </div>
             </div>
