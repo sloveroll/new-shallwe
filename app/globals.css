@@ -4,7 +4,12 @@
 
 /* ==== Base Styles ==== */
 @layer base {
+
   /* body 기본 margin 제거 */
+  html {
+    overflow-y: scroll;
+  }
+
   body {
     @apply m-0;
   }
@@ -12,6 +17,7 @@
 
 /* ==== Custom Utilities ==== */
 @layer utilities {
+
   /* 스크롤바 숨기기 */
   .no-scrollbar::-webkit-scrollbar {
     display: none;

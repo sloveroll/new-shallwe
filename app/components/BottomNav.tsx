@@ -7,11 +7,11 @@ import { useEffect } from "react";
 import { useMainTab } from "../MainTabContext";
 
 const tabs = [
-  { href: "/", label: "홈", icon: "/images/bottom-my-home.png", isHome: true },
-  { href: "/my-cash", label: "내 캐시", icon: "/images/bottom-my-cash.png", isHome: false },
-  { href: "/my-collab", label: "내 협업", icon: "/images/bottom-my-collab.png", isHome: false },
-  { href: "/my-alerts", label: "알림", icon: "/images/bottom-my-alerts.png", isHome: false },
-  { href: "/my-page", label: "내 정보", icon: "/images/bottom-my-page.png", isHome: false },
+  { href: "/", label: "홈", icon: "/images/gnb/bottom-my-home.png", isHome: true },
+  { href: "/my-cash", label: "내 캐시", icon: "/images/gnb/bottom-my-cash.png", isHome: false },
+  { href: "/my-collab", label: "내 협업", icon: "/images/gnb/bottom-my-collab.png", isHome: false },
+  { href: "/my-alerts", label: "알림", icon: "/images/gnb/bottom-my-alerts.png", isHome: false },
+  { href: "/my-page", label: "내 정보", icon: "/images/gnb/bottom-my-page.png", isHome: false },
 ];
 
 export default function BottomNav() {
@@ -48,7 +48,7 @@ export default function BottomNav() {
     >
       <div
         className="
-          flex justify-around
+          flex justify-around items-center
           text-[11px]
         "
       >
@@ -63,30 +63,27 @@ export default function BottomNav() {
               href={tab.href}
               onClick={tab.isHome ? handleHomeClick : undefined}
               className={`
-                no-underline
+                no-underline flex flex-col items-center
                 ${active ? "text-black" : "text-[#999]"}
               `}
             >
-              <div className="text-center">
+              <div className="h-[20px] flex items-center justify-center mb-1">
                 <Image
-                  src={tab.icon}
+                  src={
+                    active
+                      ? tab.icon.replace(".png", "_selected.png")
+                      : tab.icon
+                  }
                   alt={tab.label}
-                  width={17}
-                  height={17}
-                  className={`
-                    block mx-auto mb-1
-                    transition-opacity duration-200
-                    ${active
-                      ? "filter brightness-[0] saturate-[100%]"
-                      : "filter brightness-[0] saturate-[30%] opacity-30"
-                    }
-                  `}
+                  width={24}
+                  height={24}
+                  className="w-auto h-full max-h-[20px] block"
                 />
+              </div>
 
-                {/* 라벨 */}
-                <div className={active ? "font-bold" : "font-normal"}>
-                  {tab.label}
-                </div>
+              {/* 라벨 */}
+              <div className={active ? "font-bold" : "font-normal"}>
+                {tab.label}
               </div>
             </Link>
           );
