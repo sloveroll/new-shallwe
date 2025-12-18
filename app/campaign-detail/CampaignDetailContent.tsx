@@ -96,29 +96,18 @@ export default function CampaignDetailContent({
         {/* 태그/지원자수/D-day */}
         <div className="flex items-center gap-2 mb-3">
           {/* 타입 뱃지 */}
-          <span
-            className="
-              flex items-center gap-[2px]
-              text-[11px] font-bold
-              px-[6px] py-[2px]
-              rounded-[4px]
-              bg-[#333] text-white
-            "
-          >
-            <Image
-              src="/images/common/ic-shorts.png"
-              alt={campaignData.type}
-              width={14}
-              height={14}
-              className="w-[14px] h-[14px] invert"
-            />
-            {campaignData.type}
-          </span>
+          <Image
+            src="/images/common/shorts.png"
+            alt={campaignData.type}
+            width={58}
+            height={22}
+            className="w-auto h-[20px]"
+          />
 
           {/* 모집 인원 */}
           <span
             className="
-              text-[12px] font-medium
+              text-[11px] font-medium
               px-[6px] py-[2px]
               border border-[#333]
               rounded-[4px]
@@ -300,7 +289,7 @@ export default function CampaignDetailContent({
                 {/* 체크마크 항목들 - 연두색 박스 없이 */}
                 <div className="mb-3 space-y-2">
                   <div className="flex items-start gap-2">
-                    <span className="text-[#AFFF33] font-bold text-[14px] mt-0.5">✔</span>
+                    <span className="text-[#AFFF33] font-bold text-[14px] mt-0.5">✅</span>
                     <div>
                       <span className="text-[12px] font-bold text-[#444]">2차 활용</span>
                       <span className="text-[12px] text-[#5d5d5d] ml-1">
@@ -310,7 +299,7 @@ export default function CampaignDetailContent({
                   </div>
 
                   <div className="flex items-start gap-2">
-                    <span className="text-[#AFFF33] font-bold text-[14px] mt-0.5">✔</span>
+                    <span className="text-[#AFFF33] font-bold text-[14px] mt-0.5">✅</span>
                     <div>
                       <span className="text-[12px] font-bold text-[#444]">클린본 제출</span>
                       <span className="text-[12px] text-[#5d5d5d] ml-1">

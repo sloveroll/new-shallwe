@@ -1,10 +1,10 @@
 'use client';
 
 import Image from "next/image";
-import { useRef, useState, useEffect } from "react";
+import { useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 import { useMainTab } from "../MainTabContext";
-import LoadingSpinner from "../components/common/LoadingSpinner";
+import SnsCampaignTab from "./components/SnsCampaignTab";
 
 // 카테고리 목록 (컴포넌트 외부로 이동하여 hydration 오류 방지)
 const CATEGORIES = [
@@ -17,35 +17,11 @@ const CATEGORIES = [
   { key: "etc", label: "etc" },
 ];
 
-// YouTube 캠페인 아이템 타입
-type CampaignItem = {
-  id: number;
-  type: string;
-  dDay: string;
-  brand: string;
-  product: string;
-  total: number;
-  current: number;
-};
-
 export default function HomePageContent() {
   const { mainTab } = useMainTab();
   const router = useRouter();
   const [bestIndex, setBestIndex] = useState(0);
   const bestListRef = useRef<HTMLDivElement | null>(null);
-  
-  // YouTube 탭 무한 스크롤 관련 상태
-  const [youtubeItems, setYoutubeItems] = useState<CampaignItem[]>([]);
-  const [isLoading, setIsLoading] = useState(false);
-  const [hasMore, setHasMore] = useState(true);
-  const [page, setPage] = useState(0);
-  const observerTarget = useRef<HTMLDivElement | null>(null);
-  
-  // YouTube 탭 필터 상태
-  const [youtubeFormat, setYoutubeFormat] = useState<"쇼츠" | "롱폼">("쇼츠");
-  const [isFormatDropdownOpen, setIsFormatDropdownOpen] = useState(false);
-  const formatDropdownRef = useRef<HTMLDivElement | null>(null);
-  const [selectedCategory, setSelectedCategory] = useState<string>("all");
 
   const handleBestScroll = () => {
     const el = bestListRef.current;
@@ -63,107 +39,6 @@ export default function HomePageContent() {
     const idx = Math.round(ratio * (totalCards - 1));
     setBestIndex(idx);
   };
-
-  // YouTube 캠페인 데이터 로딩 함수
-  const loadYoutubeCampaigns = async (nextPage: number) => {
-    if (isLoading) return;
-    
-    setIsLoading(true);
-    
-    // TODO: 실제 API 호출로 변경
-    // const response = await fetch(`/api/campaigns/youtube?page=${nextPage}&limit=10`);
-    // const data = await response.json();
-    
-    // 임시: 시뮬레이션을 위한 딜레이
-    await new Promise(resolve => setTimeout(resolve, 1000));
-    
-    // 임시 더미 데이터 생성
-    setYoutubeItems(prev => {
-      const startIndex = prev.length;
-      const newItems: CampaignItem[] = Array.from({ length: nextPage === 0 ? 4 : 10 }, (_, i) => {
-        const index = startIndex + i;
-        return {
-          id: index + 1,
-          type: index % 3 === 0 ? "쇼츠" : index % 3 === 1 ? "피드" : "릴스",
-          dDay: `D-${(index % 10) + 1}`,
-          brand: ["아르마니 뷰티", "정샘물", "듀오버스터", "LANCOME", "DERMATORY"][index % 5],
-          product: ["NEW 파워 패브릭 PRO 파운데이션", "에센셜 물 마이크로 피팅 미스트", "민트 볼", "수분 크림", "포어 클리어 블랙 패드"][index % 5],
-          total: 100,
-          current: Math.floor(Math.random() * 50) + 20,
-        };
-      });
-
-      return nextPage === 0 ? newItems : [...prev, ...newItems];
-    });
-    
-    setPage(nextPage);
-    setHasMore((nextPage === 0 ? 4 : 10) === 10); // 10개 미만이면 더 이상 없음
-    setIsLoading(false);
-  };
-
-  // mainTab이 변경될 때 YouTube 탭 상태 초기화
-  useEffect(() => {
-    if (mainTab !== "youtube") {
-      // YouTube 탭이 아닐 때는 상태 초기화
-      setYoutubeItems([]);
-      setPage(0);
-      setHasMore(true);
-      setIsLoading(false);
-      setIsFormatDropdownOpen(false);
-    }
-  }, [mainTab]);
-
-  // 외부 클릭 시 드롭다운 닫기
-  useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
-      if (
-        formatDropdownRef.current &&
-        !formatDropdownRef.current.contains(event.target as Node)
-      ) {
-        setIsFormatDropdownOpen(false);
-      }
-    };
-
-    if (isFormatDropdownOpen) {
-      document.addEventListener("mousedown", handleClickOutside);
-    }
-
-    return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
-    };
-  }, [isFormatDropdownOpen]);
-
-  // 초기 데이터 로딩 (4개)
-  useEffect(() => {
-    if (mainTab === "youtube" && youtubeItems.length === 0 && !isLoading) {
-      loadYoutubeCampaigns(0);
-    }
-  }, [mainTab, youtubeItems.length, isLoading]);
-
-  // 무한 스크롤: Intersection Observer로 스크롤 감지
-  useEffect(() => {
-    if (mainTab !== "youtube" || !hasMore || isLoading) return;
-
-    const observer = new IntersectionObserver(
-      (entries) => {
-        if (entries[0].isIntersecting && hasMore && !isLoading) {
-          loadYoutubeCampaigns(page + 1);
-        }
-      },
-      { threshold: 0.1 }
-    );
-
-    const currentTarget = observerTarget.current;
-    if (currentTarget) {
-      observer.observe(currentTarget);
-    }
-
-    return () => {
-      if (currentTarget) {
-        observer.unobserve(currentTarget);
-      }
-    };
-  }, [mainTab, hasMore, isLoading, page]);
 
   return (
     <main>
@@ -489,137 +364,13 @@ export default function HomePageContent() {
       )}
 
       {/* 2. Youtube 탭 */}
-      {mainTab === "youtube" && (
-        <section className="px-5 pb-20">
-          {/* 상단 필터 (쇼츠 + 칩들) */}
-          <div className="flex flex-wrap items-center gap-2 my-3">
-            {/* 쇼츠/롱폼 드롭다운 */}
-            <div className="relative" ref={formatDropdownRef}>
-              <button
-                onClick={() => setIsFormatDropdownOpen(!isFormatDropdownOpen)}
-                className="
-                  px-[10px] py-1
-                  bg-white text-black
-                  text-[12px]
-                  flex items-center gap-1
-                "
-              >
-                {youtubeFormat} <span className="text-[10px]">▼</span>
-              </button>
-              
-              {/* 드롭다운 메뉴 */}
-              {isFormatDropdownOpen && (
-                <div className="absolute top-full left-0 mt-1 bg-white border border-black rounded-lg shadow-lg z-50 min-w-[80px]">
-                  <button
-                    onClick={() => {
-                      setYoutubeFormat("쇼츠");
-                      setIsFormatDropdownOpen(false);
-                    }}
-                    className={`
-                      w-full px-[10px] py-2 text-[12px] text-left
-                      first:rounded-t-lg last:rounded-b-lg
-                      hover:bg-gray-100
-                      ${youtubeFormat === "쇼츠" ? "bg-gray-50 font-bold" : ""}
-                    `}
-                  >
-                    쇼츠
-                  </button>
-                  <button
-                    onClick={() => {
-                      setYoutubeFormat("롱폼");
-                      setIsFormatDropdownOpen(false);
-                    }}
-                    className={`
-                      w-full px-[10px] py-2 text-[12px] text-left
-                      first:rounded-t-lg last:rounded-b-lg
-                      hover:bg-gray-100
-                      ${youtubeFormat === "롱폼" ? "bg-gray-50 font-bold" : ""}
-                    `}
-                  >
-                    롱폼
-                  </button>
-                </div>
-              )}
-            </div>
+      {mainTab === "youtube" && <SnsCampaignTab key="youtube" tabName="youtube" />}
 
-            {["all", "skincare", "makeup", "etc"].map((label) => {
-              const isSelected = selectedCategory === label;
-              return (
-                <button
-                  key={label}
-                  onClick={() => setSelectedCategory(label)}
-                  className={`
-                    px-[10px] py-1
-                    rounded-full
-                    border border-black
-                    text-[12px]
-                    transition-colors
-                    ${isSelected 
-                      ? "bg-[#a5ff3f] border-[#a5ff3f]" 
-                      : "bg-white text-black"
-                    }
-                  `}
-                >
-                  {label}
-                </button>
-              );
-            })}
-          </div>
+      {/* 3. Instagram 탭 */}
+      {mainTab === "instagram" && <SnsCampaignTab key="instagram" tabName="instagram" />}
 
-          {/* 카드 리스트 2열 */}
-          <div className="grid grid-cols-2 gap-y-6 gap-x-3">
-            {youtubeItems.map((item) => (
-              <article key={item.id} className="text-[12px]">
-                {/* 이미지 영역 */}
-                <div className="w-full mb-2 bg-[#f0f0f0] aspect-[3/4]">
-                  <Image
-                    src="/images/sample.png"
-                    alt="상품 이미지"
-                    width={300}
-                    height={400}
-                    className="block w-full h-full object-contain"
-                  />
-                </div>
-
-                {/* 채널/상태 라인 */}
-                <div className="flex justify-between mb-1">
-                  <span className="text-[#555]">{item.type}</span>
-                  <span className="px-[6px] py-[2px] text-[11px] rounded bg-[#a5ff3f] font-bold">
-                    {item.dDay}
-                  </span>
-                </div>
-
-                {/* 타이틀 */}
-                <div className="mb-[2px] text-[13px] font-bold">
-                  {item.brand}
-                </div>
-                <div className="mb-1">{item.product}</div>
-
-                {/* 인원 정보 */}
-                <div>
-                  {item.total}명 | <b>{item.current}명</b>
-                </div>
-              </article>
-            ))}
-          </div>
-
-          {/* 무한 스크롤 감지용 타겟 */}
-          <div ref={observerTarget} className="h-10" />
-
-          {/* 로딩 스피너 */}
-          {isLoading && <LoadingSpinner />}
-        </section>
-      )}
-
-      {/* 3. Instagram / Blog 탭 자리 */}
-      {mainTab === "instagram" && (
-        <section className="px-5 py-4">Instagram 탭 내용 넣을 자리</section>
-      )}
-
-      {mainTab === "blog" && (
-        <section className="px-5 py-4">Blog 탭 내용 넣을 자리</section>
-      )}
+      {/* 4. Blog 탭 */}
+      {mainTab === "blog" && <SnsCampaignTab key="blog" tabName="blog" />}
     </main>
   );
 }
-
