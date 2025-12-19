@@ -3,6 +3,7 @@
 
 import React, { useState } from "react";
 import { useRouter } from "next/navigation";
+import Image from "next/image";
 
 const SKIN_TYPES = ["건성", "복합성", "지성", "민감성", "중성"] as const;
 
@@ -39,13 +40,12 @@ export default function CampaignApplyPage() {
         className="
           w-full max-w-[530px] mx-auto
           min-h-screen
-          px-5 pt-3 pb-[50px]
           box-border
           relative
         "
       >
         {/* 상단 헤더 */}
-        <header className="flex items-center justify-between mb-4">
+        <header className="flex items-center justify-between px-5 pt-3 pb-2 border-b border-[#f0f0f0] bg-white">
           <button
             onClick={() => router.back()}
             className="
@@ -62,9 +62,11 @@ export default function CampaignApplyPage() {
           <div className="w-6" />
         </header>
 
+        <div className="px-5 pt-[30px]">
+
         {/* 본인 인증 영역 */}
-        <section className="mb-6">
-          <h2 className="text-[20px] font-bold mb-1.5 mt-[30px]">
+        <section className="mb-10">
+          <h2 className="text-[20px] font-bold mb-1.5">
             본인 인증을 진행해 주세요
           </h2>
           <p className="text-[13px] text-[#666] mb-4">
@@ -77,6 +79,7 @@ export default function CampaignApplyPage() {
                 type="radio"
                 checked={agreePersonal}
                 onChange={() => setAgreePersonal(true)}
+                className="appearance-none min-w-[14px] min-h-[14px] w-[14px] h-[14px] rounded-full border border-[#ddd] bg-white checked:bg-[#AFFF33] checked:border-[3.5px] checked:border-white checked:ring-1 checked:ring-[#ddd] cursor-pointer"
               />
               <span>개인정보 수집·이용 동의</span>
             </label>
@@ -102,11 +105,11 @@ export default function CampaignApplyPage() {
           <button
             type="button"
             className={`
-              w-1/2
-              py-[13px]
+              w-1/3
+              py-[11px]
               rounded-[8px]
               border-0
-              text-[15px] font-semibold
+              text-[14px] font-semibold
               text-black
               cursor-pointer
               ${
@@ -119,7 +122,11 @@ export default function CampaignApplyPage() {
             동의하고 인증하기
           </button>
         </section>
+      </div>
 
+        <div className="w-full h-3 bg-[#f7f7f7] border-t border-[#eee]" />
+
+      <div className="px-5 pt-[30px]">
         {/* 캠페인 정보 확인 제목 */}
         <section className="mb-4">
           <div className="text-[15px] font-bold leading-[1.4]">
@@ -141,86 +148,69 @@ export default function CampaignApplyPage() {
         >
           {/* 상단 라인 */}
           <div className="flex items-center mb-2 gap-2">
-            <div
-              className="
-                rounded
-                border border-black
-                px-2 py-1
-                text-[11px]
-              "
-            >
-              쇼츠
-            </div>
+            <Image
+              src="/images/common/ic-shorts.png"
+              alt="shorts"
+              width={40}
+              height={30}
+              className="object-contain"
+            />
           </div>
 
           <div className="text-[14px] font-bold mb-1 leading-[1.5]">
-            [메디힐, 비플레인] 요즘 잘 쓰는 아이템 추천템 특집 캠페인명 두줄 일
-            때
+            아르마니 뷰티, 입생로랑 뷰티
+            <div className="font-normal text-[#111] mt-1">
+              요즘 잘 쓰는 아이템 추천템
+            </div>
           </div>
 
-          <div className="text-[13px] font-semibold mt-[10px] mb-1.5">
+          <div className="text-[15px] font-bold mt-[10px] mb-3 pt-3 pb-3 border-b border-[#eee]">
             제품 협찬
           </div>
 
-          <ul className="text-[12px] leading-[1.7] text-[#444] pl-4 m-0 list-disc">
-            <li>콘텐츠 등록 기간: 11/16(일) ~ 11/27(목)</li>
-            <li>제품 발송·가이드 전달: 11/27(목)까지</li>
-            <li>사전 검사 마감일: 11/27(목)까지</li>
-            <li>캐시 지급일: 11/27(목)까지</li>
-            <li>콘텐츠 유지 기간: 60일</li>
+          <ul className="text-[12px] leading-[1.7] text-[#444] m-0 list-none">
+            <li><b>콘텐츠 등록 기간 : 11/16(일) - 11/27(목)</b></li>
+            <li>제품 발송 가이드 전달 : 11/27(목)까지</li>
+            <li>사전 검수 마감일 : 11/27(목)까지</li>
+            <li>캐시 지급일 : 11/27(목)까지</li>
+            <li>콘텐츠 유지 기간 : 60일</li>
           </ul>
         </section>
 
         {/* 유의사항 */}
         <section className="mb-5">
-          <h3 className="text-[14px] font-bold mb-2">유의사항</h3>
-
           <div
             className="
               rounded-[12px]
               border border-[#e5e5e5]
               p-[14px]
               text-[12px]
+              bg-[#fafafa]
             "
           >
+            <h3 className="text-[15px] font-bold mb-3 pb-3 border-b border-[#eee]">
+              유의 사항
+            </h3>
             {/* 상단 뱃지들 */}
             <div className="mb-2.5">
               <div className="flex items-center mb-1.5">
-                <span
-                  className="
-                    px-2 py-1
-                    rounded-full
-                    bg-[#e7fbdc]
-                    text-[11px]
-                    mr-2
-                  "
-                >
-                  ✅ 2차 활용
-                </span>
-                <span className="text-[12px] text-[#555]">
-                  협업 영상이 상업적으로 활용될 수 있습니다.
+                <span className="mr-1.5">✅</span>
+                <span className="font-bold text-[13px] mr-1.5">2차 활용</span>
+                <span className="text-[12px] text-[#888]">
+                  *협업 영상이 상업적으로 활용될 수 있습니다.
                 </span>
               </div>
 
               <div className="flex items-center">
-                <span
-                  className="
-                    px-2 py-1
-                    rounded-full
-                    bg-[#e7fbdc]
-                    text-[11px]
-                    mr-2
-                  "
-                >
-                  ✅ 클린본 제출
-                </span>
-                <span className="text-[12px] text-[#555]">
-                  BGM, 효과음 등을 제거한 영상 제출이 필요합니다.
+                <span className="mr-1.5">✅</span>
+                <span className="font-bold text-[13px] mr-1.5">클린본 제출</span>
+                <span className="text-[12px] text-[#888]">
+                  *BGM, 효과음 등을 제거한 영상 제출이 필수입니다.
                 </span>
               </div>
             </div>
 
-            <ul className="text-[12px] leading-[1.7] pl-4 m-0 text-[#444] list-disc">
+            <ul className="text-[12px] leading-[1.7] m-0 text-[#666] list-none">
               <li>유튜브 제품 태그 필수</li>
               <li>추가 제공품 노출 필수</li>
               <li>협업금에 2차 활용 비용 포함</li>
@@ -230,20 +220,29 @@ export default function CampaignApplyPage() {
 
         {/* 노출 시간 */}
         <section className="mb-6">
-          <h3 className="text-[14px] font-bold mb-2">노출 시간</h3>
           <div
             className="
               rounded-[10px]
               border border-[#eee]
+              bg-[#fafafa]
               text-[12px]
-              px-3 py-[10px]
+              px-3 py-[14px]
               text-[#555]
             "
           >
-            메디힐 30초, 비플레인 30초 (총 60초)
+            <h3 className="text-[15px] font-bold mb-3 pb-3 border-b border-[#eee] text-black">
+              노출 시간
+            </h3>
+            <div className="text-[13px]">
+              아르마니 뷰티 30초, 입생로랑 뷰티 30초 (총 60초)
+            </div>
           </div>
         </section>
+      </div>
 
+        <div className="w-full h-3 bg-[#f7f7f7] border-t border-[#eee]" />
+
+      <div className="px-5 pt-[30px]">
         {/* 참여 정보 입력 */}
         <section className="mb-6">
           <h2 className="text-[16px] font-bold leading-[1.4] mb-4">
@@ -258,22 +257,24 @@ export default function CampaignApplyPage() {
               협업 제품의 컬러를 선택해 주세요.
             </div>
 
-            <label className="flex items-center text-[13px] mb-1.5 gap-1.5">
+            <label className="flex items-center text-[13px] mb-1.5 gap-1.5 cursor-pointer">
               <input
                 type="radio"
                 name="productColor"
                 checked={productColor === "21호"}
                 onChange={() => setProductColor("21호")}
+                className="appearance-none min-w-[14px] min-h-[14px] w-[14px] h-[14px] rounded-full border border-[#ddd] bg-white checked:bg-[#AFFF33] checked:border-[3.5px] checked:border-white checked:ring-1 checked:ring-[#ddd] cursor-pointer"
               />
               <span>21호</span>
             </label>
 
-            <label className="flex items-center text-[13px] gap-1.5">
+            <label className="flex items-center text-[13px] gap-1.5 cursor-pointer">
               <input
                 type="radio"
                 name="productColor"
                 checked={productColor === "22호"}
                 onChange={() => setProductColor("22호")}
+                className="appearance-none min-w-[14px] min-h-[14px] w-[14px] h-[14px] rounded-full border border-[#ddd] bg-white checked:bg-[#AFFF33] checked:border-[3.5px] checked:border-white checked:ring-1 checked:ring-[#ddd] cursor-pointer"
               />
               <span>22호</span>
             </label>
@@ -302,7 +303,11 @@ export default function CampaignApplyPage() {
             />
           </div>
         </section>
+      </div>
 
+        <div className="w-full h-3 bg-[#f7f7f7] border-t border-[#eee]" />
+
+      <div className="px-5 pt-[30px]">
         {/* 배송 정보 */}
         <section className="mb-6">
           <div className="flex items-center mb-2">
@@ -366,7 +371,11 @@ export default function CampaignApplyPage() {
             />
           </div>
         </section>
+      </div>
 
+        <div className="w-full h-3 bg-[#f7f7f7] border-t border-[#eee]" />
+
+      <div className="px-5 pt-[30px] pb-[50px]">
         {/* 피부 타입 */}
         <section className="mb-5">
           <h3 className="text-[14px] font-bold mb-2">피부 타입</h3>
@@ -382,6 +391,7 @@ export default function CampaignApplyPage() {
                   name="skinType"
                   checked={skinType === type}
                   onChange={() => setSkinType(type)}
+                  className="appearance-none min-w-[14px] min-h-[14px] w-[14px] h-[14px] rounded-full border border-[#ddd] bg-white checked:bg-[#AFFF33] checked:border-[3.5px] checked:border-white checked:ring-1 checked:ring-[#ddd] cursor-pointer"
                 />
                 <span>{type}</span>
               </label>
@@ -406,54 +416,52 @@ export default function CampaignApplyPage() {
                   key={c}
                   type="button"
                   onClick={() => toggleConcern(c)}
+
                   className={`
                     rounded-full
                     px-3 py-[6px]
                     text-[12px]
                     cursor-pointer
+                    flex items-center gap-1
+                    transition-colors
                     ${
                       active
-                        ? "border border-[#111] bg-[#111] text-white"
-                        : "border border-[#ddd] bg-white text-[#333]"
+                        ? "border border-[#AFFF33] bg-[#AFFF33] text-black font-semibold"
+                        : "border border-[#ddd] bg-white text-[#555]"
                     }
                   `}
                 >
                   {c}
+                  {active && <span className="text-[14px] font-normal">&times;</span>}
                 </button>
               );
             })}
           </div>
         </section>
       </div>
+      </div>
 
       {/* 하단 고정 버튼 */}
       <div
         className="
-          fixed left-0 bottom-0
-          w-full
-          px-3 py-[10px]
-          bg-black/10
-          backdrop-blur-sm
-          box-border
-          flex justify-center
-          z-30
+          fixed left-1/2 bottom-0 w-full max-w-[530px] -translate-x-1/2
+          z-20
         "
       >
         <button
           type="button"
           onClick={() => router.push("/campaign-apply/step2")}
           className="
-            w-full max-w-[530px]
-            py-[14px]
-            rounded-[8px]
+            w-full
+            py-4
             border-0
             bg-[#AFFF33]
-            text-[15px] font-bold
             text-black
+            text-[15px] font-semibold
             cursor-pointer
           "
         >
-          다음 페이지 &gt;
+          다음 페이지
         </button>
       </div>
     </main>

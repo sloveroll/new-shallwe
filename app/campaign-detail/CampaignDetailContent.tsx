@@ -52,30 +52,25 @@ export default function CampaignDetailContent({
   return (
     <>
       {/* 상단: 헤더 (흰색 배경) */}
-      <section className="relative bg-white border-b border-[#f0f0f0]">
-        {/* 뒤로가기 버튼 */}
-        <button
-          onClick={() => router.back()}
-          className="
-            absolute top-0 left-0 z-10
-            border-0
-            bg-transparent text-black
-            w-[44px] h-[44px]
-            cursor-pointer
-            text-[20px] font-bold
-            flex items-center justify-center
-          "
-          aria-label="뒤로가기"
-        >
-          ←
-        </button>
-
-        {/* 브랜드명 (중앙 정렬) */}
-        <div className="w-full h-[44px] flex items-center justify-center">
-          <div className="text-[18px] font-bold text-black">
-            {campaignData.brand}
+      <section className="bg-white border-b border-[#f0f0f0] px-5 pt-3 pb-2">
+        <header className="flex items-center justify-between">
+          <button
+            onClick={() => router.back()}
+            className="
+              border-0 bg-transparent
+              cursor-pointer
+              text-[20px]
+              p-1
+            "
+          >
+            ←
+          </button>
+          <div className="text-[16px] font-semibold text-black">
+            {campaignData.brand} 외 1종
           </div>
-        </div>
+          {/* 오른쪽 여백용 */}
+          <div className="w-6" />
+        </header>
       </section>
 
       {/* 상단: 뒤로가기 + 대표 이미지 */}
@@ -194,7 +189,7 @@ export default function CampaignDetailContent({
 
       {/* 탭 영역 */}
       <section className="bg-[#f5f5f5] pt-3">
-        <div className="flex border-b border-[#eee] mb-0 bg-white pt-5">
+        <div className="flex border-b border-[#eee] mb-0 bg-white pt-5 sticky top-0 z-50">
           <button
             onClick={() => setActiveTab("info")}
             className={`
@@ -232,7 +227,7 @@ export default function CampaignDetailContent({
 
         {/* 탭 내용 - 탭별 배경색 분기 처리 */}
         <div
-          className={`pb-4 ${
+          className={` ${
             activeTab === "info" ? "bg-[#f5f5f5]" : "bg-white pt-5"
           }`}
         >
@@ -368,6 +363,54 @@ export default function CampaignDetailContent({
                   <div className="text-[14px] font-bold text-black">40,000원</div>
                 </div>
               </div>
+
+              {/* 하단 큰 배너 (이미지 접힘/펼침) */}
+              <section>
+                <div
+                  ref={bannerRef}
+                  style={{ height: bannerHeight }}
+                  className="
+                    relative
+                    overflow-hidden
+                    transition-all duration-500 ease-in-out
+                  "
+                >
+                  <Image
+                    src="/images/long.jpg"
+                    alt="배너"
+                    width={530}
+                    height={1200}
+                    className="w-full h-auto block"
+                  />
+
+                  {/* 오버레이 버튼 */}
+                  <div
+                    className="
+                      absolute left-0 right-0 bottom-0
+                      px-3 py-[14px]
+                      box-border
+                      flex justify-center
+                    "
+                  >
+                    <button
+                      onClick={() => setIsBannerOpen((prev) => !prev)}
+                      className="
+                        w-full
+                        py-[10px]
+                        rounded-full
+                        border border-white/90
+                        bg-black/35
+                        text-white
+                        text-[13px] font-medium
+                        cursor-pointer
+                        backdrop-blur-[2px]
+                      "
+                    >
+                      {isBannerOpen ? "제품 정보 접기 ▲" : "제품 정보 펼쳐보기 ▼"}
+                    </button>
+                  </div>
+                </div>
+              </section>
             </>
           ) : (
           // 콘텐츠 가이드 탭 내용
@@ -912,56 +955,7 @@ export default function CampaignDetailContent({
         </div>
       </section>
 
-      {/* 하단 큰 배너 (이미지 접힘/펼침) */}
-      {activeTab === "info" && (
-        <section className="mb-4">
-          <div
-            ref={bannerRef}
-            style={{ height: bannerHeight }}
-            className="
-              relative
-              rounded-[16px]
-              overflow-hidden
-              transition-all duration-500 ease-in-out
-            "
-          >
-            <Image
-              src="/images/long.jpg"
-              alt="배너"
-              width={530}
-              height={1200}
-              className="w-full h-auto block"
-            />
 
-            {/* 오버레이 버튼 */}
-            <div
-              className="
-                absolute left-0 right-0 bottom-0
-                px-3 py-[14px]
-                box-border
-                flex justify-center
-              "
-            >
-              <button
-                onClick={() => setIsBannerOpen((prev) => !prev)}
-                className="
-                  w-full
-                  py-[10px]
-                  rounded-full
-                  border border-white/90
-                  bg-black/35
-                  text-white
-                  text-[13px] font-medium
-                  cursor-pointer
-                  backdrop-blur-[2px]
-                "
-              >
-                {isBannerOpen ? "제품 정보 접기 ▲" : "제품 정보 펼쳐보기 ▼"}
-              </button>
-            </div>
-          </div>
-        </section>
-      )}
 
       {/* 고정 신청하기 버튼 */}
       <div

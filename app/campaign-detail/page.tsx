@@ -43,7 +43,7 @@ export default async function CampaignDetailPage({
   return (
     <main className="min-h-screen bg-white pb-[90px]">
       {/* 안쪽 모바일 캔버스 */}
-      <div className="w-full max-w-[530px] mx-auto bg-white min-h-screen pb-[30px] box-border">
+      <div className="w-full max-w-[530px] mx-auto bg-white min-h-screen box-border">
         <CampaignDetailContent campaignData={campaignData} />
       </div>
     </main>
