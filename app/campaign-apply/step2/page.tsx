@@ -4,6 +4,7 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
 import ApplyCompleteModal from "../../components/modal/ApplyCompleteModal";
+import SubPageHeader from "../../components/common/SubPageHeader";
 
 export default function CampaignApplyConfirmPage() {
   const router = useRouter();
@@ -28,23 +29,7 @@ export default function CampaignApplyConfirmPage() {
   return (
     <main className="min-h-screen bg-white">
       <div className="w-full max-w-[530px] mx-auto min-h-screen box-border relative">
-        {/* 상단 헤더 */}
-        <header className="flex items-center justify-between px-5 pt-3 pb-2 border-b border-[#f0f0f0] bg-white">
-          <button
-            onClick={() => router.back()}
-            className="
-              border-0 bg-transparent
-              cursor-pointer
-              text-[20px]
-              p-1
-            "
-          >
-            ←
-          </button>
-          <div className="text-[16px] font-semibold">캠페인 신청</div>
-          {/* 오른쪽 여백용 */}
-          <div className="w-6" />
-        </header>
+        <SubPageHeader title="캠페인 신청" />
 
         <div className="px-5 pt-4 pb-[50px]">
 

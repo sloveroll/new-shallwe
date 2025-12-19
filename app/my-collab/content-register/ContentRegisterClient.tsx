@@ -3,6 +3,7 @@
 import { useRouter } from "next/navigation";
 import React, { useState } from "react";
 import RegisterConfirmModal from "../../components/modal/ContentRegisterConfirmModal";
+import SubPageHeader from "../../components/common/SubPageHeader";
 
 export default function ContentRegisterClient() {
   const router = useRouter();
@@ -10,23 +11,9 @@ export default function ContentRegisterClient() {
 
   return (
     <main className="bg-white">
-      <div className="w-full max-w-[530px] mx-auto px-5 pt-4 box-border">
-        {/* 상단: 뒤로가기 + 타이틀 */}
-        <button
-          onClick={() => router.back()}
-          type="button"
-          className="
-            border-0 bg-transparent cursor-pointer
-            text-[22px]
-            mb-1.5
-          "
-        >
-          ←
-        </button>
-
-        <h1 className="text-center text-[18px] font-bold mb-5">
-          협업 콘텐츠 등록
-        </h1>
+      <div className="w-full max-w-[530px] mx-auto box-border">
+        <SubPageHeader title="협업 콘텐츠 등록" />
+        <div className="px-5 pt-4">
 
         {/* 1. 경고 배너 */}
         <section
@@ -340,7 +327,6 @@ https://bepla.in/HTtM`;
         </section>
       </div>
 
-      {/* 하단 등록하기 버튼 */}
       <button
         type="button"
         onClick={() => setShowModal(true)}
@@ -353,10 +339,13 @@ https://bepla.in/HTtM`;
           bg-[#AFFF33]
           text-[15px] font-bold
           cursor-pointer
+          mx-5 mb-5
+          w-[calc(100%-40px)]
         "
       >
         등록하기
       </button>
+      </div>
 
       {/* RegisterConfirmModal 모달 */}
       <RegisterConfirmModal

@@ -4,6 +4,7 @@ import React, { useState } from "react";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
 import { Campaign } from "@/app/my-collab/MyCollabClient"; // Campaign 타입을 공유하거나 새로 정의
+import SubPageHeader from "@/app/components/common/SubPageHeader";
 
 const SKIN_TYPES = ["건성", "복합성", "지성", "민감성", "중성"] as const;
 
@@ -62,23 +63,7 @@ export default function CampaignApplyStep1Client({ campaign }: CampaignApplyStep
           relative
         "
       >
-        {/* 상단 헤더 */}
-        <header className="flex items-center justify-between px-5 pt-3 pb-2 border-b border-[#f0f0f0] bg-white">
-          <button
-            onClick={() => router.back()}
-            className="
-              border-0 bg-transparent
-              cursor-pointer
-              text-[20px]
-              p-1
-            "
-          >
-            ←
-          </button>
-          <div className="text-[16px] font-semibold">캠페인 신청</div>
-          {/* 오른쪽 여백용 */}
-          <div className="w-6" />
-        </header>
+        <SubPageHeader title="캠페인 신청" />
 
         <div className="px-5 pt-[30px]">
 

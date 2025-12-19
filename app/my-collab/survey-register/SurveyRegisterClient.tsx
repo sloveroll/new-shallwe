@@ -3,35 +3,17 @@
 import { useRouter } from "next/navigation";
 import React, { useState } from "react";
 import SurveyRegisterConfirmModal from "../../components/modal/SurveyRegisterConfirmModal";
+import SubPageHeader from "../../components/common/SubPageHeader";
 
 export default function SurveyRegisterClient() {
   const router = useRouter();
   const [showModal, setShowModal] = useState(false);
-
   return (
     <main className="bg-white min-h-screen">
-      <div
-        className="
-          w-full max-w-[530px]
-          mx-auto
-          px-5 pt-4 pb-5
-          box-border
-        "
-      >
-        {/* 상단 뒤로가기 */}
-        <button
-          type="button"
-          onClick={() => router.back()}
-          className="
-            border-0 bg-transparent cursor-pointer
-            text-[22px]
-            mb-1.5
-          "
-        >
-          ←
-        </button>
+      <div className="w-full max-w-[530px] mx-auto box-border">
+        <SubPageHeader title="설문 등록" />
 
-        <h1 className="text-center text-[18px] font-bold mb-5">설문 등록</h1>
+        <div className="px-5 pt-4 pb-5">
 
         {/* 1) 경고 배너 */}
         <section
@@ -215,6 +197,7 @@ export default function SurveyRegisterClient() {
       >
         등록하기
       </button>
+      </div>
 
       {/* 등록 모달 */}
       <SurveyRegisterConfirmModal

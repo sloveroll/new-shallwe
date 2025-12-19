@@ -3,6 +3,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
+import SubPageHeader from "../components/common/SubPageHeader";
 
 type Tab = "info" | "guide";
 
@@ -52,26 +53,7 @@ export default function CampaignDetailContent({
   return (
     <>
       {/* 상단: 헤더 (흰색 배경) */}
-      <section className="bg-white border-b border-[#f0f0f0] px-5 pt-3 pb-2">
-        <header className="flex items-center justify-between">
-          <button
-            onClick={() => router.back()}
-            className="
-              border-0 bg-transparent
-              cursor-pointer
-              text-[20px]
-              p-1
-            "
-          >
-            ←
-          </button>
-          <div className="text-[16px] font-semibold text-black">
-            {campaignData.brand} 외 1종
-          </div>
-          {/* 오른쪽 여백용 */}
-          <div className="w-6" />
-        </header>
-      </section>
+      <SubPageHeader title={`${campaignData.brand} 외 1종`} />
 
       {/* 상단: 뒤로가기 + 대표 이미지 */}
       <section className="relative bg-[#f5f5f5]">
