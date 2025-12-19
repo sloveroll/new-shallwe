@@ -8,6 +8,7 @@ type BaseModalProps = {
   onClose?: () => void;
   children: React.ReactNode;
   maxWidthClass?: string; // 모달 너비 커스터마이징
+  padding?: string; // 패딩 커스터마이징 (기본값: p-6)
 };
 
 export default function BaseModal({
@@ -15,6 +16,7 @@ export default function BaseModal({
   onClose,
   children,
   maxWidthClass = "max-w-[360px]",
+  padding = "p-6",
 }: BaseModalProps) {
   if (!open) return null;
 
@@ -32,7 +34,7 @@ export default function BaseModal({
         className={`
           w-full ${maxWidthClass}
           rounded-2xl bg-white
-          p-6 shadow-lg
+          ${padding} shadow-lg
           text-center
         `}
         onClick={(e) => e.stopPropagation()} // 내용 클릭 시 닫힘 방지

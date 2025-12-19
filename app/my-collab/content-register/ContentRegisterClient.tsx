@@ -16,134 +16,136 @@ export default function ContentRegisterClient() {
         <div className="px-5 pt-4">
 
         {/* 1. 경고 배너 */}
+        {/* 1. 경고 배너 */}
         <section
           className="
             mb-[10px]
-            w-[90%]
-            mx-auto
-            rounded-full
-            border border-[#ff3b30]
-            px-1.5 py-2.5
-            text-[12px]
-            text-black
+            w-full
+            rounded-[8px]
+            bg-[#F5F5F5]
+            px-4 py-4
+            text-[13px]
             text-center
           "
         >
-          콘텐츠 등록 기간이{" "}
-          <strong className="text-[#ff3b30]">2일 경과</strong>하여 캐시가{" "}
-          <strong className="text-[#ff3b30]">80%만 지급</strong>될 예정이에요.
+          ⚠️ 콘텐츠 등록 기간이{" "}
+          <strong className="text-[#ff3b30] underline">2일 경과</strong>하여
+          캐시가 <strong className="text-[#ff3b30] underline">80%만 지급</strong>
+          될 예정이에요.
         </section>
 
+        {/* 2. 캠페인 요약 박스 */}
         {/* 2. 캠페인 요약 박스 */}
         <section
           className="
             mb-6
-            rounded-[14px]
-            bg-[#fafafa]
-            px-3 py-3
+            rounded-[12px]
+            bg-[#F5F5F5]
+            p-5
             text-[12px]
             leading-relaxed
           "
         >
-          {/* 상단 태그들 */}
-          <div className="flex items-center mb-5 gap-1.5">
-            <span
-              className="
-                text-[11px]
-                px-1.5 py-[2px]
-                rounded
-                border border-black
-              "
-            >
-              쇼츠
-            </span>
+          <div className="flex items-center gap-2 mb-3">
+            <img
+              src="/images/common/shorts.png"
+              alt="shorts"
+              className="h-[20px] w-auto object-contain"
+            />
           </div>
 
-          <div className="text-[13px] mb-1">
-            <strong>[메디힐, 비플레인]</strong> 요즘 잘 쓰는 아이템 추천템 특집
-            캠페인명 두줄 일 때
+          <div className="text-[15px] font-bold mb-1">아르마니 뷰티</div>
+          <div className="text-[13px] text-[#444] mb-4">
+            요즘 잘 쓰는 아이템 추천템
           </div>
 
-          <div className="text-[12px] mb-1">
-            <strong>제품 협찬</strong>
-          </div>
+          <div className="text-[13px] font-bold mb-2">제품 협찬</div>
 
-          <ul className="text-[12px] m-0 pl-4 leading-[1.7] list-disc">
-            <li>
-              <strong>콘텐츠 등록 기간: 11/16(일) ~ 11/27(목)</strong>
-            </li>
-            <li>
-              <strong>
-                사전 검수 마감일: 11/27(목)까지{" "}
-                <a href="#" className="text-[#0070c9]">
-                  (→ 사전 검수)
-                </a>
-              </strong>
-            </li>
-            <li>캐시 지급일: 11/27(목)까지</li>
-            <li>콘텐츠 유지 기간: 60일</li>
-          </ul>
+          {/* 구분선 */}
+          <div className="h-[1px] bg-[#ddd] mb-3"></div>
+
+          <dl className="text-[12px] text-[#333] space-y-1">
+            <div className="flex">
+              <dt className="font-bold w-[120px] shrink-0">
+                콘텐츠 등록 기간 :
+              </dt>
+              <dd>11/16(일) - 11/27(목)</dd>
+            </div>
+            <div className="flex">
+              <dt className="text-[#666] w-[120px] shrink-0">
+                제품 발송 가이드 전달 :
+              </dt>
+              <dd className="text-[#666]">11/27(목)까지</dd>
+            </div>
+            <div className="flex">
+              <dt className="text-[#666] w-[120px] shrink-0">
+                사전 검수 마감일 :
+              </dt>
+              <dd className="text-[#666]">11/27(목)까지</dd>
+            </div>
+            <div className="flex">
+              <dt className="text-[#666] w-[120px] shrink-0">캐시 지급일 :</dt>
+              <dd className="text-[#666]">11/27(목)까지</dd>
+            </div>
+            <div className="flex">
+              <dt className="text-[#666] w-[120px] shrink-0">
+                콘텐츠 유지 기간 :
+              </dt>
+              <dd className="text-[#666]">60일</dd>
+            </div>
+          </dl>
         </section>
 
         {/* 3. 섹션 타이틀 */}
         <section className="mb-10">
           <h2 className="text-[16px] font-bold mb-3">
-            <strong className="text-red-500">①</strong> 콘텐츠 등록 전 한번 더
+            <strong className="text-red-500"></strong> 콘텐츠 등록 전 한번 더
             확인해 주세요.
           </h2>
-
-          {/* 유의사항 제목 */}
-          <div className="text-[13px] font-semibold mb-1.5">유의사항</div>
 
           {/* 유의사항 박스 */}
           <div
             className="
-              mb-3.5
+              mb-5
               rounded-[12px]
               border border-[#e5e5e5]
-              p-3.5
-              bg-white
+              p-[14px]
               text-[12px]
+              bg-[#fafafa]
             "
           >
-            {/* 1줄: 2차 활용 */}
-            <div className="flex items-center mb-2 gap-2.5">
-              <span
-                className="
-                  bg-[#e7fbdc]
-                  rounded-full
-                  px-2.5 py-1
-                  text-[11px] font-semibold
-                  whitespace-nowrap
-                "
-              >
-                ✅ 2차 활용
-              </span>
-              <span className="leading-relaxed">
-                협업 영상이 상업적으로 활용될 수 있습니다.
-              </span>
+            <h3 className="text-[15px] font-bold mb-3 pb-3 border-b border-[#eee]">
+              유의 사항
+            </h3>
+
+            {/* 체크 항목들 */}
+            <div className="space-y-2 mb-3">
+              <div className="flex items-start gap-1.5">
+                <span className="text-[14px]">✅</span>
+                <div>
+                  <span className="font-bold text-[13px] text-black mr-1">
+                    2차 활용
+                  </span>
+                  <span className="text-[12px] text-[#888]">
+                    *협업 영상이 상업적으로 활용될 수 있습니다.
+                  </span>
+                </div>
+              </div>
+              <div className="flex items-start gap-1.5">
+                <span className="text-[14px]">✅</span>
+                <div>
+                  <span className="font-bold text-[13px] text-black mr-1">
+                    클린본 제출
+                  </span>
+                  <span className="text-[12px] text-[#888]">
+                    *BGM, 효과음 등을 제거한 영상 제출이 필수입니다.
+                  </span>
+                </div>
+              </div>
             </div>
 
-            {/* 2줄: 사전 검수 */}
-            <div className="flex items-center mb-2.5 gap-2.5">
-              <span
-                className="
-                  bg-[#e7fbdc]
-                  rounded-full
-                  px-2.5 py-1
-                  text-[11px] font-semibold
-                  whitespace-nowrap
-                "
-              >
-                ✅ 사전 검수
-              </span>
-              <span className="leading-relaxed">
-                콘텐츠 초안을 미리 제출하여 검수받아야 해요.
-              </span>
-            </div>
-
-            {/* 아래 bullet 목록 */}
-            <ul className="m-0 pl-4 leading-[1.7] list-disc">
+            {/* 일반 텍스트 목록 */}
+            <ul className="text-[12px] leading-[1.7] text-[#666] m-0 pl-4 list-disc">
               <li>유튜브 제품 태그 필수</li>
               <li>추가 제공품 노출 필수</li>
               <li>협업금에 2차 활용 비용 포함</li>
@@ -151,68 +153,64 @@ export default function ContentRegisterClient() {
           </div>
 
           {/* 노출 시간 */}
-          <div className="mb-3.5">
-            <div className="text-[13px] font-semibold mb-1.5">노출 시간</div>
-            <div
-              className="
-                rounded-[8px]
-                border border-[#eee]
-                px-3 py-2.5
-                text-[13px]
-              "
-            >
-              30초
+          {/* 노출 시간 */}
+          <div
+            className="
+              mb-5
+              rounded-[10px]
+              border border-[#eee]
+              bg-[#fafafa]
+              text-[12px]
+              px-3 py-[14px]
+              text-[#555]
+            "
+          >
+            <h3 className="text-[15px] font-bold mb-3 pb-3 border-b border-[#eee] text-black">
+              노출 시간
+            </h3>
+            <div className="text-[13px] text-[#333]">
+              아르마니 뷰티 30초, 입생로랑 뷰티 30초 (총 60초)
             </div>
           </div>
 
           {/* 더보기란 내용 */}
-          <div className="mb-3.5">
-            <div className="flex items-center mb-1.5">
-              <div className="text-[13px] font-semibold">더보기란 내용</div>
+          {/* 더보기란 내용 */}
+          <div className="mb-3.5 bg-[#F5F5F5] rounded-[12px] p-5">
+            <div className="flex items-center justify-between mb-3">
+              <div className="text-[13px] font-bold">더보기란 내용</div>
               <button
                 type="button"
                 onClick={() => {
-                  const text = `메디힐의 유료 광고를 포함하고 있으며, 스튜디오 쉘위를 통해 제공 받았습니다.
+                  const text = `아르마니 뷰티, 입생로랑 뷰티의 유료 광고를 포함하고 있으며, 스튜디오 쉘위를 통해 제공 받았습니다.
 
-메디힐 마데카소사이드 수분 선세럼 촉촉 리페어 50g 더블기획
-MEDIHEAL Madecassoside Moisture Sun Serum,Blemish Repair Special Set
+아르마니 뷰티 NEW 파워 패브릭 PRO 파운데이션
+Armani Beauty NEW Power Fabric Pro Foundation
 #선크림 #선세럼 #선크림추천
 https://bepla.in/HTtM`;
                   navigator.clipboard?.writeText(text);
                   alert("복사되었습니다.");
                 }}
                 className="
-                  ml-auto
-                  text-[11px]
+                  text-[11px] font-bold text-[#AFFF33]
+                  bg-black
                   px-2.5 py-1
-                  rounded-full
-                  border border-[#d4ff8f]
-                  bg-[#AFFF33]
+                  rounded-[4px]
                   cursor-pointer
+                  border-0
                 "
               >
                 복사
               </button>
             </div>
 
-            <div
-              className="
-                rounded-[8px]
-                border border-[#eee]
-                px-3 py-2.5
-                text-[12px]
-                leading-[1.7]
-                whitespace-pre-line
-              "
-            >
-              메디힐의 유료 광고를 포함하고 있으며, 스튜디오 쉘위를 통해 제공
-              받았습니다.
+            <div className="text-[12px] text-[#333] leading-[1.6] whitespace-pre-line">
+              아르마니 뷰티, 입생로랑 뷰티의 유료 광고를 포함하고 있으며, 스튜디오
+              쉘위를 통해 제공 받았습니다.
               {"\n"}
               {"\n"}
-              메디힐 마데카소사이드 수분 선세럼 촉촉 리페어 50g 더블기획
+              아르마니 뷰티 NEW 파워 패브릭 PRO 파운데이션
               {"\n"}
-              MEDIHEAL Madecassoside Moisture Sun Serum,Blemish Repair Special
-              Set
+              Armani Beauty NEW Power Fabric Pro Foundation
               {"\n"}
               #선크림 #선세럼 #선크림추천
               {"\n"}
@@ -221,107 +219,126 @@ https://bepla.in/HTtM`;
           </div>
 
           {/* 제목 키워드 */}
-          <div className="mb-3.5">
-            <div className="flex items-center mb-1.5">
-              <div className="text-[13px] font-semibold">제목 키워드</div>
+          {/* 제목 키워드 */}
+          <div className="mb-3.5 bg-[#F5F5F5] rounded-[12px] p-5">
+            <div className="flex items-center justify-between mb-3">
+              <div className="text-[13px] font-bold">제목 키워드</div>
               <button
                 type="button"
                 onClick={() => {
-                  navigator.clipboard?.writeText("메디힐");
+                  navigator.clipboard?.writeText("아르마니 뷰티");
                   alert("복사되었습니다.");
                 }}
                 className="
-                  ml-auto
-                  text-[11px]
+                  text-[11px] font-bold text-[#AFFF33]
+                  bg-black
                   px-2.5 py-1
-                  rounded-full
-                  border border-[#d4ff8f]
-                  bg-[#AFFF33]
+                  rounded-[4px]
                   cursor-pointer
+                  border-0
                 "
               >
                 복사
               </button>
             </div>
 
-            <div
-              className="
-                rounded-[8px]
-                border border-[#eee]
-                px-3 py-2.5
-                text-[12px]
-              "
-            >
-              메디힐
-            </div>
+            <div className="text-[12px] text-[#333]">아르마니 뷰티</div>
           </div>
 
           {/* 유료 프로모션 체크 */}
-          <div className="mb-1">
-            <div className="text-[13px] font-semibold mb-1.5">
-              유료 프로모션 체크
-            </div>
-            <div
-              className="
-                rounded-[8px]
-                border border-[#eee]
-                px-3 py-2.5
-                text-[12px]
-                leading-relaxed
-              "
-            >
+          {/* 유료 프로모션 체크 */}
+          <div className="mb-1 bg-[#F5F5F5] rounded-[12px] p-5">
+            <div className="text-[13px] font-bold mb-3">유료 프로모션 체크</div>
+            <div className="text-[12px] text-[#333] leading-relaxed">
               Youtube 영상 옵션 &gt; 세부정보 &gt; &apos;유료 프로모션 라벨
               추가&apos; 설정해 주세요.
             </div>
           </div>
         </section>
+      </div>
+      </div>
 
+      <div className="w-full h-3 bg-[#f7f7f7] border-t border-[#eee]" />
+
+      <div className="w-full max-w-[530px] mx-auto box-border">
+        <div className="px-5 pt-10">
         {/* 4. 최종 콘텐츠 URL 등록 */}
-        <section className="mb-4.5">
-          <h2 className="text-[16px] font-bold mb-2.5">
-            <strong className="text-red-500">②</strong> 최종 업로드된 콘텐츠를
-            등록해 주세요.
+        <section className="mb-10">
+          <h2 className="text-[16px] font-bold mb-4">
+            최종 업로드된 콘텐츠를 등록해 주세요.
           </h2>
 
-          <div className="mb-1.5">
-            <input
-              placeholder="협업 채널에 최종 업로드된 콘텐츠의 URL을 붙여 넣어주세요"
-              className="
-                w-full
-                rounded-[8px]
-                border border-[#eee]
-                px-3 py-2.5
-                text-[13px]
-                box-border
-                outline-none
-              "
-            />
+          <div className="mb-3">
+            <div className="relative">
+              <input
+                placeholder=""
+                defaultValue="http://www.youtube.com/watch?v=D3v94HND..."
+                className="
+                  w-full
+                  rounded-[8px]
+                  border border-[#ccc]
+                  pl-3 pr-10 py-3
+                  text-[13px]
+                  box-border
+                  outline-none
+                "
+              />
+              <button
+                className="absolute right-3 top-1/2 -translate-y-1/2 text-[#ccc] hover:text-[#999]"
+                onClick={() => {
+                  /* clear input logic */
+                }}
+              >
+                ✕
+              </button>
+            </div>
           </div>
 
-          <div className="text-[11px] text-[#ff3b30] mb-5">
-            연동된 채널의 콘텐츠만 등록 가능해요.
+          <div className="flex items-center gap-4 mb-6">
+            <span className="text-[12px] font-bold">
+              영상 스타일에 더 가까운 것을 선택해 주세요.
+            </span>
+            <div className="flex items-center gap-3">
+              <label className="flex items-center gap-1.5 cursor-pointer">
+                <input
+                  type="radio"
+                  name="videoStyle"
+                  className="appearance-none min-w-[14px] min-h-[14px] w-[14px] h-[14px] rounded-full border border-[#ddd] bg-white checked:bg-[#AFFF33] checked:border-[3.5px] checked:border-white checked:ring-1 checked:ring-[#ddd] cursor-pointer"
+                />
+                <span className="text-[12px] font-bold">브이로그</span>
+              </label>
+              <label className="flex items-center gap-1.5 cursor-pointer">
+                <input
+                  type="radio"
+                  name="videoStyle"
+                  className="appearance-none min-w-[14px] min-h-[14px] w-[14px] h-[14px] rounded-full border border-[#ddd] bg-white checked:bg-[#AFFF33] checked:border-[3.5px] checked:border-white checked:ring-1 checked:ring-[#ddd] cursor-pointer"
+                />
+                <span className="text-[12px] font-bold">리뷰</span>
+              </label>
+            </div>
           </div>
 
           {/* 체크박스 */}
           <label
             className="
               flex items-center
-              gap-1.5
+              gap-2
               text-[12px]
-              mb-1
+              mb-1.5
+              cursor-pointer
             "
           >
-            <input type="checkbox" className="align-middle" />
-            <span>
-              <strong>콘텐츠 내 가이드 내용을 전부 반영하였습니다. </strong>
-              <a href="#" className="text-[#0070c9]">
-                (→ 가이드 확인)
-              </a>
+            <input
+              type="checkbox"
+              className="appearance-none min-w-[14px] min-h-[14px] w-[14px] h-[14px] rounded-full border border-[#ddd] bg-white checked:bg-[#AFFF33] checked:border-[3.5px] checked:border-white checked:ring-1 checked:ring-[#ddd] cursor-pointer"
+            />
+            <span className="font-bold text-[#333]">
+              콘텐츠 내 가이드 내용을 전부 반영하였습니다.
             </span>
           </label>
 
-          <div className="text-[11px] text-[#ff3b30] ml-[25px] mt-1">
-            ※ 미준수된 항목이 있을 경우, 수정·재업로드 요청 및 실패 처리될 수
+          <div className="text-[11px] text-[#ff3b30] ml-6 leading-tight">
+            *미준수된 항목이 있을 경우, 수정·재업로드 요청 및 실패 처리될 수
             있어요.
           </div>
         </section>
@@ -332,15 +349,12 @@ https://bepla.in/HTtM`;
         onClick={() => setShowModal(true)}
         className="
           w-full
-          mt-5
-          py-3
-          rounded-[8px]
+          py-4
           border-0
           bg-[#AFFF33]
-          text-[15px] font-bold
+          text-[16px] font-bold
           cursor-pointer
-          mx-5 mb-5
-          w-[calc(100%-40px)]
+          sticky bottom-0
         "
       >
         등록하기
