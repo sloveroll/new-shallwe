@@ -19,7 +19,7 @@ export type AlertItem = {
 const MY_ALERTS: AlertItem[] = [
   {
     id: 1,
-    icon: "/images/my-collab/ic-notice.png", // 캠페인 신청
+    icon: "/images/my-collab/ic-campaign-apply.png", // 캠페인 신청
     title: "캠페인 신청",
     message:
       "[러, 아벤느] 캠페인 신청이 완료되었어요. 선정자에 한해 개별 안내드릴게요.",
@@ -129,40 +129,64 @@ export default function MyAlertsContent() {
               className="flex items-center py-4 border-b border-[#f0f0f0] text-[13px]"
             >
               {/* 아이콘 */}
-              <div className="relative mr-3 flex items-center">
+              <div className="relative mr-4 flex-shrink-0">
                 <Image
                   src={item.icon}
                   alt={item.title}
-                  width={20}
-                  height={20}
+                  width={24}
+                  height={24}
                   className="object-contain"
                 />
+                {/* 녹색 점 (디자인 시안 반영) - 아이콘 좌상단 or 우상단? 
+                    시안에는 '아이콘' 자체에 포함되어 있거나, 별도 뱃지가 있어보임. 
+                    기존 코드의 isNew(N뱃지) 로직은 유지하되, 위치나 스타일을 조정할 수 있음. 
+                    일단 기존 N 뱃지 로직은 유지.
+                */}
                 {item.isNew && (
-                  <span className="absolute -top-2 -right-2 flex items-center justify-center w-4 h-4 text-[9px] font-bold text-white bg-[#ff4b23] rounded-full">
+                  <span className="absolute -top-1 -right-1 flex items-center justify-center w-4 h-4 text-[9px] font-bold text-white bg-[#ff4b23] rounded-full">
                     N
                   </span>
                 )}
               </div>
 
-              <div className="flex-1">
-                <div className="flex justify-between mb-[4px]">
-                  <span className="text-[13px] font-semibold text-[#222]">
-                    {item.title}
-                  </span>
-                  <span className="text-[11px] text-[#999]">{item.date}</span>
+              <div className="flex-1 min-w-0 pr-2">
+                {/* 1) 날짜 (상단) */}
+                <div className="text-[12px] text-[#888] mb-[2px]">
+                  {item.date}
                 </div>
 
-                <p className="text-[13px] text-[#333] leading-[1.5]">
+                {/* 2) 타이틀 */}
+                <h3 className="text-[14px] font-bold text-[#222] mb-[2px] truncate">
+                  {item.title}
+                </h3>
+
+                {/* 3) 내용 */}
+                <p className="text-[13px] text-[#444] leading-[1.4] break-keep">
                   {item.message}
                 </p>
               </div>
 
+              {/* 화살표 아이콘 */}
               <button
                 type="button"
                 onClick={() => router.push(`/my-alerts/campaign-proposal`)}
-                className="pl-2 text-[#bbb] text-[18px]"
+                className="flex-shrink-0 text-[#222]"
               >
-                &gt;
+                <svg
+                  width="20"
+                  height="20"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M9 18L15 12L9 6"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
+                </svg>
               </button>
             </article>
           ))}
