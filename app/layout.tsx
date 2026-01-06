@@ -7,6 +7,37 @@ import FloatingQrBox from "./components/FloatingQrBox";
 export const metadata: Metadata = {
   title: "New Shallwe",
   description: "뉴쉘위 모바일 중심 웹",
+  icons: {
+    icon: [
+      {
+        url: "/images/favicon/favicon-16x16.png",
+        sizes: "16x16",
+        type: "image/png",
+      },
+      {
+        url: "/images/favicon/favicon-32x32.png",
+        sizes: "32x32",
+        type: "image/png",
+      },
+      {
+        url: "/images/favicon/favicon-192x192.png",
+        sizes: "192x192",
+        type: "image/png",
+      },
+      {
+        url: "/images/favicon/favicon-512x512.png",
+        sizes: "512x512",
+        type: "image/png",
+      },
+    ],
+    apple: [
+      {
+        url: "/images/favicon/favicon-180x180.png",
+        sizes: "180x180",
+        type: "image/png",
+      },
+    ],
+  },
 };
 
 export default function RootLayout({
