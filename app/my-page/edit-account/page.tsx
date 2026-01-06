@@ -59,8 +59,8 @@ export default function EditMyInfoPage() {
               <Image
                 src="/images/common/ic-eye.png"
                 alt="비밀번호 보기"
-                width={30}
-                height={30}
+                width={20}
+                height={20}
               />
             </button>
           </div>
@@ -85,8 +85,8 @@ export default function EditMyInfoPage() {
               <Image
                 src="/images/common/ic-eye.png"
                 alt="비밀번호 보기"
-                width={30}
-                height={30}
+                width={20}
+                height={20}
               />
             </button>
           </div>

@@ -4,6 +4,7 @@
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
+import SubPageHeader from "@/app/components/common/SubPageHeader";
 
 export default function LoginPage() {
   const router = useRouter();
@@ -13,19 +14,12 @@ export default function LoginPage() {
   const [password, setPassword] = useState("");
 
   return (
-    <main className="min-h-screen bg-white px-5 pt-4 pb-24">
+    <main className="min-h-screen bg-white px-5 pb-24">
       {/* 상단 헤더 (뒤로가기 + 타이틀) */}
-      <header className="relative mb-10 flex items-center justify-center">
-        <button
-          type="button"
-          onClick={() => router.back()}
-          className="absolute left-0 text-[22px] leading-none"
-        >
-          ‹
-        </button>
-        <h1 className="text-[16px] font-semibold">로그인</h1>
-        <div className="absolute right-0 w-[22px]" />
-      </header>
+      {/* 상단 헤더 (뒤로가기 + 타이틀) */}
+      <div className="-mx-5 mb-6">
+        <SubPageHeader title="로그인" noBorder />
+      </div>
 
       {/* 로고 + 서브타이틀 (my-home Header 느낌으로) */}
       <section className="mb-7">
@@ -62,13 +56,13 @@ export default function LoginPage() {
             아이디
           </label>
 
-          <div className="flex items-center rounded-full border border-[#cfcfcf] bg-white px-4 py-2.5">
+          <div className="flex items-center rounded-full border border-[#ddd] bg-white px-4 h-[50px]">
             <input
               type="text"
               value={userId}
               onChange={(e) => setUserId(e.target.value)}
               placeholder="5-20자의 영문 소문자, 숫자, 특수기호(_, -) 사용 가능"
-              className="w-full border-none bg-transparent text-[13px] text-[#333] placeholder:text-[#bcbcbc] focus:outline-none"
+              className="w-full border-none bg-transparent text-[15px] text-[#333] placeholder:text-[#bcbcbc] focus:outline-none"
             />
 
             {/* X 버튼 (입력값 있을 때만 노출) */}
@@ -97,13 +91,13 @@ export default function LoginPage() {
             비밀번호
           </label>
 
-          <div className="flex items-center rounded-full border border-[#cfcfcf] bg-white px-4 py-2.5">
+          <div className="flex items-center rounded-full border border-[#ddd] bg-white px-4 h-[50px]">
             <input
               type="password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               placeholder="영문, 숫자 특수문자 포함 8자리 이상"
-              className="w-full border-none bg-transparent text-[13px] text-[#333] placeholder:text-[#bcbcbc] focus:outline-none"
+              className="w-full border-none bg-transparent text-[15px] text-[#333] placeholder:text-[#bcbcbc] focus:outline-none"
             />
 
             {/* 눈 아이콘 */}
@@ -115,15 +109,15 @@ export default function LoginPage() {
               <Image
                 src="/images/common/ic-eye.png"
                 alt="비밀번호 보기"
-                width={16}
-                height={16}
+                width={20}
+                height={20}
               />
             </button>
           </div>
         </div>
 
         {/* 자동 로그인 / 아이디 찾기 / 비밀번호 찾기 */}
-        <div className="mt-1 flex items-center justify-between text-[11px] text-[#777]">
+        <div className="mt-1 flex items-center justify-between text-[13px] text-[#777]">
           <button
             type="button"
             onClick={() => setAutoLogin((prev) => !prev)}
@@ -146,11 +140,19 @@ export default function LoginPage() {
           </button>
 
           <div className="flex items-center gap-2">
-            <button type="button" className="text-[#777]">
+            <button
+              type="button"
+              className="text-[#777]"
+              onClick={() => router.push("/login/find-id")}
+            >
               아이디 찾기
             </button>
             <span className="text-[#dddddd]">|</span>
-            <button type="button" className="text-[#777]">
+            <button
+              type="button"
+              className="text-[#777]"
+              onClick={() => router.push("/login/reset-password")}
+            >
               비밀번호 찾기
             </button>
           </div>
@@ -161,18 +163,19 @@ export default function LoginPage() {
       <section className="mt-8">
         <button
           type="button"
-          className="mb-3 w-full rounded-full bg-[#AFFF33] py-3 text-[15px] font-bold text-black"
+          className="mb-3 w-full rounded-xl bg-[#AFFF33] py-3 text-[15px] font-bold text-black"
         >
           로그인
         </button>
 
-        <p className="mb-2 text-center text-[12px] text-[#777]">
+        <p className="mb-2 mt-5 text-[12px] text-[#777]">
           아직 회원이 아니신가요?
         </p>
 
         <button
           type="button"
-          className="w-full rounded-full bg-[#eeeeee] py-3 text-[14px] font-semibold text-[#333]"
+          onClick={() => router.push("/sign-up/step1")}
+          className="w-full rounded-xl bg-[#eeeeee] py-3 text-[14px] font-semibold text-[#333]"
         >
           회원가입
         </button>

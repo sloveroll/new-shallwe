@@ -5,13 +5,21 @@ import React from "react";
 
 interface SubPageHeaderProps {
   title: string;
+  noBorder?: boolean;
 }
 
-export default function SubPageHeader({ title }: SubPageHeaderProps) {
+export default function SubPageHeader({
+  title,
+  noBorder = false,
+}: SubPageHeaderProps) {
   const router = useRouter();
 
   return (
-    <header className="sticky top-0 z-50 flex items-center justify-between px-5 pt-3 pb-2 border-b border-[#f0f0f0] bg-white">
+    <header
+      className={`sticky top-0 z-50 flex items-center justify-between px-5 pt-3 pb-2 bg-white ${
+        noBorder ? "" : "border-b border-[#f0f0f0]"
+      }`}
+    >
       <button
         onClick={() => router.back()}
         type="button"

@@ -69,9 +69,11 @@ export default function WithdrawClient({
 
           {/* 안내 문구 */}
           <div className="flex items-center gap-1.5 text-[13px] text-[#999] mt-3">
-            <div className="flex items-center justify-center w-[15px] h-[15px] rounded-full border border-[#ccc] mb-[1px]">
-              <span className="text-[10px] text-[#999] leading-none">!</span>
-            </div>
+            <img
+              src="/images/common/ic-information.png"
+              alt="info"
+              className="w-[15px] h-[15px] object-contain mb-[1px]"
+            />
             누적 1만 캐시 이상부터 전액 출금만 가능해요.
           </div>
         </section>
