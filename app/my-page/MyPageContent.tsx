@@ -144,82 +144,92 @@ export default function MyPageContent({ userName }: MyPageContentProps) {
           </div>
         </section>
 
-        {/* 5. 설정 / 레퍼런스 / 마케팅 / FAQ / 로그아웃 리스트 */}
-        <section className="rounded-2xl bg-white text-[14px] text-[#333] shadow-sm">
-          {/* 유튜브 레퍼런스 */}
+        {/* 5. 메뉴 리스트 */}
+        <section className="rounded-2xl bg-white text-[#333] shadow-sm overflow-hidden mb-8">
+          {/* 유튜브 레퍼런스 등록 · 수정 */}
           <button
             type="button"
             onClick={() => router.push("/my-page/youtube-reference/register")}
-            className="flex w-full items-center justify-between px-4 py-3 text-left"
+            className="group flex w-full items-center justify-between px-5 py-5 text-left border-b border-[#f0f0f0] last:border-0"
           >
-            <span>유튜브 레퍼런스 등록</span>
-            <span className="text-[16px] text-[#999]">&gt;</span>
+            <span className="text-[15px] font-semibold">
+              유튜브 레퍼런스 등록 · 수정
+            </span>
+            <Image
+              src="/images/common/ic-rightarrow.png"
+              alt="navigate"
+              width={15}
+              height={15}
+            />
           </button>
 
-          <div className="h-[1px] bg-[#e2e2e2]" />
-
+          {/* 제안 단가 등록 */}
           <button
             type="button"
-            onClick={() => router.push("/my-page/youtube-reference/edit")}
-            className="flex w-full items-center justify-between px-4 py-3 text-left"
+            onClick={() => router.push("/my-page/proposal-price")}
+            className="group flex w-full items-center justify-between px-5 py-5 text-left border-b border-[#f0f0f0] last:border-0"
           >
-            <span>유튜브 레퍼런스 수정</span>
-            <span className="text-[16px] text-[#999]">&gt;</span>
+            <span className="text-[15px] font-semibold">제안 단가 등록</span>
+            <Image
+              src="/images/common/ic-rightarrow.png"
+              alt="navigate"
+              width={15}
+              height={15}
+            />
           </button>
 
-          <div className="h-[1px] bg-[#e2e2e2]" />
-
           {/* 마케팅 수신 동의 */}
-          <div className="flex items-center justify-between px-4 py-3">
+          <div className="flex items-center justify-between px-5 py-3 border-b border-[#f0f0f0] last:border-0">
             <div className="text-left">
-              <p>마케팅 수신 동의</p>
-              <p className="mt-[2px] text-[11px] text-[#999]">
-                캠페인 오픈 알림을 받을 수 있어요.
+              <p className="text-[15px] font-semibold">마케팅 수신 동의</p>
+              <p className="mt-1 text-[12px] text-[#666]">
+                캠페인 오픈 알림을 받을 수 있어요!
               </p>
             </div>
 
             <button
               type="button"
               onClick={() => setMarketingAgree((prev) => !prev)}
-              className={`relative h-6 w-11 overflow-hidden rounded-full transition-colors ${
-                marketingAgree ? "bg-[#a5ff3f]" : "bg-[#d5d5d5]"
+              className={`relative h-6 w-11 rounded-full transition-colors ${
+                marketingAgree ? "bg-[#a5ff3f]" : "bg-[#e5e5e5]"
               }`}
             >
               <span
                 className={`
-                  absolute top-0.5 left-0.5 h-5 w-5 rounded-full bg-white shadow
-                  transition-transform duration-150
+                  absolute top-0.5 left-0.5 h-5 w-5 rounded-full bg-white shadow-sm
+                  transition-transform duration-200
                   ${marketingAgree ? "translate-x-5" : "translate-x-0"}
                 `}
               />
             </button>
           </div>
 
-          <div className="h-[1px] bg-[#e2e2e2]" />
-
           {/* FAQ */}
           <button
             type="button"
             onClick={() => router.push("/faq")}
-            className="flex w-full items-center justify-between px-4 py-3 text-left"
+            className="group flex w-full items-center justify-between px-5 py-5 text-left"
           >
-            <span>FAQ</span>
-            <span className="text-[16px] text-[#999]">&gt;</span>
-          </button>
-
-          <div className="h-[1px] bg-[#e2e2e2]" />
-
-          {/* 로그아웃 (리스트 마지막 셀 형태) */}
-          <button
-            type="button"
-            className="flex w-full items-center justify-between px-4 py-3 text-left"
-            onClick={() => setIsLogoutModalOpen(true)}
-          >
-            <span className="text-[13px] font-semibold text-[#ff4b4b]">
-              로그아웃
-            </span>
+            <span className="text-[15px] font-semibold">FAQ</span>
+            <Image
+              src="/images/common/ic-rightarrow.png"
+              alt="navigate"
+              width={15}
+              height={15}
+            />
           </button>
         </section>
+
+        {/* 로그아웃 (리스트 박스 밖으로 이동) */}
+        <div className="mb-10 text-center">
+          <button
+            type="button"
+            className="text-[14px] text-[#333] underline underline-offset-4"
+            onClick={() => setIsLogoutModalOpen(true)}
+          >
+            로그아웃
+          </button>
+        </div>
       </div>
 
       {/* Footer (스크롤 아래 위치) */}

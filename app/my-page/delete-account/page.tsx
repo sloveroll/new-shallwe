@@ -8,7 +8,6 @@ export default function WithdrawPage() {
   const router = useRouter();
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-
   return (
     <main className="bg-white min-h-screen flex flex-col">
       <div className="w-full max-w-[530px] mx-auto px-5 pt-4 pb-10 box-border flex-1">
@@ -40,9 +39,14 @@ export default function WithdrawPage() {
             <p>3. 회원 탈퇴 후 3개월간 동일 아이디로 재가입이 불가합니다.</p>
           </div>
 
-          <label className="flex items-center gap-2 mt-3 text-[13px]">
-            <input type="checkbox" className="w-4 h-4" />
-            <span>유의사항을 확인하였으며 동의합니다.</span>
+          <label className="flex items-start gap-2 mt-3 text-[13px] cursor-pointer">
+            <input
+              type="checkbox"
+              className="mt-[2px] w-4 h-4 accent-[#AFFF33]"
+            />
+            <span className="text-[#333]">
+              유의사항을 확인하였으며 동의합니다.
+            </span>
           </label>
         </section>
 
@@ -56,24 +60,44 @@ export default function WithdrawPage() {
           </p>
 
           <div className="flex flex-col gap-3 text-[14px]">
-            <label className="flex items-center gap-2">
-              <input type="radio" name="reason" className="w-4 h-4" />
+            <label className="flex items-center gap-2 cursor-pointer">
+              <input
+                type="radio"
+                name="reason"
+                className="w-[18px] h-[18px] accent-[#AFFF33]"
+              />
               <span>이용 빈도가 낮음</span>
             </label>
-            <label className="flex items-center gap-2">
-              <input type="radio" name="reason" className="w-4 h-4" />
+            <label className="flex items-center gap-2 cursor-pointer">
+              <input
+                type="radio"
+                name="reason"
+                className="w-[18px] h-[18px] accent-[#AFFF33]"
+              />
               <span>캠페인 당첨 확률이 낮음</span>
             </label>
-            <label className="flex items-center gap-2">
-              <input type="radio" name="reason" className="w-4 h-4" />
+            <label className="flex items-center gap-2 cursor-pointer">
+              <input
+                type="radio"
+                name="reason"
+                className="w-[18px] h-[18px] accent-[#AFFF33]"
+              />
               <span>캠페인이 많지 않음</span>
             </label>
-            <label className="flex items-center gap-2">
-              <input type="radio" name="reason" className="w-4 h-4" />
+            <label className="flex items-center gap-2 cursor-pointer">
+              <input
+                type="radio"
+                name="reason"
+                className="w-[18px] h-[18px] accent-[#AFFF33]"
+              />
               <span>진행 과정, CS 등 서비스 불만족</span>
             </label>
-            <label className="flex items-start gap-2">
-              <input type="radio" name="reason" className="mt-1 w-4 h-4" />
+            <label className="flex items-start gap-2 cursor-pointer">
+              <input
+                type="radio"
+                name="reason"
+                className="mt-1 w-[18px] h-[18px] accent-[#AFFF33]"
+              />
               <div className="flex-1">
                 <span className="block mb-2">기타</span>
                 <input

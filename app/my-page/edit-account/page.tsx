@@ -99,10 +99,7 @@ export default function EditMyInfoPage() {
         <div className="mb-8">
           <div className="mb-1 flex items-center justify-between">
             <label className="text-[13px] font-semibold">이름·연락처</label>
-            <button
-              type="button"
-              className="rounded-full border border-[#ccc] bg-white px-3 py-1 text-[12px] text-[#555]"
-            >
+            <button type="button" className="text-[12px] text-[#999] underline">
               수정하기
             </button>
           </div>
@@ -155,7 +152,12 @@ export default function EditMyInfoPage() {
 
         {/* ===== 배송지 ===== */}
         <div className="mb-8">
-          <label className="mb-1 block text-[13px] font-semibold">배송지</label>
+          <div className="mb-1 flex items-center justify-between">
+            <label className="text-[13px] font-semibold">배송지</label>
+            <button type="button" className="text-[12px] text-[#999] underline">
+              수정하기
+            </button>
+          </div>
           <input
             defaultValue="서울시 강남구 언주로 726 두산빌딩"
             className="mb-2 w-full rounded-[8px] border border-[#ddd] px-3 py-3 text-[14px]"

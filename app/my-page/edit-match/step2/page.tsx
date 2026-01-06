@@ -1,204 +1,249 @@
 "use client";
 
 import { useRouter } from "next/navigation";
+import { useState } from "react";
+import SubPageHeader from "@/app/components/common/SubPageHeader";
 
 export default function MatchEditSkinPage() {
   const router = useRouter();
 
-  return (
-    <main className="bg-white min-h-screen flex flex-col">
-      <div className="w-full max-w-[530px] mx-auto px-5 pt-4 pb-10 box-border flex-1">
-        {/* 상단 헤더 */}
-        <header className="relative mb-4 flex items-center justify-center">
-          <button
-            type="button"
-            onClick={() => router.back()}
-            className="absolute left-0 text-[22px]"
-          >
-            ←
-          </button>
-          <div className="h-[22px]"></div>
-          <div className="absolute right-0 w-[22px]" />
-        </header>
+  // 상태 관리
+  const [hobbies, setHobbies] = useState<string[]>([]);
+  const [personalColor, setPersonalColor] = useState("");
+  const [skinType, setSkinType] = useState("");
+  const [skinConcerns, setSkinConcerns] = useState<string[]>([]);
+  const [hairType, setHairType] = useState("");
 
-        {/* 상단 진행바 (2단계 느낌으로 더 채운 막대) */}
-        <div className="mb-6">
-          <div className="flex w-full">
-            <div className="h-[3px] bg-[#AFFF33] flex-1 rounded-full mr-1"></div>
-            <div className="h-[3px] bg-[#AFFF33] flex-1 rounded-full ml-1"></div>
-          </div>
+  // 토글 핸들러
+  const toggleHobby = (hobby: string) => {
+    setHobbies((prev) =>
+      prev.includes(hobby) ? prev.filter((h) => h !== hobby) : [...prev, hobby]
+    );
+  };
+
+  const toggleSkinConcern = (concern: string) => {
+    setSkinConcerns((prev) =>
+      prev.includes(concern)
+        ? prev.filter((c) => c !== concern)
+        : [...prev, concern]
+    );
+  };
+
+  // 스타일 클래스 (Step 1 참고)
+  const radioClass = `
+    appearance-none
+    min-w-[18px] min-h-[18px] w-[18px] h-[18px]
+    rounded-full
+    border border-[#ddd]
+    bg-white
+    checked:bg-[#AFFF33]
+    checked:border-[5px]
+    checked:border-white
+    checked:ring-1
+    checked:ring-[#ddd]
+    cursor-pointer
+  `;
+
+  return (
+    <div className="bg-white min-h-screen flex flex-col relative text-[#222]">
+      <div className="w-full max-w-[530px] mx-auto bg-white min-h-screen flex flex-col shadow-sm">
+        {/* 상단 헤더 */}
+        <SubPageHeader title="프로필 설정" />
+
+        <div className="flex-1 px-5 pt-6 pb-32">
+          {/* 취미 */}
+          <section className="mb-8">
+            <h3 className="mb-3 text-[14px] font-bold">취미</h3>
+
+            {/* 스포츠/액티비티 */}
+            <div className="mb-3">
+              <div className="text-[12px] text-[#999] mb-2">
+                스포츠/액티비티
+              </div>
+              <div className="flex flex-wrap gap-2">
+                {[
+                  "러닝",
+                  "요가",
+                  "필라테스",
+                  "헬스",
+                  "수영",
+                  "골프",
+                  "테니스",
+                  "등산",
+                  "캠핑",
+                ].map((item) => {
+                  const isSelected = hobbies.includes(item);
+                  return (
+                    <button
+                      key={item}
+                      type="button"
+                      onClick={() => toggleHobby(item)}
+                      className={`
+                        rounded-full px-3 py-[7px] text-[12px] border transition-colors flex items-center gap-1
+                        ${
+                          isSelected
+                            ? "bg-[#AFFF33] border-[#AFFF33] text-black font-bold"
+                            : "bg-white border-[#ddd] text-[#333]"
+                        }
+                      `}
+                    >
+                      {item}
+                      {isSelected && <span className="text-[10px]">✕</span>}
+                    </button>
+                  );
+                })}
+              </div>
+            </div>
+
+            {/* 라이프 스타일 */}
+            <div>
+              <div className="text-[12px] text-[#999] mb-2">라이프 스타일</div>
+              <div className="flex flex-wrap gap-2">
+                {[
+                  "제빵",
+                  "커피",
+                  "요리",
+                  "인테리어",
+                  "사진",
+                  "드로잉/미술",
+                  "공연/전시",
+                ].map((item) => {
+                  const isSelected = hobbies.includes(item);
+                  return (
+                    <button
+                      key={item}
+                      type="button"
+                      onClick={() => toggleHobby(item)}
+                      className={`
+                        rounded-full px-3 py-[7px] text-[12px] border transition-colors flex items-center gap-1
+                        ${
+                          isSelected
+                            ? "bg-[#AFFF33] border-[#AFFF33] text-black font-bold"
+                            : "bg-white border-[#ddd] text-[#333]"
+                        }
+                      `}
+                    >
+                      {item}
+                      {isSelected && <span className="text-[10px]">✕</span>}
+                    </button>
+                  );
+                })}
+              </div>
+            </div>
+          </section>
+
+          {/* 퍼스널 컬러 */}
+          <section className="mb-8">
+            <h3 className="mb-3 text-[14px] font-bold">퍼스널 컬러</h3>
+            <div className="flex flex-wrap gap-x-6 gap-y-3">
+              {["봄웜", "여름쿨", "가을웜", "겨울쿨", "모름"].map((item) => (
+                <label key={item} className="flex items-center cursor-pointer">
+                  <input
+                    type="radio"
+                    name="personalColor"
+                    value={item}
+                    checked={personalColor === item}
+                    onChange={(e) => setPersonalColor(e.target.value)}
+                    className={radioClass}
+                  />
+                  <span className="ml-2 text-[13px] text-[#333]">{item}</span>
+                </label>
+              ))}
+            </div>
+          </section>
+
+          {/* 피부 타입 */}
+          <section className="mb-8">
+            <h3 className="mb-3 text-[14px] font-bold">피부 타입</h3>
+            <div className="flex flex-wrap gap-x-6 gap-y-3">
+              {["복합성", "건성", "지성", "중성", "민감성"].map((item) => (
+                <label key={item} className="flex items-center cursor-pointer">
+                  <input
+                    type="radio"
+                    name="skinType"
+                    value={item}
+                    checked={skinType === item}
+                    onChange={(e) => setSkinType(e.target.value)}
+                    className={radioClass}
+                  />
+                  <span className="ml-2 text-[13px] text-[#333]">{item}</span>
+                </label>
+              ))}
+            </div>
+          </section>
+
+          {/* 피부 고민 */}
+          <section className="mb-8">
+            <h3 className="mb-3 text-[14px] font-bold">피부 고민</h3>
+            <div className="flex flex-wrap gap-2">
+              {[
+                "트러블/흉터",
+                "기미/잡티",
+                "주름/탄력",
+                "모공/피지",
+                "미백",
+                "속건조",
+                "블랙헤드",
+                "다크서클",
+                "홍조",
+              ].map((item) => {
+                const isSelected = skinConcerns.includes(item);
+                return (
+                  <button
+                    key={item}
+                    type="button"
+                    onClick={() => toggleSkinConcern(item)}
+                    className={`
+                      rounded-full px-3 py-[7px] text-[12px] border transition-colors flex items-center gap-1
+                      ${
+                        isSelected
+                          ? "bg-[#AFFF33] border-[#AFFF33] text-black font-bold"
+                          : "bg-white border-[#ddd] text-[#333]"
+                      }
+                    `}
+                  >
+                    {item}
+                    {isSelected && <span className="text-[10px]">✕</span>}
+                  </button>
+                );
+              })}
+            </div>
+          </section>
+
+          {/* 두피/모발 타입 */}
+          <section className="mb-10">
+            <h3 className="mb-3 text-[14px] font-bold">두피/모발 타입</h3>
+            <div className="flex flex-wrap gap-x-6 gap-y-3">
+              {["복합성", "건성", "지성", "중성", "민감성"].map((item) => (
+                <label key={item} className="flex items-center cursor-pointer">
+                  <input
+                    type="radio"
+                    name="hairType"
+                    value={item}
+                    checked={hairType === item}
+                    onChange={(e) => setHairType(e.target.value)}
+                    className={radioClass}
+                  />
+                  <span className="ml-2 text-[13px] text-[#333]">{item}</span>
+                </label>
+              ))}
+            </div>
+          </section>
         </div>
 
-        {/* 피부 타입 */}
-        <section className="mb-6">
-          <h3 className="mb-2 text-[14px] font-semibold">피부 타입</h3>
-          <div className="flex flex-wrap gap-x-4 gap-y-2 text-[14px]">
-            {["복합성", "건성", "지성", "중성", "민감성"].map((label) => (
-              <label key={label} className="flex items-center gap-1">
-                <input type="radio" name="skin-type" />
-                <span>{label}</span>
-              </label>
-            ))}
-          </div>
-        </section>
-
-        {/* 피부 고민 */}
-        <section className="mb-6">
-          <h3 className="mb-2 text-[14px] font-semibold">피부 고민</h3>
-          <div className="flex flex-wrap gap-2">
-            {[
-              "트러블/흉터",
-              "기미/잡티",
-              "주름/탄력",
-              "모공/피지",
-              "미백",
-              "속건조",
-              "블랙헤드",
-              "다크서클",
-              "홍조",
-            ].map((label) => (
-              <button
-                key={label}
-                type="button"
-                className="rounded-full border border-[#ccc] px-3 py-[6px] text-[12px]"
-              >
-                {label}
-              </button>
-            ))}
-          </div>
-        </section>
-
-        {/* 두피/모발 타입 */}
-        <section className="mb-6">
-          <h3 className="mb-2 text-[14px] font-semibold">두피/모발 타입</h3>
-          <div className="flex flex-wrap gap-x-4 gap-y-2 text-[14px]">
-            {["복합성", "건성", "지성", "중성", "민감성"].map((label) => (
-              <label key={label} className="flex items-center gap-1">
-                <input type="radio" name="hair-type" />
-                <span>{label}</span>
-              </label>
-            ))}
-          </div>
-        </section>
-
-        {/* 두피/모발 고민 */}
-        <section className="mb-6">
-          <h3 className="mb-2 text-[14px] font-semibold">두피/모발 고민</h3>
-          <div className="flex flex-wrap gap-2">
-            {[
-              "손상모",
-              "비듬/각질",
-              "가려움",
-              "탈모",
-              "엉킴/정전기",
-              "볼륨/탄력",
-              "유분/기름기",
-              "건조/푸석",
-              "열감/트러블",
-              "윤기/광채",
-            ].map((label) => (
-              <button
-                key={label}
-                type="button"
-                className="rounded-full border border-[#ccc] px-3 py-[6px] text-[12px]"
-              >
-                {label}
-              </button>
-            ))}
-          </div>
-        </section>
-
-        {/* 바디 타입 */}
-        <section className="mb-6">
-          <h3 className="mb-2 text-[14px] font-semibold">바디 타입</h3>
-          <div className="flex flex-wrap gap-x-4 gap-y-2 text-[14px]">
-            {["복합성", "건성", "지성", "중성", "민감성"].map((label) => (
-              <label key={label} className="flex items-center gap-1">
-                <input type="radio" name="body-type" />
-                <span>{label}</span>
-              </label>
-            ))}
-          </div>
-        </section>
-
-        {/* 바디 고민 */}
-        <section className="mb-6">
-          <h3 className="mb-2 text-[14px] font-semibold">바디 고민</h3>
-          <div className="flex flex-wrap gap-2">
-            {["건조/가려움", "트러블", "각질/닳살", "아토피", "색소 침착"].map(
-              (label) => (
-                <button
-                  key={label}
-                  type="button"
-                  className="rounded-full border border-[#ccc] px-3 py-[6px] text-[12px]"
-                >
-                  {label}
-                </button>
-              )
-            )}
-          </div>
-        </section>
-
-        {/* 건강 고민 */}
-        <section className="mb-6">
-          <h3 className="mb-2 text-[14px] font-semibold">건강 고민</h3>
-          <div className="flex flex-wrap gap-2">
-            {[
-              "체중 관리",
-              "수면/피로",
-              "눈 건강",
-              "간 건강",
-              "장 건강",
-              "면역력",
-              "활력/에너지",
-              "혈액 순환",
-              "관절/뼈",
-              "여성 건강",
-            ].map((label) => (
-              <button
-                key={label}
-                type="button"
-                className="rounded-full border border-[#ccc] px-3 py-[6px] text-[12px]"
-              >
-                {label}
-              </button>
-            ))}
-          </div>
-        </section>
-
-        {/* 맞춤형 시딩 제품 받아보기 체크 */}
-        <section className="mb-4">
-          <label className="flex items-start gap-2 text-[13px]">
-            <input
-              type="checkbox"
-              defaultChecked
-              className="mt-[2px] w-4 h-4"
-            />
-            <div>
-              <p className="font-semibold mb-[2px]">
-                맞춤형 시딩 제품 받아보기
-              </p>
-              <p className="text-[12px] text-[#555]">
-                내 타입과 고민에 적합한 시딩 제품이 준비되면 보내드려요{" "}
-                <span className="underline">(개인정보 수집·이용 동의)</span>
-              </p>
-            </div>
-          </label>
-        </section>
+        {/* 하단 "다음" 버튼 (Fixed) */}
+        <div className="fixed bottom-0 left-0 right-0 mx-auto w-full max-w-[530px] bg-white border-t border-[#f0f0f0] z-20">
+          <button
+            type="button"
+            className="w-full h-[52px] text-[16px] font-bold text-black bg-[#AFFF33]"
+            onClick={() => {
+              router.push("/my-page/edit-match/step3");
+            }}
+          >
+            다음
+          </button>
+        </div>
       </div>
-
-      {/* 하단 완료 버튼 */}
-      <button
-        type="button"
-        className="w-full py-4 text-[16px] font-bold bg-[#AFFF33]"
-        onClick={() => {
-          // TODO: 저장 후 마이페이지로 이동 등
-          // router.push("/my-page");
-          alert("완료 클릭");
-        }}
-      >
-        완료
-      </button>
-    </main>
+    </div>
   );
 }

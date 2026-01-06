@@ -16,10 +16,12 @@ export default function DeleteAccountConfirmModal({
   return (
     <BaseModal open={open} onClose={onClose}>
       <h2 className="mb-2 text-[18px] font-extrabold leading-tight text-black">
-        정말 탈퇴하시겠어요?
+        탈퇴를 진행할까요?
       </h2>
       <p className="mb-6 text-[14px] text-[#555]">
-        탈퇴 시 모든 정보가 삭제되며 복구할 수 없어요.
+        탈퇴 시 보유 캐시를 포함한 모든
+        <br></br>
+        정보가 삭제되며, 복구가 불가능해요.
       </p>
 
       <div className="flex gap-2">
