@@ -63,18 +63,20 @@ export default function ChannelLinkedCard({
           height={15}
         />
 
-        <span className="text-[13px] font-semibold text-[#333]">
+        <span className="text-[15px] font-semibold text-[#333]">
           {nickname}
         </span>
       </div>
 
       {/* --- Row 3+: 카테고리 설명 --- */}
       <div className="border-t mb-2"></div>
-      <div className="space-y-2 text-[12px] leading-[1.45] text-[#333]">
+      <div className="space-y-2 text-[12px] leading-[1.45]">
         {items.map((item) => (
           <div key={item.label} className="flex justify-between">
-            <span className="text-[#777]">{item.label}</span>
-            <span className="text-right">{item.desc}</span>
+            <span>{item.label}</span>
+            <span className="text-right">
+              <b>{item.desc}</b>
+            </span>
           </div>
         ))}
       </div>

@@ -397,6 +397,8 @@ export default function CampaignDetailContent({
           ) : (
           // 콘텐츠 가이드 탭 내용
           <>
+            {/* 인쇄 대상 영역 시작 */}
+            <div className="print-content">
             {/* 상단 안내 배너 (Lime Green) */}
             <div
               className="
@@ -429,7 +431,7 @@ export default function CampaignDetailContent({
                 onClick={() => window.print()}
                 className="
                   absolute right-4
-                  flex items-center gap-1
+                  hidden md:flex items-center gap-1
                   bg-black text-white
                   text-[11px] font-bold
                   px-3 py-1.5
@@ -705,7 +707,7 @@ export default function CampaignDetailContent({
               {/* 구분선 (회색 바) */}
               <div className="h-3 bg-[#f5f5f5] mb-6"></div>
 
-              <div className={`mx-5 ${isRefOpen ? "pb-10" : "pb-0"}`}>
+              <div className={`mx-5 ${isRefOpen ? "pb-10" : "pb-0"} print-ref-section`}>
                 <div
                   className="flex items-center justify-between cursor-pointer mb-6"
                   onClick={() => setIsRefOpen((prev) => !prev)}
@@ -738,8 +740,7 @@ export default function CampaignDetailContent({
                   </div>
                 </div>
 
-                {isRefOpen && (
-                  <div className="space-y-8">
+                <div className={`space-y-8 ${!isRefOpen ? "hidden" : ""} print-always-visible`}>
                     {/* [단순 선물] */}
                     <div>
                       <div className="flex items-center gap-1.5 mb-3">
@@ -834,7 +835,6 @@ export default function CampaignDetailContent({
                       </div>
                     </div>
                   </div>
-                )}
               </div>
             </div>
 
@@ -931,6 +931,8 @@ export default function CampaignDetailContent({
                   </div>
                 </div>
               </div>
+            </div>
+            {/* 인쇄 대상 영역 끝 */}
             </div>
           </>
           )}

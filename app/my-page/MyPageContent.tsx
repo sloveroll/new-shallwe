@@ -1,12 +1,12 @@
-'use client';
+"use client";
 
-import { useRouter } from 'next/navigation';
-import Image from 'next/image';
-import { useState } from 'react';
-import ChannelLinkedCard from '../components/my-page/ChannelLinkedCard';
-import UnlinkConfirmModal from '../components/modal/UnlinkConfirmModal';
-import LogoutConfirmModal from '../components/modal/LogoutConfirmModal';
-import BottomNav from '../components/BottomNav';
+import { useRouter } from "next/navigation";
+import Image from "next/image";
+import { useState } from "react";
+import ChannelLinkedCard from "../components/my-page/ChannelLinkedCard";
+import UnlinkConfirmModal from "../components/modal/UnlinkConfirmModal";
+import LogoutConfirmModal from "../components/modal/LogoutConfirmModal";
+import BottomNav from "../components/BottomNav";
 
 interface MyPageContentProps {
   userName: string;
@@ -44,7 +44,7 @@ export default function MyPageContent({ userName }: MyPageContentProps) {
             <span className="ml-1 font-normal">, 반가워요!</span>
             <button
               type="button"
-              onClick={() => router.push('./login')}
+              onClick={() => router.push("./login")}
               className="ml-20 text-[13px] font-normal text-[#555]"
             >
               로그인
@@ -68,18 +68,19 @@ export default function MyPageContent({ userName }: MyPageContentProps) {
 
             <button
               type="button"
-              onClick={() => router.push('/my-page/edit-account')}
-              className="text-[11px] font-semibold text-[#36b44c] underline underline-offset-2"
+              onClick={() => router.push("/my-page/edit-account")}
+              className="text-[11px] font-semibold text-[#aaa] underline underline-offset-2"
             >
               내 정보 수정
             </button>
           </div>
 
           {/* 하단: 이메일 / 연락처 / 주소 등 (아직 미입력 상태 예시) */}
-          <div className="space-y-[4px] text-[12px] leading-[1.5] text-[#666]">
+          <div className="space-y-[4px] text-[12px] leading-[1.5]">
             <p>eve2zzang@gmail.com</p>
-            <p className="text-[#aaa]">연락처 정보 입력 필요</p>
-            <p className="text-[#aaa]">주소 정보 입력 필요</p>
+            <br></br>
+            <p>010-1234-5678</p>
+            <p>서울시 강남구 언주로 726 두산빌딩 3층 바이럴마케팅..</p>
           </div>
         </section>
       </div>
@@ -91,29 +92,29 @@ export default function MyPageContent({ userName }: MyPageContentProps) {
           platform="Youtube"
           nickname="후니의 vlog"
           items={[
-            { label: '롱폼', desc: '레퍼런스 등록 후 협업이 가능해요.' },
-            { label: '쇼츠', desc: '협업에 참여하실 수 있어요.' },
+            { label: "롱폼", desc: "레퍼런스 등록 후 협업이 가능해요." },
+            { label: "쇼츠", desc: "협업에 참여하실 수 있어요." },
           ]}
-          onRemove={() => handleUnlink('Youtube')}
+          onRemove={() => handleUnlink("Youtube")}
         />
 
         <ChannelLinkedCard
           platform="Instagram"
           nickname="worldbesthyo"
           items={[
-            { label: '릴스', desc: '연동된 채널 내 릴스 콘텐츠가 없어요.' },
-            { label: '피드', desc: '협업에 참여하실 수 있어요.' },
+            { label: "릴스", desc: "연동된 채널 내 릴스 콘텐츠가 없어요." },
+            { label: "피드", desc: "협업에 참여하실 수 있어요." },
           ]}
-          onRemove={() => handleUnlink('Instagram')}
+          onRemove={() => handleUnlink("Instagram")}
         />
 
         <ChannelLinkedCard
           platform="Blog"
           nickname="worldbesthyo"
           items={[
-            { label: '블로그', desc: '블로그 협업에 참여하실 수 있어요.' },
+            { label: "블로그", desc: "블로그 협업에 참여하실 수 있어요." },
           ]}
-          onRemove={() => handleUnlink('Blog')}
+          onRemove={() => handleUnlink("Blog")}
         />
 
         <div className="-mx-5 h-2 bg-white mt-5" />
@@ -126,7 +127,7 @@ export default function MyPageContent({ userName }: MyPageContentProps) {
               <h2 className="text-[15px] font-semibold">맞춤 정보</h2>
               <button
                 type="button"
-                onClick={() => router.push('/my-page/edit-match/step1')}
+                onClick={() => router.push("/my-page/edit-match/step1")}
                 className="text-[11px] text-[#8c8b8b] border-b"
               >
                 맞춤 정보 등록
@@ -148,15 +149,18 @@ export default function MyPageContent({ userName }: MyPageContentProps) {
           {/* 유튜브 레퍼런스 */}
           <button
             type="button"
-            onClick={() => router.push('/my-page/youtube-reference/register')}
+            onClick={() => router.push("/my-page/youtube-reference/register")}
             className="flex w-full items-center justify-between px-4 py-3 text-left"
           >
             <span>유튜브 레퍼런스 등록</span>
             <span className="text-[16px] text-[#999]">&gt;</span>
           </button>
+
+          <div className="h-[1px] bg-[#e2e2e2]" />
+
           <button
             type="button"
-            onClick={() => router.push('/my-page/youtube-reference/edit')}
+            onClick={() => router.push("/my-page/youtube-reference/edit")}
             className="flex w-full items-center justify-between px-4 py-3 text-left"
           >
             <span>유튜브 레퍼런스 수정</span>
@@ -178,14 +182,14 @@ export default function MyPageContent({ userName }: MyPageContentProps) {
               type="button"
               onClick={() => setMarketingAgree((prev) => !prev)}
               className={`relative h-6 w-11 overflow-hidden rounded-full transition-colors ${
-                marketingAgree ? 'bg-[#a5ff3f]' : 'bg-[#d5d5d5]'
+                marketingAgree ? "bg-[#a5ff3f]" : "bg-[#d5d5d5]"
               }`}
             >
               <span
                 className={`
                   absolute top-0.5 left-0.5 h-5 w-5 rounded-full bg-white shadow
                   transition-transform duration-150
-                  ${marketingAgree ? 'translate-x-5' : 'translate-x-0'}
+                  ${marketingAgree ? "translate-x-5" : "translate-x-0"}
                 `}
               />
             </button>
@@ -196,7 +200,7 @@ export default function MyPageContent({ userName }: MyPageContentProps) {
           {/* FAQ */}
           <button
             type="button"
-            onClick={() => router.push('/faq')}
+            onClick={() => router.push("/faq")}
             className="flex w-full items-center justify-between px-4 py-3 text-left"
           >
             <span>FAQ</span>
@@ -218,8 +222,6 @@ export default function MyPageContent({ userName }: MyPageContentProps) {
         </section>
       </div>
 
-      
-
       {/* Footer (스크롤 아래 위치) */}
       <div className="bg-white px-5 pt-6 pb-16 mt-10">
         {/* 로고 */}
@@ -237,7 +239,7 @@ export default function MyPageContent({ userName }: MyPageContentProps) {
           <p>주소 : 서울특별시 강남구 언주로 726 (논현동, 두산빌딩)</p>
           <p>대표 : 송현승 | 사업자등록번호 : 211-85-51635</p>
           <p>
-            통신판매업신고번호 : 강남-15934호 |{' '}
+            통신판매업신고번호 : 강남-15934호 |{" "}
             <span className="font-semibold text-[#555]">사업자정보확인</span>
           </p>
           <p>메일 : shallwe@doosan.com</p>
@@ -277,7 +279,7 @@ export default function MyPageContent({ userName }: MyPageContentProps) {
       {/* 연동 해제 확인 모달 */}
       <UnlinkConfirmModal
         open={!!unlinkTarget}
-        platform={unlinkTarget || ''}
+        platform={unlinkTarget || ""}
         onClose={closeUnlinkModal}
         onConfirm={confirmUnlink}
       />
@@ -288,9 +290,9 @@ export default function MyPageContent({ userName }: MyPageContentProps) {
         onClose={() => setIsLogoutModalOpen(false)}
         onConfirm={() => {
           // TODO: 실제 로그아웃 처리
-          alert('로그아웃 되었습니다.');
+          alert("로그아웃 되었습니다.");
           setIsLogoutModalOpen(false);
-          router.push('/login');
+          router.push("/login");
         }}
       />
     </main>

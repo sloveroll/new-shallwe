@@ -23,3 +23,48 @@
     display: none;
   }
 }
+
+/* ==== Print Styles ==== */
+@media print {
+  /* 인쇄 시 모든 요소 숨김 */
+  body * {
+    visibility: hidden;
+  }
+
+  /* 인쇄할 영역만 표시 */
+  .print-content,
+  .print-content * {
+    visibility: visible;
+  }
+
+  /* 인쇄할 영역을 페이지 상단에 배치 */
+  .print-content {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+  }
+
+  /* 인쇄 시 불필요한 요소 숨김 */
+  button,
+  .no-print {
+    display: none !important;
+  }
+
+  /* 인쇄 시 배경색 표시 */
+  .print-content {
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  /* 인쇄 시 참고자료 항상 표시 */
+  .print-always-visible {
+    display: block !important;
+    visibility: visible !important;
+  }
+
+  /* 인쇄 시 참고자료 섹션 하단 패딩 항상 적용 */
+  .print-ref-section {
+    padding-bottom: 2.5rem !important;
+  }
+}

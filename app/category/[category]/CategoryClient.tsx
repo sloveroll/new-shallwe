@@ -290,7 +290,7 @@ export default function CategoryClient({
             {/* 드롭다운 메뉴 */}
             {isFilterDropdownOpen && (
               <div className="absolute top-full left-0 mt-1 bg-white border border-black rounded-lg shadow-lg z-50 min-w-[80px]">
-                {["전체", "YouTube", "Instagram", "Blog"].map((filter) => (
+                {["전체", "유튜브", "인스타그램", "블로그"].map((filter) => (
                   <button
                     key={filter}
                     onClick={() => {
