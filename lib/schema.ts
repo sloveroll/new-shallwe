@@ -1,4 +1,4 @@
-import { mysqlTable, serial, varchar } from 'drizzle-orm/mysql-core';
+import { mysqlTable, serial, varchar, int, text, timestamp } from 'drizzle-orm/mysql-core';
 
 // admin 테이블 정의 (필요한 컬럼만 우선 정의)
 export const admin = mysqlTable('admin', {
@@ -35,4 +35,24 @@ export const campaigns = mysqlTable('campaigns', {
     announce_date: varchar('announce_date', { length: 100 }), // "선정자 발표: 11/17(월)까지" (형식 자유로움)
     thumbnail: varchar('thumbnail', { length: 255 }),
     user_id: varchar('user_id', { length: 100 }), // 임시 사용자 ID (추후 인증 연동 시 수정)
+});
+
+// SNS 연동 테이블
+export const users_sns = mysqlTable('users_sns', {
+    id: serial('id').primaryKey(),
+    user_idx: int('user_idx').notNull(),
+    provider_type: varchar('provider_type', { length: 50 }).notNull(), // 'instagram', 'youtube'
+    provider_name: varchar('provider_name', { length: 255 }), // username
+    provider_user_id: varchar('provider_user_id', { length: 255 }), // instagram_id
+    
+    sns_token: text('sns_token'), // access_token
+    sns_facebook_id: varchar('sns_facebook_id', { length: 255 }), // facebook_page_id
+    
+    follow_count: int('follow_count'),
+    post_count: int('post_count'),
+    
+    meta_asid: varchar('meta_asid', { length: 255 }),
+    
+    in_date: timestamp('in_date').defaultNow(),
+    up_date: timestamp('up_date').onUpdateNow(),
 });
