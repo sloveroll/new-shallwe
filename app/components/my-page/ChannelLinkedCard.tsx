@@ -37,27 +37,48 @@ export default function ChannelLinkedCard({
       // Security check: Accept messages from our own origin
       if (event.origin !== window.location.origin) return;
 
-      // Only the Instagram card should handle Instagram auth events
-      if (platform !== "Instagram") return;
-
-      if (event.data?.type === "INSTAGRAM_AUTH_SUCCESS") {
+      // --- Instagram Handler ---
+      if (
+        platform === "Instagram" &&
+        event.data?.type === "INSTAGRAM_AUTH_SUCCESS"
+      ) {
         const { code } = event.data;
-        // Prevent double submission (React Strict Mode or fast events)
+        // Prevent double submission
         if (processingCodeRef.current === code) return;
         processingCodeRef.current = code;
 
         handleServerExchange(code);
-      } else if (event.data?.type === "INSTAGRAM_AUTH_ERROR") {
+      } else if (
+        platform === "Instagram" &&
+        event.data?.type === "INSTAGRAM_AUTH_ERROR"
+      ) {
         alert(`인스타그램 연동 실패: ${event.data.error}`);
+      }
+
+      // --- YouTube Handler ---
+      if (
+        platform === "Youtube" &&
+        event.data?.type === "YOUTUBE_AUTH_SUCCESS"
+      ) {
+        const { code } = event.data;
+        // Prevent double submission
+        if (processingCodeRef.current === code) return;
+        processingCodeRef.current = code;
+
+        handleYoutubeServerExchange(code);
+      } else if (
+        platform === "Youtube" &&
+        event.data?.type === "YOUTUBE_AUTH_ERROR"
+      ) {
+        alert(`유튜브 연동 실패: ${event.data.error}`);
       }
     };
 
     window.addEventListener("message", handleMessage);
-    return () => {
-      window.removeEventListener("message", handleMessage);
-    };
-  }, []);
+    return () => window.removeEventListener("message", handleMessage);
+  }, [platform]);
 
+  // Instagram Server Exchange
   const handleServerExchange = async (code: string) => {
     try {
       const res = await fetch("/api/sns/instagram/connect", {
@@ -69,7 +90,6 @@ export default function ChannelLinkedCard({
           userIdx: 1, // TODO: Replace with actual User Context
         }),
       });
-
       const data = await res.json();
       if (res.ok && data.success) {
         alert(
@@ -94,7 +114,43 @@ export default function ChannelLinkedCard({
     }
   };
 
+  // YouTube Server Exchange
+  const handleYoutubeServerExchange = async (code: string) => {
+    try {
+      const res = await fetch("/api/sns/youtube/connect", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          code: code,
+          redirect_uri: window.location.origin + "/youtube/callback",
+          userIdx: 1,
+        }),
+      });
+      const data = await res.json();
+      const token =
+        data.tokens?.refresh_token || data.tokens?.access_token || "";
+      const tokenMsg = token ? `\n\nToken: ${token}` : "";
+
+      if (res.ok && data.success) {
+        alert(`유튜브 연동 성공: ${data.channelName}${tokenMsg}`);
+        window.location.reload();
+      } else {
+        alert(
+          `유튜브 연동 실패: ${data.error || "알 수 없는 오류"}${tokenMsg}`
+        );
+      }
+    } catch (err) {
+      console.error(err);
+      alert("서버 통신 중 오류가 발생했습니다.");
+    }
+  };
+
   const handleConnect = () => {
+    const width = 600;
+    const height = 700;
+    const left = window.screen.width / 2 - width / 2;
+    const top = window.screen.height / 2 - height / 2;
+
     if (platform === "Instagram") {
       if (!process.env.NEXT_PUBLIC_FACEBOOK_APP_ID) {
         alert(
@@ -103,34 +159,44 @@ export default function ChannelLinkedCard({
         return;
       }
 
-      // Popup Flow
-      const redirectUri =
-        typeof window !== "undefined"
-          ? window.location.origin + "/instagram/callback"
-          : "";
-
-      // Facebook Business Login (Popup Flow)
-      // Note: We use 'config_id' which bundles the permissions (instagram_business_basic, insights, etc.)
+      const redirectUri = window.location.origin + "/instagram/callback";
       const params = new URLSearchParams({
-        client_id: process.env.NEXT_PUBLIC_FACEBOOK_APP_ID,
+        client_id: process.env.NEXT_PUBLIC_FACEBOOK_APP_ID!,
         redirect_uri: redirectUri,
-        // config_id: process.env.NEXT_PUBLIC_FACEBOOK_CONFIG_ID || "", // Config ID causing issues?
         scope:
           "pages_show_list,instagram_basic,pages_read_engagement,business_management",
         response_type: "code",
       });
 
       const url = `https://www.facebook.com/v19.0/dialog/oauth?${params.toString()}`;
-
-      // Calculate center position for popup
-      const width = 600;
-      const height = 800;
-      const left = window.screen.width / 2 - width / 2;
-      const top = window.screen.height / 2 - height / 2;
-
       window.open(
         url,
         "instagram_oauth",
+        `width=${width},height=${height},top=${top},left=${left},toolbar=no,menubar=no`
+      );
+    } else if (platform === "Youtube") {
+      const redirectUri = window.location.origin + "/youtube/callback";
+      const clientId = process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID;
+
+      if (!clientId) {
+        alert("Google Client ID가 설정되지 않았습니다.");
+        return;
+      }
+
+      const params = new URLSearchParams({
+        client_id: clientId,
+        redirect_uri: redirectUri,
+        response_type: "code",
+        scope:
+          "https://www.googleapis.com/auth/youtube.readonly https://www.googleapis.com/auth/yt-analytics.readonly",
+        access_type: "offline",
+        prompt: "consent",
+      });
+
+      const url = `https://accounts.google.com/o/oauth2/v2/auth?${params.toString()}`;
+      window.open(
+        url,
+        "youtube_oauth",
         `width=${width},height=${height},top=${top},left=${left},toolbar=no,menubar=no`
       );
     } else {
