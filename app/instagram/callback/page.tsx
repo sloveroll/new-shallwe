@@ -17,6 +17,7 @@ export default function InstagramCallbackPage() {
     const errorDescription = searchParams.get("error_description");
 
     if (code) {
+      console.log("Instagram Auth Code:", code);
       // Success case
       setStatus("success");
       if (window.opener) {

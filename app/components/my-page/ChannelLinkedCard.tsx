@@ -2,7 +2,7 @@
 "use client";
 
 import Image from "next/image";
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 
 type Props = {
   platform: "Youtube" | "Instagram" | "Blog";
@@ -17,6 +17,8 @@ export default function ChannelLinkedCard({
   items,
   onRemove,
 }: Props) {
+  const processingCodeRef = useRef<string | null>(null);
+
   const platformConfig = {
     Youtube: {
       badge: "/images/my-page/ic-youtube.png",
@@ -35,8 +37,15 @@ export default function ChannelLinkedCard({
       // Security check: Accept messages from our own origin
       if (event.origin !== window.location.origin) return;
 
+      // Only the Instagram card should handle Instagram auth events
+      if (platform !== "Instagram") return;
+
       if (event.data?.type === "INSTAGRAM_AUTH_SUCCESS") {
         const { code } = event.data;
+        // Prevent double submission (React Strict Mode or fast events)
+        if (processingCodeRef.current === code) return;
+        processingCodeRef.current = code;
+
         handleServerExchange(code);
       } else if (event.data?.type === "INSTAGRAM_AUTH_ERROR") {
         alert(`인스타그램 연동 실패: ${event.data.error}`);
@@ -63,7 +72,9 @@ export default function ChannelLinkedCard({
 
       const data = await res.json();
       if (res.ok && data.success) {
-        alert(`인스타그램 연동 성공: ${data.username}`);
+        alert(
+          `인스타그램 연동 성공: ${data.username}\n\nToken: ${data.accessToken}`
+        );
         window.location.reload();
       } else {
         if (data.error === "No connected Instagram Business Account found.") {
@@ -71,7 +82,10 @@ export default function ChannelLinkedCard({
             "연동된 인스타그램 비즈니스 계정을 찾을 수 없습니다.\n\n인스타그램 설정에서 '프로페셔널 계정'으로 전환하고,\n페이스북 페이지와 연결한 뒤 다시 시도해주세요."
           );
         } else {
-          alert(`연동 실패: ${data.error || "알 수 없는 오류"}`);
+          const tokenMsg = data.accessToken
+            ? `\n\nToken: ${data.accessToken}`
+            : "";
+          alert(`연동 실패: ${data.error || "알 수 없는 오류"}${tokenMsg}`);
         }
       }
     } catch (err) {
@@ -100,7 +114,9 @@ export default function ChannelLinkedCard({
       const params = new URLSearchParams({
         client_id: process.env.NEXT_PUBLIC_FACEBOOK_APP_ID,
         redirect_uri: redirectUri,
-        config_id: process.env.NEXT_PUBLIC_FACEBOOK_CONFIG_ID || "",
+        // config_id: process.env.NEXT_PUBLIC_FACEBOOK_CONFIG_ID || "", // Config ID causing issues?
+        scope:
+          "pages_show_list,instagram_basic,pages_read_engagement,business_management",
         response_type: "code",
       });
 
