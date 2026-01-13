@@ -4,15 +4,6 @@ import { db } from "@/lib/db";
 import { users_sns } from "@/lib/schema";
 import { and, eq, ne, sql } from "drizzle-orm";
 
-/**
- * ✅ Practical Naver Blog connector
- * - Robust blogId extraction (blog.naver.com/{id}, m.blog.naver.com/{id}, PostList query, etc.)
- * - Existence check that handles "200 but error page"
- * - Nickname scraping with fallbacks (ebc.nick -> og:title -> title)
- * - Duplication check (already linked to other user)
- * - Safe UPSERT behavior (uses transaction; best is DB unique + onConflictDoUpdate if supported)
- */
-
 const NAVER_USER_AGENT =
   "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36";
 
