@@ -2,7 +2,7 @@
 "use client";
 
 import Image from "next/image";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 
 type Props = {
   platform: "Youtube" | "Instagram" | "Blog";
@@ -18,6 +18,9 @@ export default function ChannelLinkedCard({
   onRemove,
 }: Props) {
   const processingCodeRef = useRef<string | null>(null);
+  const [showNaverInput, setShowNaverInput] = useState(false);
+  const [naverUrl, setNaverUrl] = useState("");
+  const inputRef = useRef<HTMLInputElement>(null);
 
   const platformConfig = {
     Youtube: {
@@ -145,6 +148,40 @@ export default function ChannelLinkedCard({
     }
   };
 
+  const handleNaverConnect = async () => {
+    if (!naverUrl.includes("blog.naver.com")) {
+      alert(
+        "네이버 블로그 주소를 정확히 입력해주세요.\n(예: https://blog.naver.com/id)"
+      );
+      return;
+    }
+
+    try {
+      const res = await fetch("/api/sns/naver-blog/connect", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          blogUrl: naverUrl,
+          userIdx: 1, // TODO: Replace with actual User Context
+        }),
+      });
+      const data = await res.json();
+
+      if (res.ok && data.success) {
+        alert(`네이버 블로그 연동 성공: ${data.nickname}`);
+        window.location.reload();
+      } else {
+        const foundNick = data.scrapedData?.nickname
+          ? `\n(확인된 닉네임: ${data.scrapedData.nickname})`
+          : "";
+        alert(`연동 실패: ${data.error || "알 수 없는 오류"}${foundNick}`);
+      }
+    } catch (err) {
+      console.error(err);
+      alert("서버 통신 중 오류가 발생했습니다.");
+    }
+  };
+
   const handleConnect = () => {
     const width = 600;
     const height = 700;
@@ -199,13 +236,28 @@ export default function ChannelLinkedCard({
         "youtube_oauth",
         `width=${width},height=${height},top=${top},left=${left},toolbar=no,menubar=no`
       );
+    } else if (platform === "Blog") {
+      if (showNaverInput) {
+        if (naverUrl.trim()) handleNaverConnect();
+        else setShowNaverInput(false);
+      } else {
+        setShowNaverInput(true);
+        setTimeout(() => inputRef.current?.focus(), 100);
+      }
     } else {
       alert("해당 플랫폼 연동 기능은 준비 중입니다.");
     }
   };
 
   const handleDisconnect = async () => {
-    if (!confirm("정말 인스타그램 연동을 해제하시겠습니까?")) return;
+    if (!confirm(`${platform} 연동을 해제하시겠습니까?`)) return;
+
+    let apiUrl = "";
+    if (platform === "Instagram") apiUrl = "/api/sns/instagram/disconnect";
+    if (platform === "Youtube") apiUrl = "/api/sns/youtube/disconnect";
+    if (platform === "Blog") apiUrl = "/api/sns/naver-blog/disconnect";
+
+    if (!apiUrl) return;
 
     try {
       const res = await fetch("/api/sns/instagram/disconnect", {
@@ -218,7 +270,7 @@ export default function ChannelLinkedCard({
 
       const data = await res.json();
       if (res.ok && data.success) {
-        alert("인스타그램 연동이 해제되었습니다.");
+        alert("연동이 해제되었습니다.");
         window.location.reload();
       } else {
         alert(`해제 실패: ${data.error || "알 수 없는 오류"}`);
@@ -255,7 +307,7 @@ export default function ChannelLinkedCard({
                 text-[11px] text-[#666]
               "
           >
-            연동
+            {showNaverInput ? "확인" : "연동"}
           </button>
 
           <button
@@ -272,18 +324,34 @@ export default function ChannelLinkedCard({
       </div>
 
       {/* --- Row 2: 플랫폼 공통 로고 + 채널명 --- */}
-      <div className="mb-3 flex items-center gap-2">
-        <Image
-          src="/images/common/ic-lookinglogo.png"
-          alt="logo"
-          width={15}
-          height={15}
-        />
-
-        <span className="text-[15px] font-semibold text-[#333]">
-          {nickname || "미연동"}
-        </span>
-      </div>
+      {/* --- Row 2: 플랫폼 공통 로고 + 채널명 OR Input --- */}
+      {showNaverInput ? (
+        <div className="mb-3 flex flex-col gap-2 w-full">
+          <input
+            ref={inputRef}
+            type="text"
+            placeholder=" https://blog.naver.com/..."
+            value={naverUrl}
+            onChange={(e) => setNaverUrl(e.target.value)}
+            onKeyDown={(e) => {
+              if (e.key === "Enter") handleNaverConnect();
+            }}
+            className="w-full text-[12px] border border-[#ddd] rounded px-2 py-1 focus:outline-none focus:border-black"
+          />
+        </div>
+      ) : (
+        <div className="mb-3 flex items-center gap-2">
+          <Image
+            src="/images/common/ic-lookinglogo.png"
+            alt="logo"
+            width={15}
+            height={15}
+          />
+          <span className="text-[15px] font-semibold text-[#333]">
+            {nickname || "미연동"}
+          </span>
+        </div>
+      )}
 
       {/* --- Row 3+: 카테고리 설명 --- */}
       <div className="border-t mb-2"></div>
