@@ -4,6 +4,7 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
 import SubPageHeader from "@/app/components/common/SubPageHeader";
+import PasswordInput from "@/app/components/common/PasswordInput";
 
 export default function SignUpPage() {
   const router = useRouter();
@@ -60,26 +61,11 @@ export default function SignUpPage() {
               <label className="block text-[14px] font-bold mb-2">
                 비밀번호<span className="text-[#ff4d4f]">*</span>
               </label>
-              <div className="relative">
-                <input
-                  type="password"
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                  className="w-full h-[50px] rounded-xl border border-[#ddd] px-4 text-[15px] pr-10 focus:outline-none focus:border-[#000]"
-                  placeholder=""
-                />
-                <button
-                  type="button"
-                  className="absolute right-3 top-1/2 -translate-y-1/2"
-                >
-                  <Image
-                    src="/images/common/ic-eye.png"
-                    alt="보기"
-                    width={20}
-                    height={20}
-                  />
-                </button>
-              </div>
+              <PasswordInput
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                placeholder=""
+              />
               <p className="mt-2 text-[12px] text-[#aaa]">
                 영문, 숫자, 특수문자 포함 8자리 이상 입력해 주세요.
               </p>

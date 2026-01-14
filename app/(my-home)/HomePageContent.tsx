@@ -1,4 +1,4 @@
-'use client';
+"use client";
 
 import Image from "next/image";
 import { useRef, useState } from "react";
@@ -42,7 +42,7 @@ export default function HomePageContent() {
 
   return (
     <main>
-      {/* 🔥 1. Home 탭 */}
+      {/* 1. Home 탭 */}
       {mainTab === "home" && (
         <section className="px-5">
           {/* 상단 배너 카드 */}
@@ -364,10 +364,14 @@ export default function HomePageContent() {
       )}
 
       {/* 2. Youtube 탭 */}
-      {mainTab === "youtube" && <SnsCampaignTab key="youtube" tabName="youtube" />}
+      {mainTab === "youtube" && (
+        <SnsCampaignTab key="youtube" tabName="youtube" />
+      )}
 
       {/* 3. Instagram 탭 */}
-      {mainTab === "instagram" && <SnsCampaignTab key="instagram" tabName="instagram" />}
+      {mainTab === "instagram" && (
+        <SnsCampaignTab key="instagram" tabName="instagram" />
+      )}
 
       {/* 4. Blog 탭 */}
       {mainTab === "blog" && <SnsCampaignTab key="blog" tabName="blog" />}
